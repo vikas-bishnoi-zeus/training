@@ -1,0 +1,100 @@
+body {
+    margin: 0;
+    font-size: 20px;
+    font-family: Quicksand, sans-serif;
+    font-weight: medium;
+    background-color: #EEEEEE;
+}
+#main-container{
+  height: 100vh;
+  display: grid;
+  grid-template-rows: 56px 88px 65px auto 40px;
+  grid-template-columns: 100vw;
+}
+
+.navbar {
+  background-image: url('Assets/nav-bg.png');
+  height: 56px;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  /* UI Properties */
+  opacity: 1;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  grid-row: 1/span 1;
+  grid-column: 1/span 1;
+
+}
+.nav-logo{
+  flex:auto;
+}
+.end-navbar{
+  display: flex;
+  margin-right: 24px;
+}
+.end-navbar>a{
+  margin: 0px 0px 0px 32px;
+}
+#qunatumLogo{
+    margin: 10.5px auto 9.5px 24px;
+    height: 36px;
+}
+.userIcon>img{
+  height: 32px;
+  width: 32px;
+  border-radius: 50%;
+}
+.end-navbar> a{
+  color: #3FD28B;
+}
+.content-menu{
+  margin: 24px 24px 0px 24px;
+  grid-row: 2/span 1;
+  grid-column: 1/span 1;
+  display: flex;
+}
+.content-menu>div{
+  width: 50%;
+  background-color: #3FD28B;
+  text-align: center;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+}
+.content-menu>div>img{
+  /* height: 150px; */
+  margin-right: 12px;
+}
+.option{
+  margin: 20px 24px 0px 24px;
+  grid-row: 3/span 1;
+  grid-column: 1/span 1;
+  display: flex;
+  /* width:100vw; */
+  color: #686868;
+  justify-content: space-between;
+  text-align: center;
+  align-self: center;
+}
+#list-course{
+  font-size: 12px;
+}
+#sort-course{
+  font-size: 12px;
+}
+.content{
+  grid-row: 4/span 1;
+  grid-column: 1/span 1;
+  margin: 0px 24px 0px 24px;
+}
+.footer{
+  grid-row: 5/span 1;
+  grid-column: 1/span 1;
+  margin: 0px 24px 0px 24px;
+}
+/* section{
+  font-size: ;
+} */

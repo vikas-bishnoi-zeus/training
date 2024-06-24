@@ -1,0 +1,193 @@
+body {
+    margin: 0;
+    font-size: 20px;
+    font-family: Quicksand, sans-serif;
+    font-weight: medium;
+}
+#main-container{
+  height: 100vh;
+  display: grid;
+  grid-template-rows: 56px auto 40px;
+}
+#main-content{
+  display: grid;
+  grid-template-rows: auto 40px;
+}
+header {
+  background-image: url('Assets/nav-bg.png');
+  height: 56px;
+  /* UI Properties */
+  opacity: 1;
+  width: 100vw;
+}
+#qunatumLogo{
+    margin: 10.5px auto 9.5px 24px;
+    height: 36px;
+}
+#info{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#login{
+  display: grid;
+  grid-template: 52px 594px auto /auto 488px auto;
+}
+#form{
+  height: 584px;
+  width: 488px;
+  padding-top: 10px;
+  /* background-color: aqua; */
+  border-top: 4px #3AC7EC solid;
+}
+.form-back{
+  background-color: #EEEEEE;
+}
+#login-text{
+  font-size: 24px;
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+form > div{
+  /* background-color: #3AC7EC;
+   */
+  margin-left: 32px;
+  margin-right: 32px;
+}
+label{
+  margin-right: 32px;
+}
+input[type=radio]{
+  
+  accent-color: #1F7A54;
+  /* border: 2px solid #1F7A54;
+  /* border-radius: 50%; */
+  height: 16px;
+  width: 16px; 
+  margin: 0px;
+  
+}
+.districtschool{
+  margin-bottom: 34px;
+}
+.select-div{
+  height: 45px;
+  margin-bottom: 38px;
+}
+.select-div >label{
+  font-size: 12px;
+  color:#666666;
+}
+option{
+  font-size: 20px;
+  color:#222222;
+}
+select{
+  font-size: 20px;
+  border: 0px;
+  width: 100%;
+}
+option{
+  font-size: 16px;
+}
+select{
+  border:0px;
+  border-bottom: 1px solid #000000;
+}
+.userInfo>input,.eye>input{
+  outline: none;
+  border: 0px;
+  border-bottom: 1px solid #000000;
+  width:100%;
+}
+::placeholder {
+  color: #666666;
+  opacity: 1; /* Firefox */
+  font-size: 16px;
+}
+
+.userInfo{
+  height: 45px;
+  margin-bottom: 28px;
+}
+.userInfo>a{
+  color: #1F7A54;
+  font-size: 14px;
+}
+#userId,#userPass{
+  line-height: 30px;
+}
+.rember{
+  height: 45px;
+  margin-bottom: 25px;
+}
+a{
+ font-size: 12px;
+ display: block;
+ text-align: end;
+ text-decoration: none;
+ columns: #1F7A54;
+ margin: 5px;
+}
+#info{
+  color: #1F7A54;
+  
+}
+footer{
+  background-color: #E0E1E1;
+  text-align: center;
+}
+#submit{
+  /* background-color: #3AC7EC; */
+  /* width: 220px; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#login-btn{
+  width: 35%;
+  height: 40px;
+  background-color: #3FD28B;
+}
+footer{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.heading-icon{
+  position:absolute;
+}
+.arraydiv{
+  display: flex;
+}
+.arraydiv>img{
+  width: 24 px;
+  margin-right: 77px;
+}
+.rember>input{
+   accent-color:#1F7A54;
+   width: 18px;
+   height: 20px;
+   margin: 0px;
+   margin-right: 5px;
+   margin-top: 20px;
+}
+.rember>label{
+  font-size: 16px;
+  color: #222222;
+  text-align: center;
+  
+}
+#userPass{
+  width: 100%;
+}
+.eye{
+  display: flex;
+  margin: 0px;
+}
+.eye>img{
+  width:5%;
+  border-bottom: 1px solid #000000;
+}

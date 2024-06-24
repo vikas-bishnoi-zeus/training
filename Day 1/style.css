@@ -1,0 +1,52 @@
+body{
+    font-family: 'Roboto';
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+#cont{
+    /* background-color: aqua; */
+    width: 457px;
+    height: 130px;
+    padding: 4px;
+    display: flex;
+    border: solid black 0.1px;
+}
+img{
+    width: 130px;
+    height: 130px;
+}
+#imgContainer{
+    margin-right: 14px;
+    /* margin-top: 0px; */
+}
+#userId{
+    margin-top: 10px;
+    font-weight: bold;
+    margin-bottom: 14px;
+    font-size: 20px;
+    color: #000000;
+}
+#commentcount{
+    margin-left: 14px;
+    margin-right: 24px;
+}
+#status{
+    font-weight:normal;
+    margin-bottom: 24px;
+    font-size: 20px;
+    color: #000000;
+    margin-top: 0px;
+}
+.icon{
+    width: 20px;
+    height: 20px;
+    margin: 0px;
+    padding: 0px;
+}
+span{
+    font-weight: medium;
+    font-size: 15px;
+    color: #858991;
+}

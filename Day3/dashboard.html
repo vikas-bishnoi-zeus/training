@@ -19,18 +19,19 @@
             />
           </div>
           <div class="end-navbar">
-            <a>Dashboard</a>
-            <a>Content</a>
-            <a>Users</a>
-            <a>Reports</a>
-            <a>Admin</a>
-            <a><img src="./Assets/quantum screen assets/icons/alerts.svg" alt=""></a>
-            <a><img src="./Assets/quantum screen assets/icons/announcements.svg" alt=""></a>
-            <a class="userIcon"><img src="./Assets/user.jpg" alt=""></a>
+            <a class="nav-option" id="das-div">Dashboard</a>
+            <a class="nav-option">Content</a>
+            <a class="nav-option">Users</a>
+            <a class="nav-option">Reports</a>
+            <a class="nav-option">Admin</a>
+            <a><img src="./Assets/quantum screen assets/icons/alerts.svg" alt=""><div class="up-notification up-1">2</div></a>
+            <a><img src="./Assets/quantum screen assets/icons/announcements.svg" alt=""><div class="up-notification up-2">1</div></a>
+            <a class="userIcon"><img src="./Assets/quantum screen assets/quantum screen assets/icons/account_circle.svg" alt=""><div class="up-notification up-3">T</div></a>
+            <a class="hide-option"><img src="./Assets/quantum screen assets/icons/hamburger-menu.svg" alt=""></a>
           </div>
           </div>
         <div class="content-menu">
-            <div>
+            <div class="cours-div">
               <img src="./Assets/quantum screen assets/icons/courses.svg" alt="">4 courses
             </div>
             <div>
@@ -39,20 +40,382 @@
         </div>
         <div class="option">
           <p id="list-course">Showing 4 of 4 courses</p>
-          <p id="sort-course">Sort By:
-            <select>
-            <option disabled selected>Your Choice</option>
-            <option id="1">course name</option>
-            <option id="2">by price</option>
-          </select>
+          <p id="sort-course select2">Sort By:
+            <select class="custom-select1">
+              <option disabled selected>Course Name</option>
+              <option id="1">Zeus 12 Class</option>
+              <option id="2">Ug First Year</option>
+            </select>
+            <img id="up-array"src="./Assets/quantum screen assets/quantum screen assets/icons/back.svg" alt="">
         </p>
         </div>
         <div class="content">
-            content
+            
+            <div class="card">
+              <div class="descripton">
+                <div class="img-div">
+                  <img src="./Assets/quantum screen assets/images/imageMask.png" alt="">
+                </div>
+                
+                <div class="info">
+                  <div class="card-head">
+                    <div class="topic">
+                      Accelearion
+                    </div>
+                    <div class="star">
+                      <img src="./Assets/quantum screen assets/icons/favourite.svg" alt="">
+                    </div>
+                  </div>
+                  <div class="subject"><span>Physics | Grade 7</span> <span class="extra-class"> + 2</span></div>
+                  <div class="subject">
+                    <span class="number">4 </span><span class="class-detail">Units</span>
+                    <span class="number">18 </span><span class="class-detail">Lessons</span>
+                    <span class="number">24 </span><span class="class-detail">Topics</span>
+                  </div>
+                  <div class="select-div">
+                    <select class="classroom">
+                      
+                      <option class="opt" value="Mr. Frank's Class B">Mr. Frank's Class B</option>
+                      <option class="opt" value="Mr. Brank">Mr. Brank</option>
+                    </select>
+                  </div>
+                  <div class="class-info">
+                    50 Students | 21-Jan-2020 - 21-Aug-2020
+                  </div>
+                </div>
+              </div>
+              <div class="card-buttom">
+                <img src="./Assets/quantum screen assets/quantum screen assets/icons/preview.svg" alt="">
+                <img src="./Assets/quantum screen assets/icons/manage course.svg" alt="">
+                <img src="./Assets/quantum screen assets/icons/grade submissions.svg" alt="">
+                <img src="./Assets/quantum screen assets/icons/reports.svg" alt="">
+              </div>
+              
+            </div>
+            <div class="card">
+              <div class="descripton">
+                <div class="img-div">
+                  <img src="./Assets/quantum screen assets/images/imageMask-1.png" alt="">
+                </div>
+                
+                <div class="info">
+                  <div class="card-head">
+                    <div class="topic">
+                      Displacement,Velocity and speed
+                    </div>
+                    <div class="star">
+                      <img src="./Assets/quantum screen assets/icons/favourite.svg" alt="">
+                    </div>
+                  </div>
+                  <div class="subject"><span>Physics 2 | Grade 6</span> <span class="extra-class"> + 3</span></div>
+                  <div class="subject">
+                    <span class="number">2 </span><span class="class-detail">Units</span>
+                    <span class="number">15 </span><span class="class-detail">Lessons</span>
+                    <span class="number">20 </span><span class="class-detail">Topics</span>
+                  </div>
+                  <div class="select-div">
+                    <select class="classroom no-classes">
+                      
+                      <option class="opt" value="No Classes">No Classes</option>
+                    </select>
+                  </div>
+                  
+                </div>
+
+              </div>
+              <div class="card-buttom">
+                <img src="./Assets/quantum screen assets/quantum screen assets/icons/preview.svg" alt="">
+                <img class="opacity-img"src="./Assets/quantum screen assets/icons/manage course.svg" alt="">
+                <img class="opacity-img"src="./Assets/quantum screen assets/icons/grade submissions.svg" alt="">
+                <img src="./Assets/quantum screen assets/icons/reports.svg" alt="">
+
+              </div>
+              
+            </div>
+            <div class="card">
+              <div class="descripton">
+                <div class="img-div">
+                  <img src="./Assets/quantum screen assets/images/imageMask-3.png" alt="">
+                </div>
+                
+                <div class="info">
+                  <div class="card-head">
+                    <div class="topic">
+                      Introduction to Biology:Micro Organism and How they Effect the enviroment
+                    </div>
+                    <div class="star">
+                      <img src="./Assets/quantum screen assets/icons/favourite.svg" alt="">
+                    </div>
+                  </div>
+                  <div class="subject"><span>Biology | Grade 4</span> <span class="extra-class"> + 1</span></div>
+                  <div class="subject">
+                    <span class="number">5 </span><span class="class-detail">Units</span>
+                    <span class="number">16 </span><span class="class-detail">Lessons</span>
+                    <span class="number">22 </span><span class="class-detail">Topics</span>
+                  </div>
+                  <div class="select-div">
+                    <select class="classroom">
+                      
+                      <option class="opt" value="All Classes">All Classes</option>
+                      <option class="opt" value="Sub Clas">Sub Clas</option>
+                    </select>
+                  </div>
+                  <div class="class-info">
+                    300 Students
+                  </div>
+                </div>
+              </div>
+              <div class="card-buttom">
+                <img src="./Assets/quantum screen assets/quantum screen assets/icons/preview.svg" alt="">
+                <img class="opacity-img"src="./Assets/quantum screen assets/icons/manage course.svg" alt="">
+                <img class="opacity-img"src="./Assets/quantum screen assets/icons/grade submissions.svg" alt="">
+                <img src="./Assets/quantum screen assets/icons/reports.svg" alt="">
+
+              </div>
+              
+            </div>
+            
+            <div class="card">
+              <div id="ex-div">
+                <span class="expired">&nbsp;&nbsp;Expired&nbsp;&nbsp;</span>
+              </div>
+              <div id="expire-des" class="descripton">
+                
+                <div class="img-div">
+                  <img src="./Assets/quantum screen assets/images/imageMask-2.png" alt="">
+                </div>
+                
+                <div class="info">
+                  
+                  <div class="card-head">
+                    <div class="topic">
+                      Introduction to high School Mathematics
+                    </div>
+                    <div class="star">
+                      <!-- <img id="non-fav"src="./Assets/quantum screen assets/icons/favourite.svg" alt=""> -->
+                      <svg id="favourite" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                        <path id="Path_3678" data-name="Path 3678" d="M0,0H24V24H0Z" fill="none"/>
+                        <path id="Path_3679" data-name="Path 3679" d="M12,17.27,18.18,21l-1.64-7.03L22,9.24l-7.19-.61L12,2,9.19,8.63,2,9.24l5.46,4.73L5.82,21Z" fill="#EEEEEE"/>
+                        <path id="Path_3680" data-name="Path 3680" d="M0,0H24V24H0Z" fill="none"/>
+                      </svg>
+                      
+                    </div>
+                  </div>
+                  <div class="subject"><span>Physics | Grade 7</span> <span class="extra-class"> + 2</span></div>
+                  <div class="subject">
+                    <span class="number">4 </span><span class="class-detail">Units</span>
+                    <span class="number">18 </span><span class="class-detail">Lessons</span>
+                    <span class="number">24 </span><span class="class-detail">Topics</span>
+                  </div>
+                  <div class="select-div">
+                    <select class="classroom">
+                      
+                      <option class="opt" value="Mr. Frank's Class B">Mr. Frank's Class B</option>
+                      <option class="opt" value="Mr. Brank">Mr. Brank class A</option>
+                    </select>
+                  </div>
+                  <div class="class-info">
+                    44 Students | 14-Oct-2019 - 20-Oct-2020
+                  </div>
+                </div>
+              </div>
+              <div class="card-buttom">
+                <img src="./Assets/quantum screen assets/quantum screen assets/icons/preview.svg" alt="">
+                <img src="./Assets/quantum screen assets/icons/manage course.svg" alt="">
+                <img src="./Assets/quantum screen assets/icons/grade submissions.svg" alt="">
+                <img src="./Assets/quantum screen assets/icons/reports.svg" alt="">
+
+              </div>
+              
+            </div>                              
+            
+                  
+            <!-- Extra Card -->
+            <div class="card">
+              <div class="descripton">
+                <div class="img-div">
+                  <img src="./Assets/quantum screen assets/images/imageMask.png" alt="">
+                </div>
+                
+                <div class="info">
+                  <div class="card-head">
+                    <div class="topic" id="top">
+                      Accelearion
+                    </div>
+                    <div class="star">
+                      <img src="./Assets/quantum screen assets/icons/favourite.svg" alt="">
+                    </div>
+                  </div>
+                  <div class="subject"><span>Physics | Grade 7</span> <span class="extra-class"> + 2</span></div>
+                  <div class="subject">
+                    <span class="number">4 </span><span class="class-detail">Units</span>
+                    <span class="number">18 </span><span class="class-detail">Lessons</span>
+                    <span class="number">24 </span><span class="class-detail">Topics</span>
+                  </div>
+                  <div class="select-div">
+                    <select class="classroom">
+                      
+                      <option class="opt" value="Mr. Frank's Class B">Mr. Frank's Class B</option>
+                      <option class="opt" value="Mr. Brank">Mr. Brank</option>
+                    </select>
+                  </div>
+                  <div class="class-info">
+                    50 Students | 21-Jan-2020 - 21-Aug-2020
+                  </div>
+                </div>
+              </div>
+              <div class="card-buttom">
+                <img src="./Assets/quantum screen assets/quantum screen assets/icons/preview.svg" alt="">
+                <img src="./Assets/quantum screen assets/icons/manage course.svg" alt="">
+                <img src="./Assets/quantum screen assets/icons/grade submissions.svg" alt="">
+                <img src="./Assets/quantum screen assets/icons/reports.svg" alt="">
+              </div>
+              
+            </div>
+            <div class="card">
+              <div class="descripton">
+                <div class="img-div">
+                  <img src="./Assets/quantum screen assets/images/imageMask-1.png" alt="">
+                </div>
+                
+                <div class="info">
+                  <div class="card-head">
+                    <div class="topic">
+                      Displacement,Velocity and speed
+                    </div>
+                    <div class="star">
+                      <img src="./Assets/quantum screen assets/icons/favourite.svg" alt="">
+                    </div>
+                  </div>
+                  <div class="subject"><span>Physics 2 | Grade 6</span> <span class="extra-class"> + 3</span></div>
+                  <div class="subject">
+                    <span class="number">2 </span><span class="class-detail">Units</span>
+                    <span class="number">15 </span><span class="class-detail">Lessons</span>
+                    <span class="number">20 </span><span class="class-detail">Topics</span>
+                  </div>
+                  <div class="select-div">
+                    <select class="classroom no-classes">
+                      
+                      <option class="opt" value="No Classes">No Classes</option>
+                    </select>
+                  </div>
+                  
+                </div>
+
+              </div>
+              <div class="card-buttom">
+                <img src="./Assets/quantum screen assets/quantum screen assets/icons/preview.svg" alt="">
+                <img class="opacity-img"src="./Assets/quantum screen assets/icons/manage course.svg" alt="">
+                <img class="opacity-img"src="./Assets/quantum screen assets/icons/grade submissions.svg" alt="">
+                <img src="./Assets/quantum screen assets/icons/reports.svg" alt="">
+
+              </div>
+              
+            </div>
+            <div class="card">
+              <div class="descripton">
+                <div class="img-div">
+                  <img src="./Assets/quantum screen assets/images/imageMask-3.png" alt="">
+                </div>
+                
+                <div class="info">
+                  <div class="card-head">
+                    <div class="topic">
+                      Introduction to Biology:Micro Organism and How they Effect the enviroment
+                    </div>
+                    <div class="star">
+                      <img src="./Assets/quantum screen assets/icons/favourite.svg" alt="">
+                    </div>
+                  </div>
+                  <div class="subject"><span>Biology | Grade 4</span> <span class="extra-class"> + 1</span></div>
+                  <div class="subject">
+                    <span class="number">5 </span><span class="class-detail">Units</span>
+                    <span class="number">16 </span><span class="class-detail">Lessons</span>
+                    <span class="number">22 </span><span class="class-detail">Topics</span>
+                  </div>
+                  <div class="select-div">
+                    <select class="classroom">
+                      
+                      <option class="opt" value="All Classes">All Classes</option>
+                      <option class="opt" value="Sub Clas">Sub Clas</option>
+                    </select>
+                  </div>
+                  <div class="class-info">
+                    300 Students
+                  </div>
+                </div>
+              </div>
+              <div class="card-buttom">
+                <img src="./Assets/quantum screen assets/quantum screen assets/icons/preview.svg" alt="">
+                <img class="opacity-img"src="./Assets/quantum screen assets/icons/manage course.svg" alt="">
+                <img class="opacity-img"src="./Assets/quantum screen assets/icons/grade submissions.svg" alt="">
+                <img src="./Assets/quantum screen assets/icons/reports.svg" alt="">
+
+              </div>
+              
+            </div>
+            
+            <div class="card">
+              <div class="descripton">
+                <div class="img-div">
+                  <img src="./Assets/quantum screen assets/images/imageMask-2.png" alt="">
+                </div>
+                
+                <div class="info">
+                  <div class="card-head">
+                    <div class="topic">
+                      Introduction to high School Mathematics
+                    </div>
+                    <div class="star">
+                      <!-- <img id="non-fav"src="./Assets/quantum screen assets/icons/favourite.svg" alt=""> -->
+                      <svg id="favourite" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                        <path id="Path_3678" data-name="Path 3678" d="M0,0H24V24H0Z" fill="none"/>
+                        <path id="Path_3679" data-name="Path 3679" d="M12,17.27,18.18,21l-1.64-7.03L22,9.24l-7.19-.61L12,2,9.19,8.63,2,9.24l5.46,4.73L5.82,21Z" fill="#EEEEEE"/>
+                        <path id="Path_3680" data-name="Path 3680" d="M0,0H24V24H0Z" fill="none"/>
+                      </svg>
+                      
+                    </div>
+                  </div>
+                  <div class="subject"><span>Physics | Grade 7</span> <span class="extra-class"> + 2</span></div>
+                  <div class="subject">
+                    <span class="number">4 </span><span class="class-detail">Units</span>
+                    <span class="number">18 </span><span class="class-detail">Lessons</span>
+                    <span class="number">24 </span><span class="class-detail">Topics</span>
+                  </div>
+                  <div class="select-div">
+                    <select class="classroom">
+                      
+                      <option class="opt" value="Mr. Frank's Class B">Mr. Frank's Class B</option>
+                      <option class="opt" value="Mr. Brank">Mr. Brank class A</option>
+                    </select>
+                  </div>
+                  <div class="class-info">
+                    44 Students | 14-Oct-2019 - 20-Oct-2020
+                  </div>
+                </div>
+              </div>
+              <div class="card-buttom">
+                <img src="./Assets/quantum screen assets/quantum screen assets/icons/preview.svg" alt="">
+                <img src="./Assets/quantum screen assets/icons/manage course.svg" alt="">
+                <img src="./Assets/quantum screen assets/icons/grade submissions.svg" alt="">
+                <img src="./Assets/quantum screen assets/icons/reports.svg" alt="">
+
+              </div>
+              
+            </div>                              
+            
+
+        </div>
+        <div class="about">
+          <a href="=/">About</a>
+           | <a href="=/">Contact Us</a>
 
         </div>
         <div class="footer">
-            cw
+            <img src="./Assets/quantum-logo-footer.svg" alt="">&nbsp;&nbsp;
+            <span id="copyright">copyright &copy; 2020-2021</span> 
+            <span id="company-name">Zeus System Pvt. Ltd.</span>
+            <span >All rights reserved.</span>
         </div>
     </div>
     <script src="https://code.iconify.design/2/2.1.2/iconify.min.js"></script>

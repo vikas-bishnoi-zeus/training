@@ -1,0 +1,191 @@
+body {
+  margin: 0;
+  font-size: 20px;
+  font-family: Quicksand, sans-serif;
+  font-weight: medium;
+  background-color: #EEEEEE;
+}
+body > #main-container {
+  height: 100vh;
+  display: grid;
+  grid-template-rows: 56px auto 40px;
+}
+body > #main-container > header {
+  background-image: url("Assets/nav-bg.png");
+  height: 56px;
+  width: 100vw;
+}
+body > #main-container > header > div > #qunatumLogo {
+  margin: 10.5px auto 9.5px 24px;
+  height: 36px;
+}
+body > #main-container > #main-content > #login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 87vh;
+}
+body > #main-container > #main-content > #login > #form {
+  height: 584px;
+  width: 488px;
+  padding-top: 10px;
+  background-color: #FFFFFF;
+  border-top: 4px #3ac7ec solid;
+}
+body > #main-container > #main-content > #login > #form > div {
+  margin-left: 32px;
+  margin-right: 32px;
+}
+body > #main-container > #main-content > #login > #form > .arraydiv {
+  display: flex;
+}
+body > #main-container > #main-content > #login > #form > .arraydiv > img {
+  width: 24 px;
+  margin-right: 77px;
+}
+body > #main-container > #main-content > #login > #form > .arraydiv > #login-text {
+  font-size: 24px;
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+body > #main-container > #main-content > #login > #form > .districtschool {
+  margin-bottom: 34px;
+}
+body > #main-container > #main-content > #login > #form > .districtschool > label {
+  margin-right: 32px;
+}
+body > #main-container > #main-content > #login > #form > .districtschool > input[type=radio] {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  border: 1px #1f7a54 solid;
+  border-radius: 50%;
+  accent-color: #1f7a54;
+  height: 16px;
+  width: 16px;
+  margin: 0px;
+}
+body > #main-container > #main-content > #login > #form > .districtschool > input[type=radio]:checked {
+  -webkit-appearance: auto;
+     -moz-appearance: auto;
+          appearance: auto;
+}
+body > #main-container > #main-content > #login > #form > .select-div {
+  height: 45px;
+  margin-bottom: 38px;
+}
+body > #main-container > #main-content > #login > #form > .select-div > label {
+  font-size: 12px;
+  color: #666666;
+}
+body > #main-container > #main-content > #login > #form > .select-div > select {
+  font-size: 20px;
+  border: 0px;
+  width: 100%;
+  border-bottom: 1px solid #000000;
+}
+body > #main-container > #main-content > #login > #form > .select-div > select > option {
+  font-size: 16px;
+  color: #222222;
+}
+body > #main-container > #main-content > #login > #form > .userInfo {
+  height: 45px;
+  margin-bottom: 28px;
+}
+body > #main-container > #main-content > #login > #form > .userInfo ::-moz-placeholder {
+  color: #666666;
+  /* Firefox */
+  font-size: 16px;
+}
+body > #main-container > #main-content > #login > #form > .userInfo ::placeholder {
+  color: #666666;
+  /* Firefox */
+  font-size: 16px;
+}
+body > #main-container > #main-content > #login > #form > .userInfo > input {
+  outline: none;
+  border: 0px;
+  border-bottom: 1px solid #000000;
+  width: 100%;
+  line-height: 30px;
+}
+body > #main-container > #main-content > #login > #form > .userInfo > .eye {
+  display: flex;
+  margin: 0px;
+}
+body > #main-container > #main-content > #login > #form > .userInfo > .eye ::-moz-placeholder {
+  color: #666666;
+  /* Firefox */
+  font-size: 16px;
+}
+body > #main-container > #main-content > #login > #form > .userInfo > .eye ::placeholder {
+  color: #666666;
+  /* Firefox */
+  font-size: 16px;
+}
+body > #main-container > #main-content > #login > #form > .userInfo > .eye > img {
+  width: 5%;
+  border-bottom: 1px solid #000000;
+}
+body > #main-container > #main-content > #login > #form > .userInfo > .eye > input {
+  outline: none;
+  border: 0px;
+  border-bottom: 1px solid #000000;
+  width: 100%;
+  line-height: 30px;
+}
+body > #main-container > #main-content > #login > #form > .userInfo > a {
+  color: #1f7a54;
+  font-size: 14px;
+  font-size: 12px;
+  display: block;
+  text-align: end;
+  text-decoration: none;
+  -moz-columns: #1f7a54;
+       columns: #1f7a54;
+  margin: 5px;
+}
+body > #main-container > #main-content > #login > #form > .remember {
+  height: 45px;
+  margin-bottom: 25px;
+}
+body > #main-container > #main-content > #login > #form > .remember > input {
+  accent-color: #1f7a54;
+  width: 18px;
+  height: 20px;
+  margin: 0px;
+  margin-right: 5px;
+  margin-top: 20px;
+}
+body > #main-container > #main-content > #login > #form > .remember > label {
+  font-size: 16px;
+  color: #222222;
+  text-align: center;
+}
+body > #main-container > #main-content > #login > #form > #submit {
+  /* background-color: #3AC7EC; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+}
+body > #main-container > #main-content > #login > #form > #submit #login-btn {
+  width: 50%;
+  height: 40px;
+  background-color: #3fd28b;
+  border: 0px;
+}
+body > #main-container > #main-content > #info {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #1f7a54;
+}
+body > #main-container > footer {
+  background-color: #E0E1E1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}/*# sourceMappingURL=login.css.map */

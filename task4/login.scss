@@ -1,0 +1,203 @@
+$body_background_color : #EEEEEE;
+$main_cont_ht: 100vh;
+$form_background_color : #FFFFFF;
+$form_border_color:#3ac7ec;
+$page_green_color:#1f7a54;
+@mixin center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+@mixin input{
+    outline: none;
+    border: 0px;
+    border-bottom: 1px solid #000000;
+    width: 100%;
+}
+body {
+    margin: 0;
+    font-size: 20px;
+    font-family: Quicksand, sans-serif;
+    font-weight: medium;
+    background-color: $body_background_color;
+
+    >#main-container {
+        height: $main_cont_ht;
+        display: grid;
+        grid-template-rows: 56px auto 40px;
+
+        >header {
+            background-image: url("Assets/nav-bg.png");
+            height: 56px;
+            width: 100vw;
+
+            >div {
+                >#qunatumLogo {
+                    margin: 10.5px auto 9.5px 24px;
+                    height: 36px;
+                }
+            }
+        }
+
+        >#main-content {
+
+            >#login {
+
+                @include center();
+                height: 87vh;
+
+                >#form {
+                    height: 584px;
+                    width: 488px;
+                    padding-top: 10px;
+                    background-color: $form_background_color;
+                    border-top: 4px $form_border_color solid;
+
+                    >div {
+                        margin-left: 32px;
+                        margin-right: 32px;
+                    }
+
+                    >.arraydiv {
+                        display: flex;
+
+                        >img {
+                            width: 24 px;
+                            margin-right: 77px;
+                        }
+
+                        >#login-text {
+                            font-size: 24px;
+                            display: flex;
+                            justify-content: center;
+                            margin-top: 20px;
+                            margin-bottom: 20px;
+                        }
+                    }
+
+                    >.districtschool {
+                        margin-bottom: 34px;
+                        >label {
+                            margin-right: 32px;
+                        }
+
+                        >input[type="radio"] {
+                            appearance: none;
+                            border: 1px $page_green_color solid;
+                            border-radius: 50%;
+                            accent-color: $page_green_color;
+                    
+                            height: 16px;
+                            width: 16px;
+                            margin: 0px;
+                        }
+                        >input[type="radio"]:checked {
+                            appearance: auto;
+                        }
+                        
+                    }
+                    >.select-div {
+                        height: 45px;
+                        margin-bottom: 38px;
+                        >label {
+                            font-size: 12px;
+                            color: #666666;
+                        }
+                        >select {
+                            font-size: 20px;
+                            border: 0px;
+                            width: 100%;
+                            border-bottom: 1px solid #000000;
+                            >option {
+                                font-size: 16px;
+                                color: #222222;
+                            }
+                        }
+                        
+                    }
+                    >.userInfo{
+                        height: 45px;
+                        margin-bottom: 28px;
+                        ::placeholder {
+                            color: #666666;
+                            /* Firefox */
+                            font-size: 16px;
+                        }
+                        >input{
+                            @include input();
+                            line-height: 30px;
+                        }
+                        >.eye{
+                            display: flex;
+                            margin: 0px;
+                            ::placeholder {
+                                color: #666666;
+                                /* Firefox */
+                                font-size: 16px;
+                            }
+                            >img {
+                                width: 5%;
+                                border-bottom: 1px solid #000000;
+                            }
+                            >input{
+                                @include input();
+                                line-height: 30px;
+
+                            }
+                        }
+                        >a{
+                            color: $page_green_color;
+                            font-size: 14px;
+                            font-size: 12px;
+                            display: block;
+                            text-align: end;
+                            text-decoration: none;
+                            columns: $page_green_color;
+                            margin: 5px;
+                        }
+                        
+                    }
+                    >.remember{
+                        height: 45px;
+                        margin-bottom: 25px;
+                        >input {
+                            accent-color: $page_green_color;
+                            width: 18px;
+                            height: 20px;
+                            margin: 0px;
+                            margin-right: 5px;
+                            margin-top: 20px;
+                        }
+                        
+                        >label {
+                            font-size: 16px;
+                            color: #222222;
+                            text-align: center;
+                        }
+                    }
+                    >#submit {
+                        /* background-color: #3AC7EC; */
+                        // width: 720px;
+                        @include center();
+                        font-size: 14px;
+                        #login-btn {
+                            width: 50%;
+                            height: 40px;
+                            background-color: #3fd28b;
+                            border: 0px
+                        }
+                    }
+                }
+            }
+            >#info{
+                @include center();
+                color: $page_green_color;
+
+            }
+        }
+        >footer{
+            background-color: #E0E1E1;
+            @include center();
+        }
+    }
+}

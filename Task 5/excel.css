@@ -1,0 +1,17 @@
+body {
+  margin: 0px;
+}
+body > #header {
+  background-color: aqua;
+  height: 10vh;
+}
+body > #main-area {
+  height: 99vh;
+  overflow: auto;
+}
+body > #main-area > input {
+  display: none;
+}
+body > #main-area > canvas {
+  margin: 15px;
+}/*# sourceMappingURL=excel.css.map */

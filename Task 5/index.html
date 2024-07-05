@@ -1,24 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
-<body>
-    <p>Hello</p>
+    <link rel="stylesheet" href="excel.css">
+  </head>
+  <body>
+    <!-- <p>Hello</p> -->
+    <!-- <div id="header">Hello</div> -->
     <div id="main-area">
-        <canvas id="myCanvas" width="200" height="100" style="border:1px solid #000000;">
-        </canvas>
+      <input type="text" name="content" id="content">
+      <canvas
+        id="spreadsheet"
+        width="2000"
+        height="2000"
+        style="border: 1px solid red"
+      >
+      </canvas>
+      
     </div>
-    
-    <script>
-        var c = document.getElementById("myCanvas");
-        var ctx = c.getContext("2d");
-        ctx.moveTo(20, 0);
-        ctx.lineTo(20, 900);
-        ctx.stroke();
-    </script>
-        
-</body>
+
+    <script src="./index.js"></script>
+  </body>
 </html>

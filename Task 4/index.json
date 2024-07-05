@@ -2,7 +2,7 @@
   "cards": [
     {
       "title": "Acceralation",
-      "subject": "Physics and chemistry",
+      "subject": "Physics",
       "grade": "7",
       "addition": "2",
       "units": 4,
@@ -157,12 +157,32 @@
       "classesOptions": [
         "Mr. Franks Class A"
       ]
+    },
+    {
+      "title": "Introduction to High School Mathematics",
+      "subject": "Mathematics",
+      "grade": "8",
+      "addition": "3",
+      "units": 0,
+      "lessons": 0,
+      "topics": 0,
+      "info": {
+        "totalStudents": "44",
+        "duration": "| 14-Oct-2019 - 20-Oct-2020"
+      },
+      "image": "./Assets/quantum screen assets/images/imageMask-2.png",
+      "favorite": false,
+      "expired": true,
+      "opac":false,
+      "classesOptions": [
+        "Mr. Franks Class A"
+      ]
     }
   ],
   "alerts": [
     {
       "title":"License for  ant Introduction to Algebra has been assigned to your school",
-      "course":"Course: Mathematics",
+      "course":"",
       "time":"15-Sep-2018 at 07:21 pm",
       "ticked":true
     },    {
@@ -172,7 +192,7 @@
       "ticked":false
     },    {
       "title":"License for Introduction to Algebra has been assigned to your school",
-      "course":"Course: Mathematics",
+      "course":"",
       "time":"15-Sep-2018 at 07:21 pm",
       "ticked":true
     },    {
@@ -180,6 +200,21 @@
       "course":"Course: Mathematics",
       "time":"15-Sep-2018 at 07:21 pm",
       "ticked":true
+    }
+  ],
+  "announcements": [
+    {
+      "title":"No classes will be held on 21st Nov",
+      "author":"Wilson Kumar",
+      "files":2,
+      "time":"15-Sep-2018 at 07:21 pm",
+      "ticked":true
+    },     {
+      "title":"Physics classes will be held on 21st Nov",
+      "author":"Wilson",
+      "files":0,
+      "time":"15-Sep-2018 at 07:21 pm",
+      "ticked":false
     }
   ]
 }

@@ -28,6 +28,9 @@ body {
         grid-template-rows: 56px 88px 69px auto  40px 40px;
         grid-template-columns: 100vw;
         >.navbar {
+            .iconify-check{
+              color: $greentext
+            }
             @include flexCenter();
             background-image: url('Assets/nav-bg.png');
             height: 50px;
@@ -166,6 +169,9 @@ body {
                 >.meta{
                   display: flex;
                   justify-content: space-between;
+                  >span{
+                    @include flexCenter();
+                  }
                 }
               }
               // .anounce-checked{
@@ -175,6 +181,20 @@ body {
             }
             >#alertsSlide{
               right: 155px;
+              >.alert-option{
+                display: flex;
+                height: 48px;
+                // z-index: 0;
+                background-color: #FFFFFF;
+                color: #1F7A54;
+                font-size: 14px;
+                >div{
+                  width: 50%;
+                  border: 0px;
+                  @include flexCenter();
+
+                }
+              }
             }
             
         }

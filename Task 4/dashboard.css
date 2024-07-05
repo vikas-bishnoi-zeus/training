@@ -37,6 +37,9 @@ body > #main-container > .navbar {
   grid-row: 1/span 1;
   grid-column: 1/span 1;
 }
+body > #main-container > .navbar .iconify-check {
+  color: #1F7A54;
+}
 body > #main-container > .navbar > .nav-logo {
   flex: auto;
 }
@@ -158,8 +161,27 @@ body > #main-container > .navbar > #announcementsSlide > .announcements-card > .
   display: flex;
   justify-content: space-between;
 }
+body > #main-container > .navbar > #announcementsSlide > .announcements-card > .meta > span, body > #main-container > .navbar > #alertsSlide > .announcements-card > .meta > span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 body > #main-container > .navbar > #alertsSlide {
   right: 155px;
+}
+body > #main-container > .navbar > #alertsSlide > .alert-option {
+  display: flex;
+  height: 48px;
+  background-color: #FFFFFF;
+  color: #1F7A54;
+  font-size: 14px;
+}
+body > #main-container > .navbar > #alertsSlide > .alert-option > div {
+  width: 50%;
+  border: 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 body > #main-container > .content-menu {
   margin: 24px 24px 0px 24px;

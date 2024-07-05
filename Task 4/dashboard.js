@@ -147,15 +147,19 @@ function cardJson(card) {
 
 function alertContent(item){
     console.log(item);
-    let checked=`<p><img class="anounce-checked"src="./Assets/quantum screen assets/quantum screen assets/icons/checkbox-checked.svg" alt=""></p>`
+    // <span class="iconify iconify-check" data-icon="zondicons:minus-outline" data-width="13" data-height="13"></span>
+    let checked=`<span class="iconify iconify-check" data-icon="teenyicons:tick-circle-solid" data-width="20" data-height="20"></span>`
+    let unchecked=`<span class="iconify iconify-check" data-icon="zondicons:minus-outline" data-width="20" data-height="20"></span>`
+    
+    
     var el = document.createElement("div");
     el.className = "announcements-card";
     let ihtml=`
             <div class="anounce-info-row">
                 <p>${item.title}</p>
-                ${item.ticked?checked:""}
+                ${item.ticked?checked:unchecked    }
             </div>
-            <div class="course-anounce">Course:${item.course}</div>
+            <div class="course-anounce">${item.course}</div>
             <div class="meta">
                 <span>
                 </span>
@@ -165,13 +169,52 @@ function alertContent(item){
     el.innerHTML = ihtml;
     let contet = document.querySelector("#alertsSlide");
     contet.appendChild(el);
-
 }
 function alertJson(alerts){
     console.log(alerts);
     alerts.map((item) => {
         alertContent(item);
       });
+    let contet = document.querySelector("#alertsSlide");
+    var el = document.createElement("div");
+    el.className = "alert-option";
+    el.innerHTML=`<div>Show All</div><div>Create New</div>`
+    contet.append(el);
+}
+
+function anounceContent(item){
+  console.log(item);
+  // <span class="iconify iconify-check" data-icon="zondicons:minus-outline" data-width="13" data-height="13"></span>
+  let checked=`<span class="iconify iconify-check" data-icon="teenyicons:tick-circle-solid" data-width="15" data-height="15"></span>`
+  let unchecked=`<span class="iconify iconify-check" data-icon="zondicons:minus-outline" data-width="15" data-height="15"></span>`
+  
+  var el = document.createElement("div");
+  el.className = "announcements-card";
+  let ihtml=`
+          <div class="anounce-info-row">
+                <p><span class="atten">Pa: </span><span>${item.author}</span></p>
+                ${item.ticked?checked:unchecked}
+          </div>
+          <div class="anounce-des">
+                ${item.title}
+          </div>
+          <div class="course-anounce">${item.course?item.course:""}</div>
+          <div class="meta">
+                <span>
+                  ${item.files===0?"":`<span class="iconify" data-icon="ion:attach" data-width="18" data-height="18"></span>${item.files} files are attached`}
+                </span>
+                <span>${item.time}</span>
+          </div>
+  `
+  el.innerHTML = ihtml;
+  let contet = document.querySelector("#announcementsSlide");
+  contet.appendChild(el);
+}
+function anounceJson(anounce){
+  console.log(anounce);
+  anounce.map((item) => {
+    anounceContent(item);
+    });
 }
 
 fetch("./index.json")
@@ -181,3 +224,8 @@ fetch("./index.json")
 fetch("./index.json")
   .then((response) => response.json())
   .then((json) => alertJson(json.alerts));
+
+
+fetch("./index.json")
+  .then((response) => response.json())
+  .then((json) => anounceJson(json.announcements));

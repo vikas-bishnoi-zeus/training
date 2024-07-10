@@ -9,11 +9,14 @@ body{
     }
     >#main-area{
         // width: 100vw;
-        height: 99vh;
+        height: 89vh;
         overflow: auto;
         // border: 10px  solid green;
+        position: relative;
         >input{
             display: none;
+            position: absolute;
+            padding: 0px;
         }
         >canvas{
             // height: 200%;

@@ -6,11 +6,14 @@ body > #header {
   height: 10vh;
 }
 body > #main-area {
-  height: 99vh;
+  height: 89vh;
   overflow: auto;
+  position: relative;
 }
 body > #main-area > input {
   display: none;
+  position: absolute;
+  padding: 0px;
 }
 body > #main-area > canvas {
   margin: 15px;

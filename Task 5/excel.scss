@@ -5,7 +5,18 @@ body{
     >#header{
         background-color: aqua;
         height: 10vh;
+        display: flex;
+        // flex-direction: column;
         // width: 100vw;
+        padding-left: 15px;
+        >p{
+            margin-right: 30px;
+            // background-color: yellow;
+            >span{
+                &::selection{
+                background-color: transparent;
+            }}
+        }
     }
     >#main-area{
         // width: 100vw;

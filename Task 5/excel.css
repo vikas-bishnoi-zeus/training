@@ -4,6 +4,17 @@ body {
 body > #header {
   background-color: aqua;
   height: 10vh;
+  display: flex;
+  padding-left: 15px;
+}
+body > #header > p {
+  margin-right: 30px;
+}
+body > #header > p > span::-moz-selection {
+  background-color: transparent;
+}
+body > #header > p > span::selection {
+  background-color: transparent;
 }
 body > #main-area {
   height: 89vh;

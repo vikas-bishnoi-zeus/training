@@ -17,14 +17,19 @@
       <input type="text" name="content" id="content" >
       <canvas
         id="spreadsheet"
-        width="1000"
-        height="1020"
-        style="border: 1px solid red"
+
+        style="border: 0px solid red"
       >
       </canvas>
+      <div class="scrollbar vertical" id="verticalScroll"></div>
+
+      <div class="scrollbar horizontal" id="horizontalScroll"></div>
       
     </div>
 
-    <script src="./index.js"></script>
+    <!-- <script type="module"  src="./src/index.js"></script> -->
+     <script src="./src/cell.js"></script>
+    <script src="./src/scroll.js"></script>
+    <script src="./src/input.js"></script>
   </body>
 </html>

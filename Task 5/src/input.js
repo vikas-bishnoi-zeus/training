@@ -4,7 +4,7 @@ var isInput=true;
 canvas.addEventListener("click", (event) => getInput(event));
 function setInput(x, y) {
   var cellInput = document.getElementById("content");
-  console.log(x,y);
+  // console.log(x,y);
 //   var cnleft = left ;
 //   var cntop = top;
   var i = Math.floor(y/30);
@@ -18,7 +18,7 @@ function setInput(x, y) {
   }
   isInput=true;
   var top=cells[i][j].y-scrollY;
-  console.log("top",top,scrollY)
+  // console.log("top",top,scrollY)
   var left=cells[i][j].x-scrollX;
   cellInput.style.top = top-1 + "px";
   cellInput.style.left = left-1 + "px";
@@ -32,11 +32,11 @@ function setInput(x, y) {
   cellInput.onblur = () => {
     // console.log()
     cells[i][j].setValue(cellInput.value);
-    console.log("scroll",scrollX,scrollY);
-    console.log("scroll",scrollX,scrollY);
+    // console.log("scroll",scrollX,scrollY);
+    // console.log("scroll",scrollX,scrollY);
 
     // cells[i][j].rectDraw(100,30,scrollX,scrollY);
-    console.log("blur ",i,j,scrollX,scrollY);
+    // console.log("blur ",i,j,scrollX,scrollY);
     for (let k = 0; k < cells[i].length; k++) {
     //   ctx.clearRect(, rowHeights[i], 100, 30);
       cells[i][k].rectDraw(100, 30,scrollX,scrollY);

@@ -13,15 +13,10 @@ class cell {
     }
     rectDraw(w, h,scrollX,scrollY) {
       ctx.clearRect(this.x-scrollX, this.y-scrollY,100,30);
-      // j*100-scrollX
       ctx.rect(this.x-scrollX, this.y-scrollY, w, h);
       ctx.fillStyle = "black";
-      ctx.fillText(this.value, this.x + 5-scrollX, this.y + 18-scrollY);
+      ctx.fillText(`${this.value}`, this.x + 10-scrollX, this.y + 18-scrollY);
       ctx.stroke();
-      // console.log("cell",this.x,this.y,scrollX,scrollY);
-      // if(this.isSelected){
-      //   this.selectCell();
-      // }
     }
     selectCell(){
       if (this.isSelected) {

@@ -1,27 +1,21 @@
 body {
   margin: 0px;
 }
-body > #header {
+#header {
   background-color: aqua;
   height: 10vh;
   display: flex;
   padding-left: 15px;
 }
-body > #header > p {
+#header > p {
   margin-right: 30px;
 }
-body > #header > p > span::-moz-selection {
-  background-color: transparent;
-}
-body > #header > p > span::selection {
-  background-color: transparent;
-}
-body > #main-area {
+#main-area {
   height: 90vh;
   overflow: auto;
   position: relative;
 }
-body > #main-area > input {
+#main-area > input {
   display: none;
   position: absolute;
   padding: 0px;
@@ -33,21 +27,21 @@ body > #main-area > input {
 
   background: #ccc;
 }
-
-.scrollbar.vertical {
-  width: 10px;
-
+#verticall-div,#horizontal-div{
+  background-color: aliceblue;
+  position: absolute;
+}
+#verticall-div ,.scrollbar.vertical {
+  width: 8px;
   right: 0;
   top: 0;
   bottom: 0;
+  border-radius: 10%;
 }
 
-.scrollbar.horizontal {
-  height: 10px;
-
+#horizontal-div,.scrollbar.horizontal {
+  height: 8px;
   left: 0;
-
   right: 0;
-
   bottom: 0;
 }

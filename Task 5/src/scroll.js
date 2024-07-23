@@ -6,8 +6,8 @@ const div = document.getElementById("main-area");
 // const ctx = canvas.getContext("2d");
 // console.log(div.clientHeight);
 // console.log(div.clientWidth);
-canvas.width = div.clientWidth - 10;
-canvas.height = div.clientHeight - 10;
+canvas.width = div.clientWidth - 8;
+canvas.height = div.clientHeight - 8;
 
 const container = document.getElementById("main-area");
 
@@ -40,15 +40,17 @@ function addRows(rowAdd){
   }
 }
 function addCols(colsAdd){
+  console.log("Hello columns adding started")
   let len=cells.length;
   let wid=cells[0].length
   for(let i=0;i<len;i++){
     for(let j=wid;j<wid+colsAdd;j++){
       let val = Math.floor(Math.random() * 1000);
-      const curCell = new cell(j*100, (len+i)*30, val, false);
-      cells[i][j] = curCell;
+      const curCell = new cell(j*100, (i)*30, val, false);
+      cells[i].push(curCell);
     }
   }
+  console.log("Sucessfully add colms")
 }
 addRows(rows);
 updateScrollbars();
@@ -70,10 +72,12 @@ function drawContent() {
       if(j*100-scrollX<-110){
         continue;
       }
-      ctx.rect(j*100-scrollX, 30 * i - scrollY, 100, 30);
-      // ctx.fillText(`${i + 1} ${j+1} ${cells[i][j].value}`, (j*100)+10 - scrollX, 30 * (i + 1) - scrollY - 10);
-      ctx.fillText(`${cells[i][j].value}`, (j*100)+10 - scrollX, 30 * (i + 1) - scrollY - 10);
-      ctx.stroke();
+      // if(i==0 && j>19 && j<21){
+      //   console.log(i,j);
+      //   console.log(cells[i][j].x);
+      //   console.log(j*100-scrollX);
+      // }
+      cells[i][j].rectDraw(100,30,scrollX,scrollY);
     }
     
     }
@@ -153,7 +157,9 @@ function startHorizontalScroll(e) {
       )
     );
     if (scrollX + container.clientWidth >= contentWidth - 50) {
+      // console.log("Adding more colms or X");
       addMoreContentX();
+
     }
 
     drawContent();
@@ -208,12 +214,17 @@ function addMoreContentY() {
 }
 function addMoreContentX() {
   // Increase the content height and add more rows
+  contentWidth += 2000;
   colms += 20;
   addCols(20);
-  contentWidth += 2000;
+  // console.log("Again drawing");
   drawContent();
   updateScrollbars();
 }
 
+canvas.addEventListener("mousedown",select);
+function select(event){
+  console.log("Mouse Down");
+}
 
 drawContent();

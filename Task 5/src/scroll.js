@@ -222,9 +222,4 @@ function addMoreContentX() {
   updateScrollbars();
 }
 
-canvas.addEventListener("mousedown",select);
-function select(event){
-  console.log("Mouse Down");
-}
-
 drawContent();

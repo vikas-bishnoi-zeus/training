@@ -4,8 +4,7 @@
 
 // console.log(div.clientHeight);
 // console.log(div.clientWidth);
-canvas.width = div.clientWidth - 108;
-canvas.height = div.clientHeight - 8;
+
 
 const container = document.getElementById("main-area");
 
@@ -67,13 +66,13 @@ function drawContent() {
   ctx.reset();
   ctxside.reset();
   for (let i = 0; i < rows; i++) {
-    if (30 * i - scrollY < -40) {
-      continue;
-    }
+    // if (30 * i - scrollY < -40) {
+    //   continue;
+    // }
     // console.log("Ver",verticalcell[i].y);
     verticalcell[i].isSelected=true;
     // if((i%2)==0){
-      verticalcell[i].rectDraw(100,30,0,screenY)
+      verticalcell[i].rectDraw(100,30,0,scrollY)
     // }
     // else{
       // continue;

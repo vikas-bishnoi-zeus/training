@@ -1,6 +1,6 @@
 let selected = [];
 canvas.addEventListener("mousedown", select);
-let canvasElement = document.querySelector("canvas");
+let canvasElement = document.querySelector("#spreadsheet");
 let rect = canvasElement.getBoundingClientRect();
 function select(event) {
   console.log("Mouse Down");
@@ -11,7 +11,7 @@ function select(event) {
 }
 function getXind(clientX) {
   let len = clientX- rect.left+scrollX;
-  return Math.floor(len / 100)-1;
+  return Math.floor(len / 100);
 }
 function getYind(clientY) {
   let len = clientY-rect.top+scrollY;
@@ -72,7 +72,7 @@ const mouseMove = (xInd, yInd) => {
   }
   // let l=0;
   canvasElement.addEventListener("mouseup", (event) => {
-    // console.log("hello");
+    console.log("hello");
     body.removeEventListener("mousemove", move);
     // var cellInput = document.getElementById("content");
     // if(newXind===-1 || newYind===-1){

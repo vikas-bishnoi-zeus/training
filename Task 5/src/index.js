@@ -2,18 +2,16 @@ const div = document.getElementById("main-area");
 const verticalCanvas = document.getElementById("vertrical");
 const ctxside = verticalCanvas.getContext("2d");
 
-verticalCanvas.width = 100;
-verticalCanvas.height = div.clientHeight-20;
-
+verticalCanvas.height =  div.clientHeight - 8;
+// console.log(div.clientHeight);
+verticalCanvas.width = 101;
 const canvas = document.getElementById("spreadsheet");
 const ctx = canvas.getContext("2d");
 
 
-
-
-
-
-
+canvas.height = div.clientHeight - 8;
+// console.log(div.clientHeight);
+canvas.width = div.clientWidth - 108;
 
 
 // import {cell} from "./cell.js"

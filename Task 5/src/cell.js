@@ -14,18 +14,18 @@ class cell {
     rectDraw(w, h,scrollX,scrollY) {
       this.currentctx.lineWidth=0.5;
       if(this.isSelected){
-        console.log(this.y-scrollY+0.5);
-        console.log(this.y,h)
+        // console.log(this.y-scrollY+0.5+h);
+        // console.log(this.y,h)
         // this.selectCell();
       }
 
-      // this.currentctx.clearRect(this.x-scrollX+0.5, this.y-scrollY+0.5,w,h);
-      this.currentctx.rect(this.x-Math.floor(scrollX)+0.5, this.y-Math.floor(scrollY)+0.5,100, 30);
+      this.currentctx.clearRect(this.x-scrollX, this.y-scrollY,w,h);
+      this.currentctx.rect(this.x-Math.floor(scrollX)+0.5, this.y-Math.floor(scrollY),w, h);
       if(this.isSelected){
       }
       this.currentctx.fillStyle = "black";
       this.currentctx.font=`${18}px areal`
-      // this.currentctx.fillText(`${this.value}`, this.x + 10-scrollX, this.y + 18-scrollY);
+      this.currentctx.fillText(`${this.value}`, this.x + 10-scrollX, this.y + 18-scrollY);
       this.currentctx.stroke();
     }
     selectCell(){

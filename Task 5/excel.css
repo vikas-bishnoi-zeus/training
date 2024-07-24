@@ -45,3 +45,7 @@ body {
   right: 0;
   bottom: 0;
 }
+
+#horizontal-2{
+  display: flex;
+}

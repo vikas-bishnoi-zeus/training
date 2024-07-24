@@ -15,12 +15,22 @@
     
     <div id="main-area">
       <input type="text" name="content" id="content" >
-      <canvas
-        id="spreadsheet"
+      <div id="horizontal-1"></div>
+      <div id="horizontal-2">
+        <!-- <canvas id="vertrical" style="border: 1px solid red">
+        </canvas> -->
+        <canvas id="vertrical" style="border: 0px solid red">
+        </canvas>
+        <!-- <h1>Hello</h1> -->
+        <canvas
+          id="spreadsheet"
+  
+          style="border: 0px solid red"
+        >
+        </canvas>
 
-        style="border: 0px solid red"
-      >
-      </canvas>
+      </div>
+
       <div id="verticall-div">
         <div class="scrollbar vertical" id="verticalScroll"></div>
       </div>
@@ -30,7 +40,7 @@
       
     </div>
 
-    <!-- <script type="module"  src="./src/index.js"></script> -->
+    <script src="./src/index.js"></script>
      <script src="./src/cell.js"></script>
     <script src="./src/scroll.js"></script>
     <script src="./src/input.js"></script>

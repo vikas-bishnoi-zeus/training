@@ -1,12 +1,10 @@
 // import {cell} from "./cell.js"
 
-// const canvas = document.getElementById("spreadsheet");
-const div = document.getElementById("main-area");
+// const div = document.getElementById("main-area");
 
-// const ctx = canvas.getContext("2d");
 // console.log(div.clientHeight);
 // console.log(div.clientWidth);
-canvas.width = div.clientWidth - 8;
+canvas.width = div.clientWidth - 108;
 canvas.height = div.clientHeight - 8;
 
 const container = document.getElementById("main-area");
@@ -28,13 +26,16 @@ let colms=20;
 // Initial scrollbar sizes
 
 var cells=[];
+var verticalcell=[];
 function addRows(rowAdd){
   let len=cells.length;
   for(let i=0;i<rowAdd;i++){
     cells[len+i]=[];
+    const verCell = new cell(0, (len+i)*30, len+i+1, false,ctxside);
+    verticalcell[len+i]=verCell;
     for(let j=0;j<colms;j++){
       let val = Math.floor(Math.random() * 1000);
-      const curCell = new cell(j*100, (len+i)*30, val, false);
+      const curCell = new cell(j*100, (len+i)*30, val, false,ctx);
       cells[len+i][j] = curCell;
     }
   }
@@ -46,7 +47,7 @@ function addCols(colsAdd){
   for(let i=0;i<len;i++){
     for(let j=wid;j<wid+colsAdd;j++){
       let val = Math.floor(Math.random() * 1000);
-      const curCell = new cell(j*100, (i)*30, val, false);
+      const curCell = new cell(j*100, (i)*30, val, false,ctx);
       cells[i].push(curCell);
     }
   }
@@ -64,13 +65,28 @@ horizontalScroll.addEventListener('mousedown', startHorizontalScroll);
 canvas.addEventListener("wheel", handleWheelScroll);
 function drawContent() {
   ctx.reset();
+  ctxside.reset();
   for (let i = 0; i < rows; i++) {
     if (30 * i - scrollY < -40) {
       continue;
     }
+    // console.log("Ver",verticalcell[i].y);
+    verticalcell[i].isSelected=true;
+    // if((i%2)==0){
+      verticalcell[i].rectDraw(100,30,0,screenY)
+    // }
+    // else{
+      // continue;
+    // }
+    
+    // console.log(verticalcell[i])
     for(let j=0;j<colms;j++){
       if(j*100-scrollX<-110){
         continue;
+      }
+      if(i==j){
+        // console.log("Cells",cells[i][j].y);
+        // cells[i][j].isSelected=true;
       }
       // if(i==0 && j>19 && j<21){
       //   console.log(i,j);

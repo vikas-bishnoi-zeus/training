@@ -1,3 +1,21 @@
+const div = document.getElementById("main-area");
+const verticalCanvas = document.getElementById("vertrical");
+const ctxside = verticalCanvas.getContext("2d");
+
+verticalCanvas.width = 100;
+verticalCanvas.height = div.clientHeight-20;
+
+const canvas = document.getElementById("spreadsheet");
+const ctx = canvas.getContext("2d");
+
+
+
+
+
+
+
+
+
 // import {cell} from "./cell.js"
 // const canvas = document.getElementById("spreadsheet");
 // const ctx = canvas.getContext("2d");

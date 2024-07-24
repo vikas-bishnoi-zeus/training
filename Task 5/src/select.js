@@ -11,7 +11,7 @@ function select(event) {
 }
 function getXind(clientX) {
   let len = clientX- rect.left+scrollX;
-  return Math.floor(len / 100);
+  return Math.floor(len / 100)-1;
 }
 function getYind(clientY) {
   let len = clientY-rect.top+scrollY;
@@ -65,6 +65,9 @@ const mouseMove = (xInd, yInd) => {
     if (count != 0) {
       let avr = sum / count;
       document.getElementById("average").innerHTML = avr;
+    }
+    else{
+      document.getElementById("average").innerHTML = 0;
     }
   }
   // let l=0;

@@ -1,33 +1,41 @@
-const canvas = document.getElementById("spreadsheet");
-const ctx = canvas.getContext("2d");
-
 class cell {
-    constructor(x, y, value, isSelected) {
-      this.x = x;
-      this.y = y;
-      this.value = value;
-      this.isSelected = isSelected;
-    }
+  // const canvas = document.getElementById("spreadsheet");
+  // const currentctx = can vas.getContext("2d");
+  constructor(x, y, value, isSelected,ctx) {
+    this.x = x;
+    this.y = y;
+    this.value = value;
+    this.isSelected = isSelected;
+    this.currentctx=ctx
+  }
     setValue(value){
       this.value=value;
     }
     rectDraw(w, h,scrollX,scrollY) {
+      this.currentctx.lineWidth=0.5;
+      if(this.isSelected){
+        console.log(this.y-scrollY+0.5);
+        console.log(this.y,h)
+        // this.selectCell();
+      }
 
-      ctx.clearRect(this.x-scrollX, this.y-scrollY,100,30);
-      ctx.rect(this.x-scrollX, this.y-scrollY, w, h);
-      ctx.fillStyle = "black";
-      ctx.font=`${18}px areal`
-      ctx.fillText(`${this.value}`, this.x + 10-scrollX, this.y + 18-scrollY);
-      ctx.stroke();
+      // this.currentctx.clearRect(this.x-scrollX+0.5, this.y-scrollY+0.5,w,h);
+      this.currentctx.rect(this.x-Math.floor(scrollX)+0.5, this.y-Math.floor(scrollY)+0.5,100, 30);
+      if(this.isSelected){
+      }
+      this.currentctx.fillStyle = "black";
+      this.currentctx.font=`${18}px areal`
+      // this.currentctx.fillText(`${this.value}`, this.x + 10-scrollX, this.y + 18-scrollY);
+      this.currentctx.stroke();
     }
     selectCell(){
       if (this.isSelected) {
-        ctx.fillStyle = 'rgba(0, 100, 255, 0.3)';
-        ctx.fillRect(this.x-scrollX, this.y-scrollY, 100, 30);
+        this.currentctx.fillStyle = 'rgba(0, 100, 255, 0.3)';
+        this.currentctx.fillRect(this.x-scrollX, this.y-scrollY, 100, 30);
       } else {
         // console.log(`This log that selectCell is working for ${Math.floor(this.x/100)} and ${Math.floor(this.y/30)}  ${this.isSelected}`);
         // console.log("Calling rect from select")
-        // ctx.clearRect(this.x, this.y,100,30);
+        // currentctx.clearRect(this.x, this.y,100,30);
         // this.rectDraw(100,30)
         this.rectDraw(100,30,scrollX,scrollY)
       }

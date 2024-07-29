@@ -1,11 +1,12 @@
 class cell {
   // const canvas = document.getElementById("spreadsheet");
   // const currentctx = can vas.getContext("2d");
-  constructor(x, y, value, isSelected,ctx) {
+  constructor(x, y, value, isSelected,head,ctx) {
     this.x = x;
     this.y = y;
     this.value = value;
     this.isSelected = isSelected;
+    this.head=head;
     this.currentctx=ctx
   }
     setValue(value){
@@ -20,13 +21,16 @@ class cell {
       }
 
       this.currentctx.clearRect(this.x-scrollX, this.y-scrollY,w,h);
-      this.currentctx.rect(this.x-Math.floor(scrollX)+0.5, this.y-Math.floor(scrollY),w, h);
+      this.currentctx.rect(this.x-Math.floor(scrollX)+0.5, this.y-Math.floor(scrollY)+0.5,w, h-1);
       if(this.isSelected){
       }
-      this.currentctx.fillStyle = "black";
-      this.currentctx.font=`${18}px areal`
+      this.currentctx.fillStyle = '#000';
+      this.currentctx.font=`${18}px areal light`
       this.currentctx.fillText(`${this.value}`, this.x + 10-scrollX, this.y + 18-scrollY);
       this.currentctx.stroke();
+      if(this.isSelected){
+        this.selectCell();
+      }
     }
     selectCell(){
       if (this.isSelected) {
@@ -40,4 +44,5 @@ class cell {
         this.rectDraw(100,30,scrollX,scrollY)
       }
     }
+    
   }

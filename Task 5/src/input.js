@@ -7,8 +7,9 @@ function setInput(x, y) {
   cellInput.value = cells[i][j].value;
   cellInput.style.display = "inline";
   var top = cells[i][j].y - scrollY;
-  var left = cells[i][j].x - scrollX;
-  cellInput.style.top = top - 1 + "px";
+  var left = cells[i][j].x - scrollX+rect.left;
+  console.log("top",top,left)
+  cellInput.style.top = top +30- 1 + "px";
   cellInput.style.left = left - 1 + "px";
   cellInput.style.height = 30 - 2 + "px";
   cellInput.style.width = 100 - 2 + "px";

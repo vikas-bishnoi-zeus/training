@@ -2,7 +2,7 @@ body {
   margin: 0px;
 }
 #header {
-  background-color: aqua;
+  background-color: aliceblue;
   height: 10vh;
   display: flex;
   padding-left: 15px;
@@ -45,7 +45,20 @@ body {
   right: 0;
   bottom: 0;
 }
+#horizontal-1{
+  height: 30px;
+  display: flex;
+  justify-content: start;
+  background-color: aliceblue;
+}
+#vertrical{
+  background-color: aliceblue;
+}
 
 #horizontal-2{
   display: flex;
+  
+}
+#corner{
+  width: 101px;
 }

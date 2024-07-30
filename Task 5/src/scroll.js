@@ -89,7 +89,7 @@ function drawContent() {
   ctxup.reset();
   for(let j=0;j<colms;j++){
     // console.log(horizontalcell[j],j);
-    horizontalcell[j].rectDraw(100,30,scrollX,0);
+    horizontalcell[j].rectDraw(100,29.5,scrollX,0);
   }
   for (let i = 0; i < rows; i++) {
     if (30 * i - scrollY < -40) {
@@ -98,7 +98,7 @@ function drawContent() {
     // console.log("Ver",verticalcell[i].y);
     // verticalcell[i].isSelected=true;
     // if((i%2)==0){
-      verticalcell[i].rectDraw(100,30,0,scrollY)
+      verticalcell[i].rectDraw(99.5,30,0,scrollY)
     // }
     // else{
       // continue;

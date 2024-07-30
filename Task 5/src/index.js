@@ -1,22 +1,23 @@
+
 const div = document.getElementById("main-area");
 const horizontalCanvas = document.getElementById("horizontal");
 const ctxup = horizontalCanvas.getContext("2d");
 horizontalCanvas.height =30;
 // console.log(div.clientHeight);
-horizontalCanvas.width = div.clientWidth-101;
+horizontalCanvas.width = div.clientWidth-100;
 const verticalCanvas = document.getElementById("vertrical");
 const ctxside = verticalCanvas.getContext("2d");
 
-verticalCanvas.height =  div.clientHeight - 39;
+verticalCanvas.height =  div.clientHeight - 30;
 // console.log(div.clientHeight);
-verticalCanvas.width = 101;
+verticalCanvas.width = 100;
 const canvas = document.getElementById("spreadsheet");
 const ctx = canvas.getContext("2d");
 
 
-canvas.height = div.clientHeight - 39;
+canvas.height = div.clientHeight - 30;
 // console.log(div.clientHeight);
-canvas.width = div.clientWidth-101;
+canvas.width = div.clientWidth-100;
 
 // import {cell} from "./cell.js"
 // const canvas = document.getElementById("spreadsheet");

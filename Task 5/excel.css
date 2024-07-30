@@ -12,7 +12,7 @@ body {
 }
 #main-area {
   height: 90vh;
-  overflow: auto;
+  overflow: hidden;
   position: relative;
 }
 #main-area > input {
@@ -32,7 +32,7 @@ body {
   position: absolute;
 }
 #verticall-div ,.scrollbar.vertical {
-  width: 8px;
+  width: 15px;
   right: 0;
   top: 0;
   bottom: 0;
@@ -40,7 +40,7 @@ body {
 }
 
 #horizontal-div,.scrollbar.horizontal {
-  height: 8px;
+  height: 15px;
   left: 0;
   right: 0;
   bottom: 0;
@@ -57,8 +57,9 @@ body {
 
 #horizontal-2{
   display: flex;
+  position: relative;
   
 }
 #corner{
-  width: 101px;
+  width: 98px;
 }

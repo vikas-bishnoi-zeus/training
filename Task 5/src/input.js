@@ -1,8 +1,9 @@
-canvas.addEventListener("click", (event) => getInput(event));
+canvas.addEventListener("dblclick", (event) => getInput(event));
 function setInput(x, y) {
   var cellInput = document.getElementById("content");
   var i = Math.floor(y / 30);
   var j = Math.floor(x / 100);
+  cells[i][j].clearRect(100,30,scrollX,scrollY);
 
   cellInput.value = cells[i][j].value;
   cellInput.style.display = "inline";
@@ -18,6 +19,7 @@ function setInput(x, y) {
   cellInput.focus();
   cellInput.onblur = () => {
     cells[i][j].setValue(cellInput.value);
+    cellInput.style.display="none";
     for (let k = 0; k < cells[i].length; k++) {
       cells[i][k].rectDraw(100, 30, scrollX, scrollY);
     }

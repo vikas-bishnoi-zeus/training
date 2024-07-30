@@ -1,12 +1,14 @@
 let selected = [];
+let versel=[];
+let horisel=[];
 canvas.addEventListener("mousedown", select);
 let canvasElement = document.querySelector("#spreadsheet");
 let rect = canvasElement.getBoundingClientRect();
 function select(event) {
-  console.log("Mouse Down");
+  // console.log("Mouse Down");
   let xind = getXind(event.clientX);
   let yind = getYind(event.clientY);
-  console.log("x,y ",xind,yind);
+  // console.log("x,y ",xind,yind);
   mouseMove(xind, yind);
 }
 function getXind(clientX) {
@@ -26,7 +28,7 @@ const mouseMove = (xInd, yInd) => {
   function move(event) {
     let newXind1 = getXind(event.clientX );
     let newYind1 = getYind(event.clientY);
-    console.log(newXind1,newYind1);
+    // console.log(newXind1,newYind1);
     if(newXind1===-1 || newYind1===-1){
       console.log("R")
       body.removeEventListener("mousemove", move);
@@ -37,17 +39,39 @@ const mouseMove = (xInd, yInd) => {
     if (newXind == newXind1 && newYind == newYind1) {
       return;
     } else {
+      // console.log(new)
       newXind = newXind1;
       newYind = newYind1;
     }
-    for (let i = 0; i < selected.length; i++) {
-      selected[i].isSelected = false;
-      selected[i].selectCell();
-      // console.log(i, selected[i]);
+    function removeSelects(arr,scx,scy){
+      for (let i = 0; i < arr.length; i++) {
+        arr[i].isSelected = false;
+        arr[i].selectCell(scx,scy);
+      }
     }
+    // for (let i = 0; i < selected.length; i++) {
+    //   selected[i].isSelected = false;
+    //   selected[i].selectCell();
+    //   // console.log(i, selected[i]);
+    // }
+    removeSelects(selected,scrollX,scrollY);
+    removeSelects(versel,0,scrollY);
+    removeSelects(horisel,scrollX,0);
     selected = [];
+    versel=[];
+    horisel=[];
     let sum = 0;
     let count = 0;
+    for (let i = Math.min(yInd, newYind); i <= Math.max(yInd, newYind); i++) {
+      verticalcell[i].isSelected=true;
+      verticalcell[i].selectCell(0,scrollY);
+      versel.push(verticalcell[i]);
+    }
+    for (let i = Math.min(xInd, newXind); i <= Math.max(xInd, newXind); i++) {
+      horizontalcell[i].isSelected=true;
+      horizontalcell[i].selectCell(scrollX,0);
+      horisel.push(horizontalcell[i]);
+    }
     for (let i = Math.min(xInd, newXind); i <= Math.max(xInd, newXind); i++) {
       for (let j = Math.min(yInd, newYind); j <= Math.max(yInd, newYind); j++) {
         cells[j][i].isSelected = true;
@@ -74,15 +98,5 @@ const mouseMove = (xInd, yInd) => {
   canvasElement.addEventListener("mouseup", (event) => {
     console.log("hello");
     body.removeEventListener("mousemove", move);
-    // var cellInput = document.getElementById("content");
-    // if(newXind===-1 || newYind===-1){
-    // }
-    // else{
-    //   cellInput.style.display = "none";
-
-    // }
-    // console.log(cellInput.style.display,l);
-    // l++;
-    // isInput=false;
   });
 };

@@ -1,12 +1,11 @@
 class cell {
   // const canvas = document.getElementById("spreadsheet");
   // const currentctx = can vas.getContext("2d");
-  constructor(x, y, value, isSelected,head,ctx) {
+  constructor(x, y, value, isSelected,ctx) {
     this.x = x;
     this.y = y;
     this.value = value;
     this.isSelected = isSelected;
-    this.head=head;
     this.currentctx=ctx
   }
     setValue(value){
@@ -37,7 +36,7 @@ class cell {
     selectCell(scx=scrollX,scy=scrollY){
       // console.log(scx,scy);
       if (this.isSelected) {
-        this.currentctx.fillStyle = 'rgba(0, 100, 255, 0.3)';
+        this.currentctx.fillStyle = 'rgba(19, 126, 67, 0.3)';
         this.currentctx.fillRect(this.x-scx, this.y-scy, 100, 30);
       } else {
         // console.log(`This log that selectCell is working for ${Math.floor(this.x/100)} and ${Math.floor(this.y/30)}  ${this.isSelected}`);

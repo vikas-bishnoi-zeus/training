@@ -9,14 +9,32 @@
   <body>
     <!-- <p>Hello</p> -->
     <div id="header">
-      <p>Sum:<span id="sum"></span></p>
-      <p>Average:<span id="average"></span></p>
+      <div id="info">
+        <p>Sum:<span id="sum"></span></p>
+        <p>Average:<span id="average"></span></p>
+      </div>
+      <div id="operation">
+        <div>
+          <label for="find">Find:</label>
+          <input type="text" id="find" name="find" placeholder="Find">
+          <button id="btn-find"><img  id="findSearch" src="./asset/FInd Search.png"></img></button>
+        </div>
+        <div>
+          <label for="find">Replace:</label>
+          <input type="text" id="find" name="find">
+        </div>
+      </div>
     </div>
     
     <div id="main-area">
       <input type="text" name="content" id="content" >
+      <!-- <div id="horizontal-0">
+        <div id="cornere" style="border: 1px solid black"></div>
+        <canvas id="temp" style="border: 1px solid red"></canvas>
+      </div> -->
       <div id="horizontal-1">
-        <div id="corner" style="border: 1px solid black"></div>
+        <!-- <div id="corner" style="border: 1px solid black"></div> -->
+        <canvas id="corner" style="border: 1px solid black" height="30"></canvas>
         <canvas id="horizontal" style="border: 0px solid red"></canvas>
       </div>
       <div id="horizontal-2">
@@ -38,9 +56,9 @@
         <div id="verticall-div">
           <div class="scrollbar vertical" id="verticalScroll"></div>
         </div>
-        <div id="horizontal-div">
-          <div class="scrollbar horizontal" id="horizontalScroll"></div>
-        </div>
+      </div>
+      <div id="horizontal-div">
+        <div class="scrollbar horizontal" id="horizontalScroll"></div>
       </div>
 
       
@@ -49,7 +67,8 @@
     <script src="./src/index.js"></script>
      <script src="./src/cell.js"></script>
     <script src="./src/scroll.js"></script>
-    <script src="./src/input.js"></script>
     <script src="./src/select.js"></script>
+    <script src="./src/input.js"></script>
+    <script src="./src/find.js"></script>
   </body>
 </html>

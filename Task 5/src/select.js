@@ -9,6 +9,7 @@ function select(event) {
   let xind = getXind(event.clientX);
   let yind = getYind(event.clientY);
   // console.log("x,y ",xind,yind);
+  // console.log("Ram Ram")
   mouseMove(xind, yind);
 }
 function getXind(clientX) {
@@ -19,19 +20,30 @@ function getYind(clientY) {
   let len = clientY-rect.top+scrollY;
   return Math.floor(len / 30);
 }
+function removeSelects(arr,scx,scy){
+  for (let i = 0; i < arr.length; i++) {
+    arr[i].isSelected = false;
+    arr[i].selectCell(scx,scy);
+  }
+}
 const mouseMove = (xInd, yInd) => {
   let newXind = -1;
   let newYind = -1;
   let body = document.querySelector("body");
-  body.addEventListener("mousemove", move);
-
+  body.addEventListener("mousemove", animate);
+  function animate(event){
+    // window.requestAnimationFrame(move)
+    // console.log("animate")
+    move(event);
+  }
   function move(event) {
+    // console.log("eni")
     let newXind1 = getXind(event.clientX );
     let newYind1 = getYind(event.clientY);
-    // console.log(newXind1,newYind1);
+    // console.log("Jai Hind");
     if(newXind1===-1 || newYind1===-1){
       console.log("R")
-      body.removeEventListener("mousemove", move);
+      body.removeEventListener("mousemove", animate);
       console.log("F");
 
       return;
@@ -42,12 +54,6 @@ const mouseMove = (xInd, yInd) => {
       // console.log(new)
       newXind = newXind1;
       newYind = newYind1;
-    }
-    function removeSelects(arr,scx,scy){
-      for (let i = 0; i < arr.length; i++) {
-        arr[i].isSelected = false;
-        arr[i].selectCell(scx,scy);
-      }
     }
     // for (let i = 0; i < selected.length; i++) {
     //   selected[i].isSelected = false;
@@ -65,6 +71,7 @@ const mouseMove = (xInd, yInd) => {
     for (let i = Math.min(yInd, newYind); i <= Math.max(yInd, newYind); i++) {
       verticalcell[i].isSelected=true;
       verticalcell[i].selectCell(0,scrollY);
+      
       versel.push(verticalcell[i]);
     }
     for (let i = Math.min(xInd, newXind); i <= Math.max(xInd, newXind); i++) {
@@ -87,7 +94,7 @@ const mouseMove = (xInd, yInd) => {
     }
     document.getElementById("sum").innerHTML = sum;
     if (count != 0) {
-      let avr = sum / count;
+      let avr = (sum / count).toFixed(2);;
       document.getElementById("average").innerHTML = avr;
     }
     else{
@@ -95,8 +102,11 @@ const mouseMove = (xInd, yInd) => {
     }
   }
   // let l=0;
-  canvasElement.addEventListener("mouseup", (event) => {
-    console.log("hello");
-    body.removeEventListener("mousemove", move);
-  });
+  // console.log("Z")
+  canvasElement.addEventListener("mouseup",removeMouseMove);
+  function removeMouseMove(event){
+    body.removeEventListener("mousemove", animate);
+    canvasElement.removeEventListener("mouseup",removeMouseMove)
+
+  }
 };

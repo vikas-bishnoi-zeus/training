@@ -3,7 +3,19 @@ function setInput(x, y) {
   var cellInput = document.getElementById("content");
   var i = Math.floor(y / 30);
   var j = Math.floor(x / 100);
+  removeSelects(selected,scrollX,scrollY);
+  removeSelects(horisel,scrollX,0);
+  removeSelects(versel,0,scrollY);
   cells[i][j].clearRect(100,30,scrollX,scrollY);
+
+  // console.log(horizontalcell[j],j);
+  horisel.push(horizontalcell[j]);
+  horizontalcell[j].isSelected=true;
+  horizontalcell[j].selectCell(scrollX,0);
+
+  versel.push(verticalcell[i])
+  verticalcell[i].isSelected=true;
+  verticalcell[i].selectCell(0,scrollY)
 
   cellInput.value = cells[i][j].value;
   cellInput.style.display = "inline";

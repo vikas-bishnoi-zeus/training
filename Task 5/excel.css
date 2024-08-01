@@ -1,14 +1,43 @@
 body {
   margin: 0px;
+  overflow: hidden;
+
 }
-#header {
+#header{
   background-color: aliceblue;
-  height: 10vh;
+  height: 90px;
   display: flex;
   padding-left: 15px;
+  
 }
-#header > p {
+#info{
+  display: flex;
+  /* width: 25%; */
+  justify-content: space-around;
+}
+#info> p {
   margin-right: 30px;
+  font-size: 19px;
+  display:flex;
+  align-items: center;
+}
+#operation{
+  display: flex;
+  font-size: 19px;
+  /* justify-content: space-around; */
+  /* width: 50%; */
+}
+#operation>div{
+  /* display:; */
+  margin: 20px;
+  display: flex;
+  align-items: center;
+}
+button{
+  margin-left: 10px;
+}
+#findSearch{
+  width:12px;
 }
 #main-area {
   height: 90vh;
@@ -62,4 +91,5 @@ body {
 }
 #corner{
   width: 98px;
+  height: 28px;
 }

@@ -4,12 +4,15 @@ let horisel=[];
 canvas.addEventListener("mousedown", select);
 let canvasElement = document.querySelector("#spreadsheet");
 let rect = canvasElement.getBoundingClientRect();
+
 function select(event) {
   // console.log("Mouse Down");
   let xind = getXind(event.clientX);
   let yind = getYind(event.clientY);
   // console.log("x,y ",xind,yind);
   // console.log("Ram Ram")
+  // console.log(xind,yind);
+  setInput(xind*100,yind*30)
   mouseMove(xind, yind);
 }
 function getXind(clientX) {
@@ -30,12 +33,7 @@ const mouseMove = (xInd, yInd) => {
   let newXind = -1;
   let newYind = -1;
   let body = document.querySelector("body");
-  body.addEventListener("mousemove", animate);
-  function animate(event){
-    // window.requestAnimationFrame(move)
-    // console.log("animate")
-    move(event);
-  }
+  body.addEventListener("mousemove", move);
   function move(event) {
     // console.log("eni")
     let newXind1 = getXind(event.clientX );
@@ -43,9 +41,8 @@ const mouseMove = (xInd, yInd) => {
     // console.log("Jai Hind");
     if(newXind1===-1 || newYind1===-1){
       console.log("R")
-      body.removeEventListener("mousemove", animate);
+      body.removeEventListener("mousemove", move);
       console.log("F");
-
       return;
     }
     if (newXind == newXind1 && newYind == newYind1) {
@@ -82,6 +79,7 @@ const mouseMove = (xInd, yInd) => {
     for (let i = Math.min(xInd, newXind); i <= Math.max(xInd, newXind); i++) {
       for (let j = Math.min(yInd, newYind); j <= Math.max(yInd, newYind); j++) {
         cells[j][i].isSelected = true;
+        // console.log(i,j);
         selected.push(cells[j][i]);
         cells[j][i].selectCell();
         let number = Number(cells[j][i].value);
@@ -103,10 +101,10 @@ const mouseMove = (xInd, yInd) => {
   }
   // let l=0;
   // console.log("Z")
-  canvasElement.addEventListener("mouseup",removeMouseMove);
+  window.addEventListener("mouseup",removeMouseMove);
   function removeMouseMove(event){
-    body.removeEventListener("mousemove", animate);
-    canvasElement.removeEventListener("mouseup",removeMouseMove)
+    body.removeEventListener("mousemove", move);
+    // canvasElement.removeEventListener("mouseup",removeMouseMove)
 
   }
 };

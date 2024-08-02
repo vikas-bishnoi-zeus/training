@@ -89,7 +89,13 @@ button{
   position: relative;
   
 }
+#spreadsheet {
+  cursor: cell;
+}
 #corner{
   width: 98px;
   height: 28px;
+}
+#content{
+  z-index: 100;
 }

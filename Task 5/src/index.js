@@ -1,6 +1,5 @@
 function setHeightWidth(canvas,height,width){
     canvas.height =height;
-    // console.log(div.clientHeight);
     canvas.width = width;
 }
 

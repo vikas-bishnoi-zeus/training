@@ -39,12 +39,13 @@ button{
 #findSearch{
   width:12px;
 }
-#main-area {
-  height: 90vh;
+#excel-1{
+  height: 100vh;
   overflow: hidden;
   position: relative;
+  /* bottom: 0; */
 }
-#main-area > input {
+#main-area >  #excel-1 >input {
   display: none;
   position: absolute;
   padding: 0px;
@@ -72,6 +73,8 @@ button{
   height: 15px;
   left: 0;
   right: 0;
+  /* top:0; */
+  z-index: 10;
   bottom: 0;
 }
 #horizontal-1{

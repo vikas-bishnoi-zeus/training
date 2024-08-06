@@ -1,49 +1,118 @@
-class grid{
-    // va=[];
-    constructor(row,col,width,height){
-        this.row=row;
-        this.col=col;
-        this.width=width;
-        this.height=height;
-        this.columnSizePrefix=[0];
-        this.rowSizePrefix=[0];
-        this.cells=[];
-        this.verticalcell=[];
-        this.horizontalcell=[];
-        this.getCanvas();
-        this.getCtx("A")
-        this.addSize(this.columnSizePrefix,width,col)
-        this.addSize(this.rowSizePrefix,height,row)
+import { cell } from "./cell.js";
+export class grid {
+    /**
+     * 
+     * @param {*} dimension 
+     */
+    constructor(dimension) {
+        this.dimension=dimension;
+        this.rowSizePrefix = dimension.rowSizePrefix;
+        this.columnSizePrefix = dimension.columnSizePrefix;
+        this.ctx = this.getCanvas();
+        // console.log(this.dimension.scrollY)
+        this.cells = [];
+        this.init();
+        // console.log(this.cells);
+        this.render()
     }
-    getCanvas(){
-        this.horizontalCanvas=document.getElementById("horizontal");
-        this.ctxup=this.getCtx(this.horizontalCanvas);
-        this.setHeightWidth(horizontalCanvas,30,screen.width);
-        
-        this.verticalCanvas=document.getElementById("vertrical");
-        this.ctxside=this.getCtx(this.verticalCanvas);
-        this.setHeightWidth(verticalCanvas,screen.height-30,100);
-
-        this.canvas = document.getElementById("spreadsheet");
-        this.ctx=this.getCtx(this.canvas);
-        this.setHeightWidth(canvas,screen.height-30,screen.width)
-
-    }
-    setHeightWidth(canvas,height,width){
-        canvas.height =height;
-        canvas.width = width;
-    }
-    getCtx(canvas){
-        return canvas.getContext("2d");
-    }
-    addSize(arr,toAdd,len){
-        for(let i=1;i<=len;i++){
-            arr.push(arr[i-1]+toAdd);
+    render() {
+        this.ctx.reset();
+        let starti=this.dimension.findRowIndex(this.dimension.scrollY);
+        let lasti=this.dimension.findRowIndex(this.dimension.scrollY+screen.height);
+        let startj=this.dimension.findColumnIndex(this.dimension.scrollX);
+        // console.log(this.dimension.scrollX+screen.width)
+        let lastj=this.dimension.findColumnIndex(this.dimension.scrollX+screen.width);
+        // console.log(lastj)
+        for (let i = starti; i <lasti; i++) {
+            for (let j = startj; j <lastj; j++) {
+                this.cells[i][j].rectDraw(this.dimension.scrollX,this.dimension.scrollY);
+            }
         }
     }
-    
+    init() {
+        for (let i = 0; i < this.dimension.row; i++) {
+            this.cells[i] = [];
+            for (let j = 0; j < this.dimension.col; j++) {
+                let val = Math.floor(Math.random() * 1000) + "";
+                const curCell = new cell(
+                    this.columnSizePrefix[j],
+                    this.rowSizePrefix[i],
+                    this.getWidth(j),
+                    this.getHeight(i),
+                    val,
+                    false,
+                    this.ctx
+                );
+                if(i==j){
+                    curCell.isSelected=true;
+                }
+                this.cells[i][j] = curCell;
+            }
+        }
+    }
+    getHeight(i) {
+        return this.rowSizePrefix[i + 1] - this.rowSizePrefix[i];
+    }
+    getWidth(j) {
+        return this.columnSizePrefix[j + 1] - this.columnSizePrefix[j];
+    }
+    getCanvas() {
+        let canvas = document.getElementById("spreadsheet");
+        this.setHeightWidth(canvas, screen.height - 30, screen.width);
+        return canvas.getContext("2d");
+    }
+    addMoreRows(num){
+        let len=this.dimension.row
+        for (let i = 0; i < num; i++) {
+            this.cells[i+len] = [];
+            for (let j = 0; j < this.dimension.col; j++) {
+                let val = Math.floor(Math.random() * 1000) + "";
+                const curCell = new cell(
+                    this.columnSizePrefix[j],
+                    this.rowSizePrefix[i+len],
+                    this.getWidth(j),
+                    this.getHeight(i+len),
+                    val,
+                    false,
+                    this.ctx
+                );
+                if((i+len)==j){
+                    curCell.isSelected=true;
+                }
+                this.cells[i+len][j] = curCell;
+            }
+        }
+    }
+    addMoreCols(num){
+        console.log("Grid col")
+        let len=this.dimension.col;
+        for (let i = 0; i < this.dimension.row; i++) {
+            for (let j = 0; j < num; j++) {
+                let val = Math.floor(Math.random() * 1000) + "";
+                const curCell = new cell(
+                    this.columnSizePrefix[j+len],
+                    this.rowSizePrefix[i],
+                    this.getWidth(j+len),
+                    this.getHeight(i),
+                    val,
+                    false,
+                    this.ctx
+                );
+                if(i==j+len){
+                    curCell.isSelected=true;
+                }
+                this.cells[i][j+len] = curCell;
+            }
+        }
+    }
+    /**
+     *
+     * @param {*} canvas
+     * @param {*} height
+     * @param {*} width
+     */
+    setHeightWidth(canvas, height, width) {
+        canvas.height = height;
+        canvas.width = width;
+    }
 }
-const he=new grid(10,10,109,40);
-console.log(he.ram);
-console.log(he.columnSizePrefix)
-console.log(he.rowSizePrefix);

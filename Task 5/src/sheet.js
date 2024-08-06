@@ -5,6 +5,7 @@ import { dimensions } from "./dimension.js";
 import { topSheet } from "./topSheet.js";
 import { leftSheet } from "./leftSheet.js";
 import { scrollBar } from "./scrollbar.js";
+import { sheetUtility } from "./sheetUtility.js";
 class sheet{
     /**
      * 
@@ -20,20 +21,10 @@ class sheet{
         this.topSheet=new topSheet(this.dimension)
         this.leftSheet=new leftSheet(this.dimension);
         this.grid=new grid(this.dimension)
-        console.log(this.topSheet)
-        console.log(this.leftSheet)
-        console.log(this.grid )
-        // this.sheetArray={topSheet:this.topSheet,leftSheet:this.topSheet,grid:this.grid};
         this.sheetArray=[this.topSheet,this.leftSheet,this.grid];
         this.scrollBar=new scrollBar(this.dimension,this.sheetArray,this.sheet)
-        // console.log(this.grid);
-        // console.log(this.dimensions.rowSizePrefix);
-        // console.log(this.grid.rowSizePrefix);
-        // this.tempcell=new cell(0,0,224,false,"na","as");
-        // console.log(this.tempcell.value);
+        this.sheetUtlilty=new sheetUtility(this.dimension,this.sheetArray);
     }
     
 }
-const he=new sheet(60,30,100,30);
-// console.log(he.columnSizePrefix)
-// console.log(he.rowSizePrefix);
+const sheet1=new sheet(60,30,100,30);

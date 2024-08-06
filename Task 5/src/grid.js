@@ -84,7 +84,6 @@ export class grid {
         }
     }
     addMoreCols(num){
-        console.log("Grid col")
         let len=this.dimension.col;
         for (let i = 0; i < this.dimension.row; i++) {
             for (let j = 0; j < num; j++) {

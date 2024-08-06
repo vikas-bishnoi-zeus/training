@@ -45,7 +45,7 @@ button{
   position: relative;
   /* bottom: 0; */
 }
-#main-area >  #excel-1 >input {
+#content {
   display: none;
   position: absolute;
   padding: 0px;

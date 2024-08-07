@@ -1,11 +1,13 @@
 export class scrollBar {
-    constructor(dimension, objArray, sheet) {
+    constructor(dimension, objArray, sheet,sheetUtlilty) {
+        this.sheetUtlilty=sheetUtlilty;
         this.dimension = dimension;
         this.objArray = objArray;
         this.sheet = sheet;
         this.init();
         this.flagVScroll = false;
         this.flagHScroll = false;
+        // console.log(this.sheetUtlilty)
     }
     init() {
         this.container = document.getElementById("excel-1");
@@ -15,7 +17,7 @@ export class scrollBar {
         this.eventListner();
     }
     eventListner() {
-        this.sheet.addEventListener("wheel", this.handleWheelScroll.bind(this));
+        this.sheet.addEventListener("wheel", this.handleWheelScroll.bind(this) ,{passive:false});
         this.verticalScroll.addEventListener(
             "mousedown",
             this.startVerticalScroll.bind(this)
@@ -29,9 +31,17 @@ export class scrollBar {
     }
     handleWheelScroll(evt) {
         evt.preventDefault();
-
-        const deltaX = evt.deltaX;
-        const deltaY = evt.deltaY / 5;
+        console.log("Wheel")
+        console.log(evt)
+        let deltaX=0;
+        let deltaY=0;
+        if(evt.shiftKey){
+            deltaX = evt.deltaY/5;
+            console.log()
+        }
+        else{
+            deltaY = evt.deltaY / 5;
+        }
         this.dimension.scrollX = Math.max(
             0,
             Math.min(
@@ -50,6 +60,9 @@ export class scrollBar {
         );
         if (this.isContentLimitReachedVertical()) {
             this.addMoreContentY();
+        }
+        if (this.isContentLimitReachedHorizontal()) {
+            this.addMoreContentX();
         }
         this.updateScrollbars();
     }
@@ -71,7 +84,6 @@ export class scrollBar {
         this.flagHScroll = false;
     }
     isContentLimitReachedVertical() {
-        //"ZY")
         if (
             this.dimension.scrollY + this.container.clientHeight >=
             this.dimension.rowSizePrefix[this.dimension.row - 5]
@@ -196,5 +208,7 @@ export class scrollBar {
                 this.container.clientWidth,
             screen.width + 10
         )}px`;
+
+        this.sheetUtlilty.renderInput(true);
     }
 }

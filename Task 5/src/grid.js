@@ -19,6 +19,9 @@ export class grid {
         this.ctx.reset();
         let starti=this.dimension.findRowIndex(this.dimension.scrollY);
         let lasti=this.dimension.findRowIndex(this.dimension.scrollY+screen.height);
+        console.log(starti,this.cells[starti][0])
+        console.log(starti,this.cells[starti+1][0])
+        console.log(this.dimension.scrollY)
         let startj=this.dimension.findColumnIndex(this.dimension.scrollX);
         // console.log(this.dimension.scrollX+screen.width)
         let lastj=this.dimension.findColumnIndex(this.dimension.scrollX+screen.width);
@@ -43,9 +46,6 @@ export class grid {
                     false,
                     this.ctx
                 );
-                if(i==j){
-                    curCell.isSelected=true;
-                }
                 this.cells[i][j] = curCell;
             }
         }
@@ -76,9 +76,6 @@ export class grid {
                     false,
                     this.ctx
                 );
-                if((i+len)==j){
-                    curCell.isSelected=true;
-                }
                 this.cells[i+len][j] = curCell;
             }
         }
@@ -97,9 +94,6 @@ export class grid {
                     false,
                     this.ctx
                 );
-                if(i==j+len){
-                    curCell.isSelected=true;
-                }
                 this.cells[i][j+len] = curCell;
             }
         }

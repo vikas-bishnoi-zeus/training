@@ -22,8 +22,8 @@ class sheet{
         this.leftSheet=new leftSheet(this.dimension);
         this.grid=new grid(this.dimension)
         this.sheetArray=[this.topSheet,this.leftSheet,this.grid];
-        this.scrollBar=new scrollBar(this.dimension,this.sheetArray,this.sheet)
         this.sheetUtlilty=new sheetUtility(this.dimension,this.sheetArray);
+        this.scrollBar=new scrollBar(this.dimension,this.sheetArray,this.sheet,this.sheetUtlilty)
     }
     
 }

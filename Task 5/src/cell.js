@@ -19,7 +19,7 @@ export class cell {
     }
     rectDraw(scrollX, scrollY) {
         this.currentctx.lineWidth = 0.5;
-        this.currentctx.clearRect(this.x - scrollX, this.y - scrollY, this.w, this.h);
+        // this.currentctx.clearRect(this.x - scrollX, this.y - scrollY, this.w, this.h);
         this.currentctx.strokeStyle = "#E0E0E0";
         this.currentctx.strokeRect(
             this.x - Math.floor(scrollX) + 0.5,
@@ -44,12 +44,9 @@ export class cell {
         if (this.isSelected) {
             this.currentctx.fillStyle = "rgba(19, 126, 67, 0.3)";
             this.currentctx.fillRect(this.x - scx, this.y - scy, this.w, this.h);
-        } else {
-            // console.log(`This log that selectCell is working for ${Math.floor(this.x/100)} and ${Math.floor(this.y/30)}  ${this.isSelected}`);
-            // console.log("Calling rect from select")
-            // currentctx.clearRect(this.x, this.y,100,30);
-            // this.rectDraw(100,30)
-            this.rectDraw(scx, scy);
-        }
+        } 
+        // else {
+            // this.rectDraw(scx, scy);
+        // }
     }
 }

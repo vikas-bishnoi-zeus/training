@@ -1,3 +1,4 @@
+// import { graph } from "./graph.js";
 export class sheetUtility {
     constructor(dimension, objArray) {
         this.dimension = dimension;
@@ -17,6 +18,7 @@ export class sheetUtility {
         this.isSelection=false;
         this.cellInput = document.getElementById("content");
         this.rect = spreadsheet.getBoundingClientRect();
+        // this.graph=new graph(dimension,this.i,this.j,this.currenti,this.currentj);
 
     }
     eventListner() {
@@ -40,6 +42,8 @@ export class sheetUtility {
         this.j = this.dimension.findColumnIndex(this.inputX);
         this.currenti=this.i;
         this.currentj=this.j;
+
+        // this.updateGarph()
         this.renderInput(false);
         this.isInput = true;
         this.isSelection=true;
@@ -54,18 +58,19 @@ export class sheetUtility {
             this.deselect()
             this.currenti=tempcurrenti
             this.currentj=tempcurrentj;
+            // this.updateGarph();
             this.select()
         }
     }
     onMouseUp(evt){
-        console.log("Up")
+        // console.log("Up")
         this.isSelection=false;
     }
     select(){
         this.count=0;
         this.sum=0;
         this.min=Number.MAX_VALUE
-        this.max=Number.MIN_VALUE
+        this.max=-Number.MAX_VALUE
         for(let j=Math.min(this.j,this.currentj);j<=Math.max(this.j,this.currentj);j++){
             this.topSheet.horizontalcell[j].isSelected=true;
         }
@@ -73,6 +78,9 @@ export class sheetUtility {
             this.leftSheet.verticalcell[i].isSelected=true;
             for(let j=Math.min(this.j,this.currentj);j<=Math.max(this.j,this.currentj);j++){
                 this.grid.cells[i][j].isSelected=true;
+                if(this.grid.cells[i][j].value===""){
+                    continue;
+                }
                 let number = Number(this.grid.cells[i][j].value);
                 if (!Number.isNaN(number)) {
                     this.sum=this.sum+ number;
@@ -82,21 +90,27 @@ export class sheetUtility {
                 }
             }
         }
-        document.getElementById("sum").innerHTML = this.sum;
-        if (this.count != 0) {
+        // console.log(this.count)
+        if (this.count> 1) {
+            document.getElementById("sum").innerHTML ="Sum: "+ this.sum;
             let avr = (this.sum / this.count).toFixed(2);;
-            document.getElementById("average").innerHTML = avr;
-            document.getElementById("min").innerHTML = this.min;
-            document.getElementById("max").innerHTML = this.max;
+            document.getElementById("average").innerHTML ="Average: "+avr;
+            document.getElementById("min").innerHTML = "Min: "+this.min;
+            document.getElementById("max").innerHTML = "Max: "+this.max;
         }
         else{
-            document.getElementById("average").innerHTML = 0;
+            this.removeInfoMath()
         }
         this.sheetRender()
     }
+    removeInfoMath(){
+        document.getElementById("sum").innerHTML ="";
+        document.getElementById("average").innerHTML = "";
+        document.getElementById("min").innerHTML ="";
+        document.getElementById("max").innerHTML = "";
+    }
     deselect(){
-        document.getElementById("sum").innerHTML =0;
-        document.getElementById("average").innerHTML = 0;
+        this.removeInfoMath()
         if(this.j===-1 || this.i===-1){
             return ;
         }
@@ -111,7 +125,7 @@ export class sheetUtility {
         }
     }
     renderPrv(){
-        console.log("Prv")
+        // console.log("Prv")
         this.grid.cells[this.i][this.j].value=this.cellInput.value
         this.cellInput.value="";
         this.sheetRender();
@@ -131,8 +145,8 @@ export class sheetUtility {
         var left = this.grid.cells[this.i][this.j].x - Math.floor(this.dimension.scrollX) + this.rect.left;
         this.cellInput.style.top = top + "px";
         this.cellInput.style.left = left + "px";
-        this.cellInput.style.height = 30 - 2 + "px";
-        this.cellInput.style.width = 100 - 2 + "px";
+        this.cellInput.style.height = this.grid.cells[this.i][this.j].h + "px";
+        this.cellInput.style.width = 100+ "px";
     }
     sheetRender(){
         this.grid.render()

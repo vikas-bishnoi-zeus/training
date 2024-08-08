@@ -19,9 +19,9 @@ export class grid {
         this.ctx.reset();
         let starti=this.dimension.findRowIndex(this.dimension.scrollY);
         let lasti=this.dimension.findRowIndex(this.dimension.scrollY+screen.height);
-        console.log(starti,this.cells[starti][0])
-        console.log(starti,this.cells[starti+1][0])
-        console.log(this.dimension.scrollY)
+        // console.log(starti,this.cells[starti][0])
+        // console.log(starti,this.cells[starti+1][0])
+        // console.log(this.dimension.scrollY)
         let startj=this.dimension.findColumnIndex(this.dimension.scrollX);
         // console.log(this.dimension.scrollX+screen.width)
         let lastj=this.dimension.findColumnIndex(this.dimension.scrollX+screen.width);
@@ -36,7 +36,8 @@ export class grid {
         for (let i = 0; i < this.dimension.row; i++) {
             this.cells[i] = [];
             for (let j = 0; j < this.dimension.col; j++) {
-                let val = Math.floor(Math.random() * 1000) + "";
+                // let val = Math.floor(Math.random() * 1000) + "";
+                let val=""
                 const curCell = new cell(
                     this.columnSizePrefix[j],
                     this.rowSizePrefix[i],
@@ -66,7 +67,8 @@ export class grid {
         for (let i = 0; i < num; i++) {
             this.cells[i+len] = [];
             for (let j = 0; j < this.dimension.col; j++) {
-                let val = Math.floor(Math.random() * 1000) + "";
+                // let val = Math.floor(Math.random() * 1000) + "";
+                let val=""
                 const curCell = new cell(
                     this.columnSizePrefix[j],
                     this.rowSizePrefix[i+len],
@@ -84,7 +86,8 @@ export class grid {
         let len=this.dimension.col;
         for (let i = 0; i < this.dimension.row; i++) {
             for (let j = 0; j < num; j++) {
-                let val = Math.floor(Math.random() * 1000) + "";
+                // let val = Math.floor(Math.random() * 1000) + "";
+                let val=""
                 const curCell = new cell(
                     this.columnSizePrefix[j+len],
                     this.rowSizePrefix[i],

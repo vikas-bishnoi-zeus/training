@@ -54,7 +54,8 @@ button{
   position: absolute;
   padding: 0px;
   z-index: 0;
-  /* border: 0px; */
+  border: 0px;
+  outline: none;
 }
 
 .scrollbar {
@@ -102,7 +103,7 @@ button{
   cursor: cell;
 }
 #corner{
-  width: 98px;
+  width: 100px;
   height: 28px;
 }
 #horizontal-1{
@@ -111,4 +112,77 @@ button{
 
 #horizontal-1{
   z-index: 5;
+}
+
+
+#ribbon-container {
+  background-color: #f5faf7;
+  height: 10vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  }
+.tab-list-container{
+  height: max-content;
+  width: 100%;
+  display: flex;
+  justify-content: start;
+  flex-direction: row;
+  padding-left: 20px;
+  margin-bottom: 5px;
+}
+.tab-list-container > span {
+  margin-right: 10px;
+}
+.tab-list-container > .active {
+  border-bottom: 2px solid #107C41;
+}
+.tab-list-container-items:hover {
+  border-bottom: 2px solid #107C41;
+  cursor: pointer;
+}
+.focus-zone {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #107C41;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  border-radius: 7px;
+}
+.focus-zone-inner {
+  width: 100%;
+}
+.focus-zone-left {
+  display: flex;
+  flex-direction: row;
+}
+.focus-zone-right {
+  display: grid;
+  grid-template-columns: auto auto auto auto auto;
+}
+.focus-zone-right {
+  color: white;
+}
+
+.graph {
+  display: none;
+  height: -moz-fit-content;
+  height: fit-content;
+  width: 500px;
+  position: absolute;
+  top: 340px;
+  left: 35%;
+  border: 1px dotted;
+  padding: 30px;
+  background-color: white;
+  border-radius: 10px;
+}
+.graph-close {
+  position: absolute;
+  border-radius: 5px;
+  right: 5px;
+  top: 5px;
 }

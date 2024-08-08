@@ -31,13 +31,13 @@ export class scrollBar {
     }
     handleWheelScroll(evt) {
         evt.preventDefault();
-        console.log("Wheel")
-        console.log(evt)
+        // console.log("Wheel")
+        // console.log(evt)
         let deltaX=0;
         let deltaY=0;
         if(evt.shiftKey){
             deltaX = evt.deltaY/5;
-            console.log()
+            // console.log()
         }
         else{
             deltaY = evt.deltaY / 5;
@@ -200,13 +200,13 @@ export class scrollBar {
         this.verticalScroll.style.top = `${Math.min(
             (this.dimension.scrollY / this.getContentHeight()) *
                 this.container.clientHeight,
-            screen.height - 150
+            screen.height - 350
         )}px`;
         // this.verticalScroll.style.top="0px"
         this.horizontalScroll.style.left = `${Math.min(
             (this.dimension.scrollX / this.getContentWidth()) *
                 this.container.clientWidth,
-            screen.width + 10
+            screen.width -30
         )}px`;
 
         this.sheetUtlilty.renderInput(true);

@@ -36,8 +36,8 @@ export class grid {
         for (let i = 0; i < this.dimension.row; i++) {
             this.cells[i] = [];
             for (let j = 0; j < this.dimension.col; j++) {
-                // let val = Math.floor(Math.random() * 1000) + "";
-                let val=""
+                let val = Math.floor(Math.random() * 1000) + "";
+                // let val=""
                 const curCell = new cell(
                     this.columnSizePrefix[j],
                     this.rowSizePrefix[i],
@@ -50,6 +50,7 @@ export class grid {
                 this.cells[i][j] = curCell;
             }
         }
+        this.cells[0][0].isSelected=true;
     }
     getHeight(i) {
         return this.rowSizePrefix[i + 1] - this.rowSizePrefix[i];

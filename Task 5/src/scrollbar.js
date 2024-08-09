@@ -208,7 +208,6 @@ export class scrollBar {
                 this.container.clientWidth,
             screen.width -30
         )}px`;
-
-        this.sheetUtlilty.renderInput(true);
+        this.sheetUtlilty.select.setInputBox();
     }
 }

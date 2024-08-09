@@ -24,6 +24,7 @@ export class topSheet{
             const temp=new cell(this.columnSizePrefix[i],0,this.getWidth(i),30,this.getCoulomName(i+1),false,this.ctx);
             this.horizontalcell[i]=temp;
         }
+        this.horizontalcell[0].isSelected=true;
     }
     addMoreRows(num){
         

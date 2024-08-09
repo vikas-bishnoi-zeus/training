@@ -19,7 +19,9 @@ export class cell {
     }
     rectDraw(scrollX, scrollY) {
         this.currentctx.lineWidth = 0.5;
-        // this.currentctx.clearRect(this.x - scrollX, this.y - scrollY, this.w, this.h);
+        this.currentctx.clearRect(this.x - scrollX, this.y - scrollY, this.w, this.h);
+        if(!(this.value==="")){
+        }
         this.currentctx.strokeStyle = "#E0E0E0";
         this.currentctx.strokeRect(
             this.x - Math.floor(scrollX) + 0.5,

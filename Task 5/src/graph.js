@@ -6,9 +6,11 @@ export class graph {
         this.grid=objArray[2];
         this.select = selectObj;
         this.draw = false;
+        this.draging=false;
         this.updateselectRange();
         this.getGraphElement();
         this.init();
+        this.addEventListener();
     }
     updateselectRange() {
         this.i = Math.min(this.select.i,this.select.currenti);
@@ -17,12 +19,33 @@ export class graph {
         this.currentj = Math.max(this.select.j,this.select.currentj);
     }
     getGraphElement() {
-        this.graphCanvasElement = document.getElementById("myChart");
         this.graph = document.querySelector(".graph");
+        this.graphCanvasElement = document.getElementById("myChart");
         this.barGraphBtn = document.querySelector(".graph-bar-btn");
         this.lineGraphBtn = document.querySelector(".graph-line-btn");
         this.pieGraphBtn = document.querySelector(".graph-pie-btn");
         this.graphCloseBtn = document.querySelector(".graph-close");
+    }
+    addEventListener(){
+        this.graph.addEventListener("mousedown",()=>{this.draging=true});
+        window.addEventListener("mouseup",()=>{this.draging=false});
+        window.addEventListener("mousemove",this.dragChart.bind(this))
+    }
+    dragChart(evt){
+        if(this.draging){
+            // console.log("draging ",this.graph.getBoundingClientRect())
+            let graphX=this.graph.getBoundingClientRect().x
+            let graphY=this.graph.getBoundingClientRect().y;
+            let newX=graphX+evt.movementX;
+            if(newX>0){
+                this.graph.style.left=newX+"px";
+            }
+            let newY=graphY+evt.movementY;
+            if(newY>0){
+                this.graph.style.top=newY+"px";
+            }
+            console.log(evt.movementX,newX,newY)
+        }
     }
     init() {
         this.barGraphBtn.addEventListener(
@@ -49,7 +72,7 @@ export class graph {
     destroyGraph() {
         this.graph.style.display = "inline-block";
         this.updateselectRange();
-        console.log(this.i, this.j, this.currenti, this.currentj);
+        // console.log(this.i, this.j, this.currenti, this.currentj);
         if (this.draw) {
             this.draw.destroy();
         }
@@ -116,9 +139,6 @@ export class graph {
             // },
             // grouped:true,
         });
-        if (this.draw) {
-            console.log("a");
-        }
     }
 
     //  * Drawing Line Graph

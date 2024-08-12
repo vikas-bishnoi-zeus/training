@@ -1,13 +1,12 @@
 export class scrollBar {
-    constructor(dimension, objArray, sheet,sheetUtlilty) {
-        this.sheetUtlilty=sheetUtlilty;
+    constructor(dimension, objArray, sheet,select) {
+        this.select=select;
         this.dimension = dimension;
         this.objArray = objArray;
         this.sheet = sheet;
         this.init();
         this.flagVScroll = false;
         this.flagHScroll = false;
-        // console.log(this.sheetUtlilty)
     }
     init() {
         this.container = document.getElementById("excel-1");
@@ -31,13 +30,10 @@ export class scrollBar {
     }
     handleWheelScroll(evt) {
         evt.preventDefault();
-        // console.log("Wheel")
-        // console.log(evt)
         let deltaX=0;
         let deltaY=0;
         if(evt.shiftKey){
             deltaX = evt.deltaY/5;
-            // console.log()
         }
         else{
             deltaY = evt.deltaY / 5;
@@ -202,12 +198,11 @@ export class scrollBar {
                 this.container.clientHeight,
             screen.height - 350
         )}px`;
-        // this.verticalScroll.style.top="0px"
         this.horizontalScroll.style.left = `${Math.min(
             (this.dimension.scrollX / this.getContentWidth()) *
                 this.container.clientWidth,
             screen.width -30
         )}px`;
-        this.sheetUtlilty.select.setInputBox();
+        this.select.setInputBox(true);
     }
 }

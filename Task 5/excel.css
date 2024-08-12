@@ -122,6 +122,8 @@ button{
   display: flex;
   flex-direction: column;
   padding: 10px;
+  position: sticky;
+  z-index: 4
   }
 .tab-list-container{
   height: max-content;

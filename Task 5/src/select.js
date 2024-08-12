@@ -7,14 +7,15 @@ export class select{
         this.grid = objArray[2];
         this.init()
         this.eventListner();
+        this.setInputBox();
     }
     init(){
         this.inputX = -1;
         this.inputY = -1;
         this.i=0;
         this.j=0;
-        this.currenti=1;
-        this.currentj=1;
+        this.currenti=0;
+        this.currentj=0;
         this.isInput = false;
         this.isSelection=false;
         
@@ -90,7 +91,6 @@ export class select{
                 }
             }
         }
-        // console.log(this.count)
         if (this.count> 1) {
             document.getElementById("sum").innerHTML ="Sum: "+ this.sum;
             let avr = (this.sum / this.count).toFixed(2);;
@@ -126,8 +126,8 @@ export class select{
         }
     }
     renderPrv(){
-        // console.log("Prv")
         this.grid.cells[this.i][this.j].value=this.cellInput.value
+        console.log("hello",this.cellInput.value)
         this.cellInput.value="";
         this.sheetRender();
     }
@@ -135,14 +135,13 @@ export class select{
         if(this.inputX===-1 ||this.inputY===-1){
             return ;
         }
-        // if(this.isInput){
-        //     // this.renderPrv()
-        // }
         this.select()
-        // console.log(this.grid.cells[this.i][this.j].value);
-        this.setInputBox()
+        this.setInputBox(false)
     }
-    setInputBox(){
+    setInputBox(iScrolling){
+        if(iScrolling){
+            this.renderPrv();
+        }
         this.cellInput.value = this.grid.cells[this.i][this.j].value;
         this.cellInput.style.display = "block";
         var top = this.grid.cells[this.i][this.j].y - Math.floor(this.dimension.scrollY);

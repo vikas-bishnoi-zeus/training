@@ -28,6 +28,9 @@ export class grid {
         // console.log(lastj)
         for (let i = starti; i <lasti; i++) {
             for (let j = startj; j <lastj; j++) {
+                this.cells[i][j].x=this.columnSizePrefix[j];
+                this.cells[i][j].y=this.rowSizePrefix[i];
+                this.cells[i][j].w=this.getWidth(j);
                 this.cells[i][j].rectDraw(this.dimension.scrollX,this.dimension.scrollY);
             }
         }
@@ -36,8 +39,8 @@ export class grid {
         for (let i = 0; i < this.dimension.row; i++) {
             this.cells[i] = [];
             for (let j = 0; j < this.dimension.col; j++) {
-                let val = Math.floor(Math.random() * 1000) + "";
-                // let val=""
+                // let val = Math.floor(Math.random() * 1000) + "";
+                let val=""
                 const curCell = new cell(
                     this.columnSizePrefix[j],
                     this.rowSizePrefix[i],

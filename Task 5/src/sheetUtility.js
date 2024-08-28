@@ -1,6 +1,7 @@
 import { graph } from "./graph.js";
 import { select } from "./select.js";
 import { scrollBar } from "./scrollbar.js";
+import { resizeCol } from "./ResizeCol.js";
 
 export class sheetUtility {
     constructor(dimension, objArray) {
@@ -8,5 +9,6 @@ export class sheetUtility {
         this.graph=new graph(dimension,objArray,this.select);
         this.sheet=document.getElementById("excel-1");
         this.scrollBar=new scrollBar(dimension,objArray,this.sheet,this.select)
+        this.resize=new resizeCol(dimension,objArray,this.select);
     }
 }

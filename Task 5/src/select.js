@@ -127,7 +127,7 @@ export class select{
     }
     renderPrv(){
         this.grid.cells[this.i][this.j].value=this.cellInput.value
-        console.log("hello",this.cellInput.value)
+        // console.log("hello",this.cellInput.value)
         this.cellInput.value="";
         this.sheetRender();
     }
@@ -149,7 +149,7 @@ export class select{
         this.cellInput.style.top = top + "px";
         this.cellInput.style.left = left + "px";
         this.cellInput.style.height = this.grid.cells[this.i][this.j].h + "px";
-        this.cellInput.style.width = 100+ "px";
+        this.cellInput.style.width = this.grid.cells[this.i][this.j].w+ "px";
     }
     sheetRender(){
         this.grid.render()

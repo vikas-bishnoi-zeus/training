@@ -3,7 +3,7 @@ import { dimensions } from "./dimension.js";
 import { topSheet } from "./topSheet.js";
 import { leftSheet } from "./leftSheet.js";
 import { sheetUtility } from "./sheetUtility.js";
-class sheet{
+export class sheet{
     /**
      * 
      * @param {*} row 
@@ -21,4 +21,3 @@ class sheet{
     }
     
 }
-const sheet1=new sheet(60,30,100,30);

@@ -65,7 +65,43 @@ export class dimensions{
                 right = mid - 1; // Move the right boundary to mid - 1
             }
         }
-    
         return result;
+    }
+    findCoumnResizeIndex(distance){
+
+        return this.binarySearchResizeIndex(this.columnSizePrefix,distance);
+    }
+    binarySearchResizeIndex(arr,Y){
+        if(Y<=5){
+            return -1;
+        }
+        let left = 0;
+        let right = arr.length - 1;
+        let result = -1;
+    
+        while (left <= right) {
+            let mid = Math.floor((left + right) / 2);
+
+            if(Y>=arr[mid]-5 && Y<=arr[mid]+5){
+                // console.log(Y,mid);
+                return mid;
+            }
+            else if (arr[mid] < Y) {
+                left = mid + 1; // Move the left boundary to mid + 1
+            } else {
+                right = mid - 1; // Move the right boundary to mid - 1
+            }
+        }
+        // console.log(result);
+
+        return result;
+    }
+    addColumnwidth(ind,extra){
+        this.sizeAdd(this.columnSizePrefix,ind,extra);
+    }
+    sizeAdd(arr,ind,extra){
+        for(let i=ind;i<arr.length;i++){
+            arr[i]+=extra;
+        }
     }
 }

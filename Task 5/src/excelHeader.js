@@ -1,6 +1,7 @@
 export class excelHeader {
     constructor(sheet) {
         this.grid=sheet.grid;
+        this.dimension=sheet.dimension;
         this.select=sheet.sheetUtlilty.select;
         this.init();
     }
@@ -13,7 +14,7 @@ export class excelHeader {
         this.uploadCsv();
         window.addEventListener("load",async()=>{
             console.log("Loading")
-            await this.getFile(0,100);
+            await this.getFile(0,this.dimension.row);
         })
     }
     uploadCsv() {
@@ -36,10 +37,8 @@ export class excelHeader {
                     }
                 )
                     .then(async (response) => {
-                        // this.grid.cells[0][0].value="1";
-                        // console.log(this.grid.cells[1][1]);
-                        // console.log(response);
-                        await this.getFile(0,100);
+                        console.log(this.dimension.row);
+                        await this.getFile(0,this.dimension.row);
                     })
                     .catch((error) => {
                         console.error("Error:", error);
@@ -69,10 +68,10 @@ export class excelHeader {
             ); 
             const res = await response.json();
             console.log("Geting Data")
-            console.log(res);
+            // console.log(res);
             // // var values = res.map(item => Object.values(item))
             for(let row of res){
-                console.log(row[0]);
+                // console.log(row[0]);
                 let j=-1;
                 for(let cell of row){
                     if(j==-1){

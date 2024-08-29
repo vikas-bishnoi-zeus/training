@@ -6,4 +6,4 @@ class excel{
         this.excelHead=new excelHeader(this.sheet1);
     }
 }
-const index1=new excel(1000,50,100,30);
+const index1=new excel(200,50,100,30);

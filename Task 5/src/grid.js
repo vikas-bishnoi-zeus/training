@@ -26,8 +26,8 @@ export class grid {
         // console.log(this.dimension.scrollX+screen.width)
         let lastj=this.dimension.findColumnIndex(this.dimension.scrollX+screen.width);
         // console.log(lastj)
-        for (let i = starti; i <lasti; i++) {
-            for (let j = startj; j <lastj; j++) {
+        for (let i = starti; i <=lasti; i++) {
+            for (let j = startj; j <=lastj; j++) {
                 this.cells[i][j].x=this.columnSizePrefix[j];
                 this.cells[i][j].y=this.rowSizePrefix[i];
                 this.cells[i][j].w=this.getWidth(j);
@@ -53,7 +53,7 @@ export class grid {
                 this.cells[i][j] = curCell;
             }
         }
-        this.cells[0][0].isSelected=true;
+        this.cells[1][0].isSelected=true;
     }
     getHeight(i) {
         return this.rowSizePrefix[i + 1] - this.rowSizePrefix[i];

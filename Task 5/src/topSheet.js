@@ -15,7 +15,7 @@ export class topSheet{
         let starti=this.dimension.findColumnIndex(this.dimension.scrollX);
         let lasti=this.dimension.findColumnIndex(this.dimension.scrollX+screen.width);
         // console.log(lasti)
-        for (let i = starti; i <lasti; i++) {
+        for (let i = starti; i <=lasti; i++) {
             this.horizontalcell[i].x=this.columnSizePrefix[i];
             this.horizontalcell[i].w=this.getWidth(i);
             this.horizontalcell[i].rectDraw(this.dimension.scrollX,0);

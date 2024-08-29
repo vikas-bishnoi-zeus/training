@@ -3,6 +3,7 @@ export class scrollBar {
         this.select=select;
         this.dimension = dimension;
         this.objArray = objArray;
+        this.grid=this.objArray[2];
         this.sheet = sheet;
         this.init();
         this.flagVScroll = false;
@@ -54,7 +55,7 @@ export class scrollBar {
                 this.dimension.scrollY + deltaY
             )
         );
-        if (this.isContentLimitReachedVertical()) {
+        if (this.isContentLimitReachedVertical(20)) {
             this.addMoreContentY();
         }
         if (this.isContentLimitReachedHorizontal()) {
@@ -79,10 +80,10 @@ export class scrollBar {
         this.flagVScroll = false;
         this.flagHScroll = false;
     }
-    isContentLimitReachedVertical() {
+    isContentLimitReachedVertical(check) {
         if (
             this.dimension.scrollY + this.container.clientHeight >=
-            this.dimension.rowSizePrefix[this.dimension.row - 5]
+            this.dimension.rowSizePrefix[this.dimension.row - check]
         ) {
             return true;
         }
@@ -98,12 +99,57 @@ export class scrollBar {
         return false;
     }
     addMoreContentY() {
-        const add = 40;
+        const add = 200;
+        console.log(this.dimension.row);
         this.dimension.addMoreRows(add);
+        this.getFile(this.dimension.row,add);
         this.objArray.forEach((obj) => {
             obj.addMoreRows(add);
         });
         this.dimension.row = this.dimension.row + add;
+
+    }
+    async getFile(offset, limit){
+        let response;
+        let range = {
+            "limit": limit,
+            "offset": offset
+        }; 
+        // const formData = new FormData();
+        // formData.append("range", JSON.stringify(range));
+        try {
+            response = await fetch('https://localhost:7009/api/csv/GetItems',
+                {
+                    method: "POST",
+                    headers: {
+                        'Content-Type': 'application/json', 
+                    },
+                    body: JSON.stringify(range),
+                }
+            ); 
+            const res = await response.json();
+            console.log("Geting Data")
+            // console.log(res);
+            // // var values = res.map(item => Object.values(item))
+            for(let row of res){
+                // console.log(row[0]);
+                let j=-1;
+                for(let cell of row){
+                    if(j==-1){
+                        j++;
+                        continue;
+                    }
+                    this.grid.cells[row[0]][j].value=cell;
+                    j++;
+                }
+            }
+            this.grid.render();
+            // this.select.setInputBox(false);
+            // console.log(res[0]);
+              
+        } catch (error) {
+            console.error('could not get items',error);
+        }
     }
     addMoreContentX() {
         const add = 20;
@@ -158,8 +204,8 @@ export class scrollBar {
                             this.container.clientHeight)
             )
         );
-
-        if (this.isContentLimitReachedVertical) {
+        let checkReached=Math.max(100,Math.floor(0.3*this.dimension.row));
+        if (this.isContentLimitReachedVertical(checkReached)) {
             this.addMoreContentY();
         }
         this.updateScrollbars();

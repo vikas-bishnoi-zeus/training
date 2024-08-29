@@ -49,9 +49,9 @@ export class resizeCol{
         let distance=evt.clientX-this.rect.left+this.dimension.scrollX;
         this.ind=this.dimension.findCoumnResizeIndex(distance);
         // console.log("Moving on top Column canvas",evt.clientX-this.rect.left+this.dimension.scrollX,this.ind);
-        if(this.ind!=-1){
-            console.log("do it",this.ind);
-        }
+        // if(this.ind!=-1){
+        //     console.log("do it",this.ind,distance);
+        // }
     }
     mouseDown(evt){
         this.isMouseDown=true;

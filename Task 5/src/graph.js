@@ -109,7 +109,7 @@ export class graph {
                 datasets.push(tempDataset)
             }
         }
-        console.log(datasets)
+        // console.log(datasets)
         return {labels,datasets};
     }
     isHorizantalSizebigger(){
@@ -123,6 +123,8 @@ export class graph {
     drawBarGraph() {
         this.destroyGraph();
         let {labels:labels,datasets:datasets}=this.getGraphValue();
+        console.log(labels)
+        console.log(datasets);
         // console.log(labels)
         this.draw = new Chart(this.graphCanvasElement, {
             type: "bar",

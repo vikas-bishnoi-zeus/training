@@ -24,7 +24,7 @@ export class leftSheet{
             this.verticalcell[i]=verCell;
             // this.verticalcell[i].rectDraw(this.dimension.scrollX,this.dimension.scrollY);
         }
-        this.verticalcell[0].isSelected=true;
+        this.verticalcell[1].isSelected=true;
     }
     addMoreRows(num){
         let len=this.dimension.row

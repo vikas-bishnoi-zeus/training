@@ -1,8 +1,8 @@
-export class excelHeader {
+export class ExcelHeader {
     constructor(sheet) {
-        this.grid=sheet.grid;
-        this.dimension=sheet.dimension;
-        this.select=sheet.sheetUtlilty.select;
+        this.grid = sheet.grid;
+        this.dimension = sheet.dimension;
+        this.select = sheet.sheetUtlilty.select;
         this.init();
     }
     init() {
@@ -12,10 +12,10 @@ export class excelHeader {
         //     this.uploadCsv();
         // });
         this.uploadCsv();
-        window.addEventListener("load",async()=>{
-            console.log("Loading")
-            await this.getFile(0,this.dimension.row);
-        })
+        window.addEventListener("load", async () => {
+            console.log("Loading");
+            await this.getFile(0, this.dimension.row);
+        });
     }
     uploadCsv() {
         console.log("Uploading");
@@ -23,22 +23,19 @@ export class excelHeader {
             e.preventDefault();
             const fileInput = document.getElementById("uploadFileInput");
             const file = fileInput.files[0];
-            console.log(file)
+            console.log(file);
             if (file) {
                 console.log("file found");
                 const formData = new FormData();
                 formData.append("file", file);
 
-                await fetch(
-                    "https://localhost:7009/api/csv/uploadCsv",
-                    {
-                        method: "POST",
-                        body: formData,
-                    }
-                )
+                await fetch("https://localhost:7009/api/csv/uploadCsv", {
+                    method: "POST",
+                    body: formData,
+                })
                     .then(async (response) => {
                         console.log(this.dimension.row);
-                        await this.getFile(0,this.dimension.row);
+                        await this.getFile(0, this.dimension.row);
                     })
                     .catch((error) => {
                         console.error("Error:", error);
@@ -48,46 +45,43 @@ export class excelHeader {
             }
         });
     }
-    async getFile(offset, limit){
+    async getFile(offset, limit) {
         let response;
         let range = {
-            "limit": limit,
-            "offset": offset
-        }; 
+            limit: limit,
+            offset: offset,
+        };
         // const formData = new FormData();
         // formData.append("range", JSON.stringify(range));
         try {
-            response = await fetch('https://localhost:7009/api/csv/GetItems',
-                {
-                    method: "POST",
-                    headers: {
-                        'Content-Type': 'application/json', 
-                    },
-                    body: JSON.stringify(range),
-                }
-            ); 
+            response = await fetch("https://localhost:7009/api/csv/GetItems", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(range),
+            });
             const res = await response.json();
-            console.log("Geting Data")
+            console.log("Geting Data");
             // console.log(res);
             // // var values = res.map(item => Object.values(item))
-            for(let row of res){
+            for (let row of res) {
                 // console.log(row[0]);
-                let j=-1;
-                for(let cell of row){
-                    if(j==-1){
+                let j = -1;
+                for (let cell of row) {
+                    if (j == -1) {
                         j++;
                         continue;
                     }
-                    this.grid.cells[row[0]][j].value=cell;
+                    this.grid.cells[row[0]][j].value = cell;
                     j++;
                 }
             }
             this.grid.render();
             this.select.setInputBox(false);
             // console.log(res[0]);
-              
         } catch (error) {
-            console.error('could not get items');
+            console.error("could not get items");
         }
     }
     ClickUtility() {

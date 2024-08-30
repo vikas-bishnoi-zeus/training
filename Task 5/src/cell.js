@@ -1,9 +1,9 @@
-export class cell {
-    constructor(x, y,w,h, value, isSelected, ctx) {
+export class Cell {
+    constructor(x, y, w, h, value, isSelected, ctx) {
         this.x = x;
         this.y = y;
-        this.w=w;
-        this.h=h;
+        this.w = w;
+        this.h = h;
         this.value = value;
         this.isSelected = isSelected;
         this.currentctx = ctx;
@@ -12,15 +12,23 @@ export class cell {
         this.value = value;
     }
     clearRect(scrollX, scrollY) {
-        
-        
-        this.currentctx.clearRect(this.x - scrollX, this.y - scrollY, this.w, this.h);
+        this.currentctx.clearRect(
+            this.x - scrollX,
+            this.y - scrollY,
+            this.w,
+            this.h
+        );
         // console.log("Clearing")
     }
     rectDraw(scrollX, scrollY) {
         this.currentctx.lineWidth = 0.5;
-        this.currentctx.clearRect(this.x - scrollX, this.y - scrollY, this.w, this.h);
-        if(!(this.value==="")){
+        this.currentctx.clearRect(
+            this.x - scrollX,
+            this.y - scrollY,
+            this.w,
+            this.h
+        );
+        if (!(this.value === "")) {
         }
         this.currentctx.strokeStyle = "#E0E0E0";
         this.currentctx.strokeRect(
@@ -45,10 +53,15 @@ export class cell {
         // console.log(scx,scy);
         if (this.isSelected) {
             this.currentctx.fillStyle = "rgba(19, 126, 67, 0.3)";
-            this.currentctx.fillRect(this.x - scx, this.y - scy, this.w, this.h);
-        } 
+            this.currentctx.fillRect(
+                this.x - scx,
+                this.y - scy,
+                this.w,
+                this.h
+            );
+        }
         // else {
-            // this.rectDraw(scx, scy);
+        // this.rectDraw(scx, scy);
         // }
     }
 }

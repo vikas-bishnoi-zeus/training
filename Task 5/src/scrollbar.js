@@ -1,9 +1,9 @@
-export class scrollBar {
-    constructor(dimension, objArray, sheet,select) {
-        this.select=select;
+export class ScrollBar {
+    constructor(dimension, objArray, sheet, select) {
+        this.select = select;
         this.dimension = dimension;
         this.objArray = objArray;
-        this.grid=this.objArray[2];
+        this.grid = this.objArray[2];
         this.sheet = sheet;
         this.init();
         this.flagVScroll = false;
@@ -17,7 +17,11 @@ export class scrollBar {
         this.eventListner();
     }
     eventListner() {
-        this.sheet.addEventListener("wheel", this.handleWheelScroll.bind(this) ,{passive:false});
+        this.sheet.addEventListener(
+            "wheel",
+            this.handleWheelScroll.bind(this),
+            { passive: false }
+        );
         this.verticalScroll.addEventListener(
             "mousedown",
             this.startVerticalScroll.bind(this)
@@ -31,12 +35,11 @@ export class scrollBar {
     }
     handleWheelScroll(evt) {
         evt.preventDefault();
-        let deltaX=0;
-        let deltaY=0;
-        if(evt.shiftKey){
-            deltaX = evt.deltaY/5;
-        }
-        else{
+        let deltaX = 0;
+        let deltaY = 0;
+        if (evt.shiftKey) {
+            deltaX = evt.deltaY / 5;
+        } else {
             deltaY = evt.deltaY / 5;
         }
         this.dimension.scrollX = Math.max(
@@ -55,7 +58,7 @@ export class scrollBar {
                 this.dimension.scrollY + deltaY
             )
         );
-        if (this.isContentLimitReachedVertical(20)) {
+        while (this.isContentLimitReachedVertical(20)) {
             this.addMoreContentY();
         }
         if (this.isContentLimitReachedHorizontal()) {
@@ -100,55 +103,53 @@ export class scrollBar {
     }
     addMoreContentY() {
         const add = 200;
-        console.log(this.dimension.row);
         this.dimension.addMoreRows(add);
-        this.getFile(this.dimension.row,add);
+        if (this.dimension.row < 110000) {
+            console.log(this.dimension.row);
+            this.getFile(this.dimension.row, add);
+        }
         this.objArray.forEach((obj) => {
             obj.addMoreRows(add);
         });
         this.dimension.row = this.dimension.row + add;
-
     }
-    async getFile(offset, limit){
+    async getFile(offset, limit) {
         let response;
         let range = {
-            "limit": limit,
-            "offset": offset
-        }; 
+            limit: limit,
+            offset: offset,
+        };
         // const formData = new FormData();
         // formData.append("range", JSON.stringify(range));
         try {
-            response = await fetch('https://localhost:7009/api/csv/GetItems',
-                {
-                    method: "POST",
-                    headers: {
-                        'Content-Type': 'application/json', 
-                    },
-                    body: JSON.stringify(range),
-                }
-            ); 
+            response = await fetch("https://localhost:7009/api/csv/GetItems", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(range),
+            });
             const res = await response.json();
-            console.log("Geting Data")
+            console.log("Geting Data", offset);
             // console.log(res);
             // // var values = res.map(item => Object.values(item))
-            for(let row of res){
+            for (let row of res) {
                 // console.log(row[0]);
-                let j=-1;
-                for(let cell of row){
-                    if(j==-1){
+                let j = -1;
+                for (let cell of row) {
+                    if (j == -1) {
                         j++;
                         continue;
                     }
-                    this.grid.cells[row[0]][j].value=cell;
+                    this.grid.cells[row[0]][j].value = cell;
                     j++;
                 }
             }
             this.grid.render();
             // this.select.setInputBox(false);
             // console.log(res[0]);
-              
         } catch (error) {
-            console.error('could not get items',error);
+            console.error("could not get items", error);
         }
     }
     addMoreContentX() {
@@ -158,7 +159,6 @@ export class scrollBar {
             obj.addMoreCols(add);
         });
         this.dimension.col = this.dimension.col + add;
-
     }
     onMouseMove(evt) {
         if (this.flagVScroll) {
@@ -204,8 +204,8 @@ export class scrollBar {
                             this.container.clientHeight)
             )
         );
-        let checkReached=Math.max(100,Math.floor(0.3*this.dimension.row));
-        if (this.isContentLimitReachedVertical(checkReached)) {
+        let checkReached = Math.max(100, Math.floor(0.3 * this.dimension.row));
+        while (this.isContentLimitReachedVertical(checkReached)) {
             this.addMoreContentY();
         }
         this.updateScrollbars();
@@ -247,7 +247,7 @@ export class scrollBar {
         this.horizontalScroll.style.left = `${Math.min(
             (this.dimension.scrollX / this.getContentWidth()) *
                 this.container.clientWidth,
-            screen.width -30
+            screen.width - 30
         )}px`;
         this.select.setInputBox(true);
     }

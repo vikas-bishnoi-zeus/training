@@ -1,51 +1,141 @@
-import { cell } from "./cell.js";
-export class leftSheet{
-    constructor(dimension){
-        this.dimension=dimension;
+import { Cell } from "./cell.js";
+import { Dimensions } from "./dimension.js";
+export class LeftSheet {
+    /**
+     * Initializes the LeftSheet class with the given dimensions and prepares the canvas.
+     * @param {Dimensions} dimension - The dimensions of the sheet.
+     */
+    constructor(dimension) {
+        /**
+         * @type {Dimensions}
+         */
+        this.dimension = dimension;
+
+        /**
+         * @type {number[]}
+         */
         this.rowSizePrefix = dimension.rowSizePrefix;
+
+        /**
+         * @type {CanvasRenderingContext2D}
+         */
         this.ctx = this.getCanvas();
-        this.verticalcell=[];
-        // this.dimension.scrollY=55;
-        // console.log(this.dimension.scrollY);
+
+        /**
+         * @type {Cell[]}
+         */
+        this.verticalcell = [];
+
         this.init();
         this.render();
     }
-    render(){
-        this.ctx.reset();
-        let starti=this.dimension.findRowIndex(this.dimension.scrollY);
-        let lasti=this.dimension.findRowIndex(this.dimension.scrollY+screen.height);
-        for (let i = starti; i <lasti; i++) {
-            this.verticalcell[i].rectDraw(0,this.dimension.scrollY);
-        }
-    }
-    init(){
+    /**
+     * Initializes the left sheet with cells.
+     * @returns {void}
+     */
+    init() {
+        // Create and initialize cells for each row
         for (let i = 0; i < this.dimension.row; i++) {
-            const verCell = new cell(0, this.rowSizePrefix[i],100,this.getHeight(i),i+1, false,this.ctx);
-            this.verticalcell[i]=verCell;
-            // this.verticalcell[i].rectDraw(this.dimension.scrollX,this.dimension.scrollY);
+            const verCell = new Cell(
+                0,
+                this.rowSizePrefix[i],
+                100,
+                this.getHeight(i),
+                i + 1,
+                false,
+                this.ctx
+            );
+            this.verticalcell[i] = verCell;
         }
-        this.verticalcell[1].isSelected=true;
+        this.verticalcell[1].isSelected = true; // Select the second cell by default
     }
-    addMoreRows(num){
-        let len=this.dimension.row
+    /**
+     * Renders the left sheet by drawing the cells within the visible area.
+     * @returns {void}
+     */
+    render() {
+        this.ctx.reset(); // Reset the left canvas context
+
+        /**
+         * @type {number}
+         */
+        let starti = this.dimension.findRowIndex(this.dimension.scrollY);
+
+        /**
+         * @type {number}
+         */
+        let lasti = this.dimension.findRowIndex(
+            this.dimension.scrollY + screen.height
+        );
+
+        // Iterate through the visible cells and draw them
+        for (let i = starti; i <= lasti; i++) {
+            this.verticalcell[i].rectDraw(0, this.dimension.scrollY);
+        }
+    }
+    /**
+     * Adds more rows to the left sheet.
+     * @param {number} num - The number of rows to add.
+     * @returns {void}
+     */
+    addMoreRows(num) {
+        /**
+         * @type {number}
+         */
+        let len = this.dimension.row;
+
+        // Create and initialize new cells for the additional rows
         for (let i = 0; i < num; i++) {
-            const verCell = new cell(0, this.rowSizePrefix[i+len],100,this.getHeight(i+len),i+len+1, false,this.ctx);
-            this.verticalcell[i+len]=verCell;
+            const verCell = new Cell(
+                0,
+                this.rowSizePrefix[i + len],
+                100,
+                this.getHeight(i + len),
+                i + len + 1,
+                false,
+                this.ctx
+            );
+            this.verticalcell[i + len] = verCell;
         }
     }
-    addMoreCols(num){
-        
+
+    /**
+     * Adds more columns to the left sheet. (Currently not implemented)
+     * @param {number} num - The number of columns to add.
+     * @returns {void}
+     */
+    addMoreCols(num) {
+        // No code need just dumy function
     }
+
+    /**
+     * Calculates the height of a row.
+     * @param {number} i - The index of the row.
+     * @returns {number} - The height of the row.
+     */
     getHeight(i) {
         return this.rowSizePrefix[i + 1] - this.rowSizePrefix[i];
     }
+
+    /**
+     * Retrieves the canvas context for drawing.
+     * @returns {CanvasRenderingContext2D} - The 2D drawing context.
+     */
     getCanvas() {
         let canvas = document.getElementById("vertrical");
-        this.setHeightWidth(canvas,screen.height-30,100);
+        this.setHeightWidth(canvas, screen.height - 30, 100);
         return canvas.getContext("2d");
     }
-    setHeightWidth(canvas,height,width){
-        canvas.height =height;
+
+    /**
+     * Sets the height and width of the canvas.
+     * @param {HTMLCanvasElement} canvas - The canvas element.
+     * @param {number} height - The height to set.
+     * @param {number} width - The width to set.
+     * @returns {void}
+     */
+    setHeightWidth(canvas, height, width) {
+        canvas.height = height;
         canvas.width = width;
     }
 }

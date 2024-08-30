@@ -1,108 +1,113 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <link
+            href="
+    https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+            crossorigin="anonymous"
+        />
+        <link rel="stylesheet" href="excel.css" />
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    </head>
 
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <link href="
-    https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
-    <link rel="stylesheet" href="excel.css" />
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-</head>
+    <body>
+        <div id="ribbon-container">
+            <div class="tab-list-container">
+                <span class="tab-list-container-items file-tab-btn active"
+                    >File</span
+                >
+                <span class="tab-list-container-items operations-tab-btn"
+                    >Operations</span
+                >
+                <span class="tab-list-container-items graph-tab-btn"
+                    >Graph</span
+                >
+            </div>
 
-<body>
-    <div id="ribbon-container">
-        <div class="tab-list-container">
-            <span class="tab-list-container-items file-tab-btn active">File</span>
-            <span class="tab-list-container-items operations-tab-btn">Operations</span>
-            <span class="tab-list-container-items graph-tab-btn">Graph</span>
-        </div>
-
-        <div class="focus-zone">
-            <div class="row focus-zone-inner">
-                <div class="col-6 focus-zone-left">
-                    <div class="focus-file">
-                        <form enctype="multipart/form-data">
-                            <input type="file" name="file" accept=".csv"  id="uploadFileInput"/>
-                            <input class="file-upload-btn" type="submit" value="Upload" id="uploadBtn"/>
-                        </form>
-                        <!-- <button class="file-upload-btn">file upload</button> -->
+            <div class="focus-zone">
+                <div class="row focus-zone-inner">
+                    <div class="col-6 focus-zone-left">
+                        <div class="focus-file">
+                            <form enctype="multipart/form-data">
+                                <input
+                                    type="file"
+                                    name="file"
+                                    accept=".csv"
+                                    id="uploadFileInput"
+                                />
+                                <input
+                                    class="file-upload-btn"
+                                    type="submit"
+                                    value="Upload"
+                                    id="uploadBtn"
+                                />
+                            </form>
+                        </div>
+                        <div class="focus-operations d-none">
+                            <button class="find-btn">find</button>
+                            <button class="find-replace-btn">
+                                find and replace
+                            </button>
+                        </div>
+                        <div class="focus-graph d-none">
+                            <button class="graph-bar-btn">bar</button>
+                            <button class="graph-line-btn">line</button>
+                            <button class="graph-pie-btn">chart</button>
+                        </div>
                     </div>
-                    <div class="focus-operations d-none">
-                        <button class="find-btn">find</button>
-                        <button class="find-replace-btn">
-                            find and replace
-                        </button>
-                    </div>
-                    <div class="focus-graph d-none">
-                        <button class="graph-bar-btn">bar</button>
-                        <button class="graph-line-btn">line</button>
-                        <button class="graph-pie-btn">chart</button>
-                    </div>
-                </div>
 
-                <div class="col-6 focus-zone-right">
-                    <span id="sum"></span>
-                    <span id="min"></span>
-                    <span id="max"></span>
-                    <span id="average"></span>
+                    <div class="col-6 focus-zone-right">
+                        <span id="sum"></span>
+                        <span id="min"></span>
+                        <span id="max"></span>
+                        <span id="average"></span>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <!-- <div id="header">
-      <div id="upload">
-        <button>File Upload</button>
-      </div>
-      <div id="info">
-        <p>Sum:<span id="sum"></span></p>
-        <p>Average:<span id="average"></span></p>
-        <p>Min:<span id="min"></span></p>
-        <p>Max:<span id="max"></span></p>
-      </div>
-      <div id="operation">
-        <div>
-          <label for="find">Find:</label>
-          <input type="text" id="find" name="find" placeholder="Find">
-          <button id="btn-find"><img  id="findSearch" src="./asset/FInd Search.png"></img></button>
-        </div>
-        <div>
-          <label for="find">Replace:</label>
-          <input type="text" id="find" name="find">
-        </div>
-      </div>
-    </div>
-     -->
-    <div id="main-area">
-        <div id="excel-1">
-            <div id="horizontal-1">
-                <canvas id="corner" style="border: 1px solid black" height="30"></canvas>
-                <canvas id="horizontal" style="border: 0px solid red"></canvas>
-            </div>
-            <div id="horizontal-2">
-                <canvas id="vertrical" style="border: 0px solid red">
-                </canvas>
-                <div>
-                    <input type="text" name="content" id="content" />
+        <div id="main-area">
+            <div id="excel-1">
+                <div id="horizontal-1">
+                    <canvas
+                        id="corner"
+                        style="border: 1px solid black"
+                        height="30"
+                    ></canvas>
+                    <canvas
+                        id="horizontal"
+                        style="border: 0px solid red"
+                    ></canvas>
                 </div>
-                <canvas id="spreadsheet" style="border: 0px solid red">
-                </canvas>
+                <div id="horizontal-2">
+                    <canvas id="vertrical" style="border: 0px solid red">
+                    </canvas>
+                    <div>
+                        <input type="text" name="content" id="content" />
+                    </div>
+                    <canvas id="spreadsheet" style="border: 0px solid red">
+                    </canvas>
 
-                <div id="verticall-div">
-                    <div class="scrollbar vertical" id="verticalScroll"></div>
+                    <div id="verticall-div">
+                        <div
+                            class="scrollbar vertical"
+                            id="verticalScroll"
+                        ></div>
+                    </div>
                 </div>
             </div>
+            <div class="graph">
+                <button class="graph-close btn btn-sm btn-danger">X</button>
+                <canvas id="myChart"></canvas>
+            </div>
+            <div id="horizontal-div">
+                <div class="scrollbar horizontal" id="horizontalScroll"></div>
+            </div>
         </div>
-        <div class="graph">
-            <button class="graph-close btn btn-sm btn-danger">X</button>
-            <canvas id="myChart"></canvas>
-        </div>
-        <div id="horizontal-div">
-            <div class="scrollbar horizontal" id="horizontalScroll"></div>
-        </div>
-    </div>
-    <script type="module" src="./src/index.js"></script>
-</body>
+        <script type="module" src="./src/index.js"></script>
+    </body>
 </html>

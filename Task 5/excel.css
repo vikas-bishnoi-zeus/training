@@ -1,190 +1,219 @@
 body {
-  margin: 0px;
-  overflow: hidden;
-  z-index: 0;
+    margin: 0px;
+    overflow: hidden;
+    z-index: 0;
 }
-#header{
-  background-color: aliceblue;
-  height: 90px;
-  display: flex;
-  padding-left: 15px;
-  
+
+#header {
+    background-color: aliceblue;
+    height: 90px;
+    display: flex;
+    padding-left: 15px;
 }
-#info,#upload{
-  display: flex;
-  /* width: 25%; */
-  justify-content: space-around;
-  align-items: center;
+
+#info,
+#upload {
+    display: flex;
+    /* width: 25%; */
+    justify-content: space-around;
+    align-items: center;
 }
-#upload>button{
-  height: 20px;
+
+#upload > button {
+    height: 20px;
 }
-#info> p {
-  margin: 0px 30px;
-  font-size: 19px;
-  display:flex;
-  align-items: center;
+
+#info > p {
+    margin: 0px 30px;
+    font-size: 19px;
+    display: flex;
+    align-items: center;
 }
-#operation{
-  display: flex;
-  font-size: 19px;
-  /* justify-content: space-around; */
-  /* width: 50%; */
+
+#operation {
+    display: flex;
+    font-size: 19px;
+    /* justify-content: space-around; */
+    /* width: 50%; */
 }
-#operation>div{
-  /* display:; */
-  margin: 20px;
-  display: flex;
-  align-items: center;
+
+#operation > div {
+    /* display:; */
+    margin: 20px;
+    display: flex;
+    align-items: center;
 }
-button{
-  margin-left: 10px;
+
+button {
+    margin-left: 10px;
 }
-#findSearch{
-  width:12px;
+
+#findSearch {
+    width: 12px;
 }
-#excel-1{
-  height: 100vh;
-  overflow: hidden;
-  position: relative;
-  /* bottom: 0; */
+
+#excel-1 {
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+    /* bottom: 0; */
 }
+
 #content {
-  display: none;
-  position: absolute;
-  padding: 0px;
-  z-index: 0;
-  border: 1px solid black;
-  /* outline: none; */
+    display: none;
+    position: absolute;
+    padding: 0px;
+    z-index: 0;
+    border: 1px solid black;
+    /* outline: none; */
 }
 
 .scrollbar {
-  position: absolute;
+    position: absolute;
 
-  background: #ccc;
-}
-#verticall-div,#horizontal-div{
-  background-color: aliceblue;
-  position: absolute;
-}
-#verticall-div ,.scrollbar.vertical {
-  width: 15px;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  border-radius: 10%;
+    background: #ccc;
 }
 
-#horizontal-div,.scrollbar.horizontal {
-  height: 15px;
-  left: 0;
-  right: 0;
-  /* top:0; */
-  bottom: 0;
-  z-index: 10;
-}
-#horizontal-1{
-  height: 30px;
-  display: flex;
-  justify-content: start;
-  background-color: aliceblue;
-}
-#vertrical{
-  background-color: aliceblue;
-  z-index: 1;
+#verticall-div,
+#horizontal-div {
+    background-color: aliceblue;
+    position: absolute;
 }
 
-#horizontal-2{
-  display: flex;
-  position: relative;
-  z-index: 0; 
+#verticall-div,
+.scrollbar.vertical {
+    width: 15px;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    border-radius: 10%;
 }
+
+#horizontal-div,
+.scrollbar.horizontal {
+    height: 15px;
+    left: 0;
+    right: 0;
+    /* top:0; */
+    bottom: 0;
+    z-index: 10;
+}
+
+#horizontal-1 {
+    height: 30px;
+    display: flex;
+    justify-content: start;
+    background-color: aliceblue;
+}
+
+#vertrical {
+    background-color: aliceblue;
+    z-index: 1;
+}
+
+#horizontal-2 {
+    display: flex;
+    position: relative;
+    z-index: 0;
+}
+
 #spreadsheet {
-  cursor: cell;
-}
-#corner{
-  width: 100px;
-  height: 28px;
-}
-#horizontal-1{
-  position: sticky;
+    cursor: cell;
 }
 
-#horizontal-1{
-  z-index: 5;
+#corner {
+    width: 100px;
+    height: 28px;
 }
 
+#horizontal-1 {
+    position: sticky;
+}
+
+#horizontal-1 {
+    z-index: 5;
+}
 
 #ribbon-container {
-  background-color: #f5faf7;
-  height: 10vh;
-  width: 100vw;
-  display: flex;
-  flex-direction: column;
-  padding: 10px;
-  position: sticky;
-  z-index: 4
-  }
-.tab-list-container{
-  height: max-content;
-  width: 100%;
-  display: flex;
-  justify-content: start;
-  flex-direction: row;
-  padding-left: 20px;
-  margin-bottom: 5px;
+    background-color: #f5faf7;
+    height: 10vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    position: sticky;
+    z-index: 4;
 }
+
+.tab-list-container {
+    height: max-content;
+    width: 100%;
+    display: flex;
+    justify-content: start;
+    flex-direction: row;
+    padding-left: 20px;
+    margin-bottom: 5px;
+}
+
 .tab-list-container > span {
-  margin-right: 10px;
+    margin-right: 10px;
 }
+
 .tab-list-container > .active {
-  border-bottom: 2px solid #107C41;
+    border-bottom: 2px solid #107c41;
 }
+
 .tab-list-container-items:hover {
-  border-bottom: 2px solid #107C41;
-  cursor: pointer;
+    border-bottom: 2px solid #107c41;
+    cursor: pointer;
 }
+
 .focus-zone {
-  padding-top: 5px;
-  padding-bottom: 5px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #107C41;
-  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-  border-radius: 7px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #107c41;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    border-radius: 7px;
 }
+
 .focus-zone-inner {
-  width: 100%;
+    width: 100%;
 }
+
 .focus-zone-left {
-  display: flex;
-  flex-direction: row;
+    display: flex;
+    flex-direction: row;
 }
+
 .focus-zone-right {
-  display: grid;
-  grid-template-columns: auto auto auto auto auto;
+    display: grid;
+    grid-template-columns: auto auto auto auto auto;
 }
+
 .focus-zone-right {
-  color: white;
+    color: white;
 }
 
 .graph {
-  display: none;
-  height: -moz-fit-content;
-  height: fit-content;
-  width: 500px;
-  position: absolute;
-  top: 340px;
-  left: 35%;
-  border: 1px dotted;
-  padding: 30px;
-  background-color: white;
-  border-radius: 10px;
+    display: none;
+    height: -moz-fit-content;
+    height: fit-content;
+    width: 500px;
+    position: absolute;
+    top: 340px;
+    left: 35%;
+    border: 1px dotted;
+    padding: 30px;
+    background-color: white;
+    border-radius: 10px;
 }
+
 .graph-close {
-  position: absolute;
-  border-radius: 5px;
-  right: 5px;
-  top: 5px;
+    position: absolute;
+    border-radius: 5px;
+    right: 5px;
+    top: 5px;
 }

@@ -38,12 +38,7 @@ export class SheetUtility {
          * Handles the scroll bar functionality for navigating the sheet.
          * @type {ScrollBar}
          */
-        this.scrollBar = new ScrollBar(
-            dimension,
-            objArray,
-            this.sheet,
-            this.select
-        );
+        this.scrollBar = new ScrollBar(dimension, objArray, this.sheet, this.select);
 
         /**
          * Manages the resizing of columns within the sheet.

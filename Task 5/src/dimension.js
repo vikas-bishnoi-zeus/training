@@ -64,9 +64,7 @@ export class Dimensions {
     addMoreRows(num) {
         let len = this.rowSizePrefix.length;
         for (let i = 0; i < num; i++) {
-            this.rowSizePrefix.push(
-                this.rowSizePrefix[i + len - 1] + this.height
-            );
+            this.rowSizePrefix.push(this.rowSizePrefix[i + len - 1] + this.height);
         }
     }
 
@@ -78,9 +76,7 @@ export class Dimensions {
     addMoreCols(num) {
         let len = this.columnSizePrefix.length;
         for (let j = 0; j < num; j++) {
-            this.columnSizePrefix.push(
-                this.columnSizePrefix[j + len - 1] + this.width
-            );
+            this.columnSizePrefix.push(this.columnSizePrefix[j + len - 1] + this.width);
         }
     }
 

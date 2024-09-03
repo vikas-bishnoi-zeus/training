@@ -36,15 +36,7 @@ export class LeftSheet {
     init() {
         // Create and initialize cells for each row
         for (let i = 0; i < this.dimension.row; i++) {
-            const verCell = new Cell(
-                0,
-                this.rowSizePrefix[i],
-                100,
-                this.getHeight(i),
-                i + 1,
-                false,
-                this.ctx
-            );
+            const verCell = new Cell(0, this.rowSizePrefix[i], 100, this.getHeight(i), i + 1, false, this.ctx);
             this.verticalcell[i] = verCell;
         }
         this.verticalcell[1].isSelected = true; // Select the second cell by default
@@ -64,9 +56,7 @@ export class LeftSheet {
         /**
          * @type {number}
          */
-        let lasti = this.dimension.findRowIndex(
-            this.dimension.scrollY + screen.height
-        );
+        let lasti = this.dimension.findRowIndex(this.dimension.scrollY + screen.height);
 
         // Iterate through the visible cells and draw them
         for (let i = starti; i <= lasti; i++) {
@@ -86,15 +76,7 @@ export class LeftSheet {
 
         // Create and initialize new cells for the additional rows
         for (let i = 0; i < num; i++) {
-            const verCell = new Cell(
-                0,
-                this.rowSizePrefix[i + len],
-                100,
-                this.getHeight(i + len),
-                i + len + 1,
-                false,
-                this.ctx
-            );
+            const verCell = new Cell(0, this.rowSizePrefix[i + len], 100, this.getHeight(i + len), i + len + 1, false, this.ctx);
             this.verticalcell[i + len] = verCell;
         }
     }

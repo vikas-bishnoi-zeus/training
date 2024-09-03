@@ -18,15 +18,9 @@
     <body>
         <div id="ribbon-container">
             <div class="tab-list-container">
-                <span class="tab-list-container-items file-tab-btn active"
-                    >File</span
-                >
-                <span class="tab-list-container-items operations-tab-btn"
-                    >Operations</span
-                >
-                <span class="tab-list-container-items graph-tab-btn"
-                    >Graph</span
-                >
+                <span class="tab-list-container-items file-tab-btn active">File</span>
+                <span class="tab-list-container-items operations-tab-btn">Operations</span>
+                <span class="tab-list-container-items graph-tab-btn">Graph</span>
             </div>
 
             <div class="focus-zone">
@@ -34,25 +28,13 @@
                     <div class="col-6 focus-zone-left">
                         <div class="focus-file">
                             <form enctype="multipart/form-data">
-                                <input
-                                    type="file"
-                                    name="file"
-                                    accept=".csv"
-                                    id="uploadFileInput"
-                                />
-                                <input
-                                    class="file-upload-btn"
-                                    type="submit"
-                                    value="Upload"
-                                    id="uploadBtn"
-                                />
+                                <input type="file" name="file" accept=".csv" id="uploadFileInput" />
+                                <input class="file-upload-btn" type="submit" value="Upload" id="uploadBtn" />
                             </form>
                         </div>
                         <div class="focus-operations d-none">
                             <button class="find-btn">find</button>
-                            <button class="find-replace-btn">
-                                find and replace
-                            </button>
+                            <button class="find-replace-btn">find and replace</button>
                         </div>
                         <div class="focus-graph d-none">
                             <button class="graph-bar-btn">bar</button>
@@ -73,30 +55,18 @@
         <div id="main-area">
             <div id="excel-1">
                 <div id="horizontal-1">
-                    <canvas
-                        id="corner"
-                        style="border: 1px solid black"
-                        height="30"
-                    ></canvas>
-                    <canvas
-                        id="horizontal"
-                        style="border: 0px solid red"
-                    ></canvas>
+                    <canvas id="corner" style="border: 1px solid black" height="30"></canvas>
+                    <canvas id="horizontal" style="border: 0px solid red"></canvas>
                 </div>
                 <div id="horizontal-2">
-                    <canvas id="vertrical" style="border: 0px solid red">
-                    </canvas>
+                    <canvas id="vertrical" style="border: 0px solid red"> </canvas>
                     <div>
                         <input type="text" name="content" id="content" />
                     </div>
-                    <canvas id="spreadsheet" style="border: 0px solid red">
-                    </canvas>
+                    <canvas id="spreadsheet" style="border: 0px solid red"> </canvas>
 
                     <div id="verticall-div">
-                        <div
-                            class="scrollbar vertical"
-                            id="verticalScroll"
-                        ></div>
+                        <div class="scrollbar vertical" id="verticalScroll"></div>
                     </div>
                 </div>
             </div>

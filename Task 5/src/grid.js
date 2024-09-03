@@ -44,15 +44,7 @@ export class Grid {
             this.cells[i] = [];
             for (let j = 0; j < this.dimension.col; j++) {
                 let val = ""; // Initialize cell with an empty string
-                const curCell = new Cell(
-                    this.columnSizePrefix[j],
-                    this.rowSizePrefix[i],
-                    this.getWidth(j),
-                    this.getHeight(i),
-                    val,
-                    false,
-                    this.ctx
-                );
+                const curCell = new Cell(this.columnSizePrefix[j], this.rowSizePrefix[i], this.getWidth(j), this.getHeight(i), val, false, this.ctx);
                 this.cells[i][j] = curCell;
             }
         }
@@ -72,9 +64,7 @@ export class Grid {
         /**
          * @type {number}
          */
-        let lasti = this.dimension.findRowIndex(
-            this.dimension.scrollY + screen.height
-        );
+        let lasti = this.dimension.findRowIndex(this.dimension.scrollY + screen.height);
         /**
          * @type {number}
          */
@@ -82,9 +72,7 @@ export class Grid {
         /**
          * @type {number}
          */
-        let lastj = this.dimension.findColumnIndex(
-            this.dimension.scrollX + screen.width
-        );
+        let lastj = this.dimension.findColumnIndex(this.dimension.scrollX + screen.width);
 
         // Iterate through the visible cells and draw them
         for (let i = starti; i <= lasti; i++) {
@@ -92,10 +80,7 @@ export class Grid {
                 this.cells[i][j].x = this.columnSizePrefix[j];
                 this.cells[i][j].y = this.rowSizePrefix[i];
                 this.cells[i][j].w = this.getWidth(j);
-                this.cells[i][j].rectDraw(
-                    this.dimension.scrollX,
-                    this.dimension.scrollY
-                );
+                this.cells[i][j].rectDraw(this.dimension.scrollX, this.dimension.scrollY);
             }
         }
     }
@@ -159,15 +144,7 @@ export class Grid {
             this.cells[i + len] = [];
             for (let j = 0; j < this.dimension.col; j++) {
                 let val = ""; // Initialize cell with an empty string
-                const curCell = new Cell(
-                    this.columnSizePrefix[j],
-                    this.rowSizePrefix[i + len],
-                    this.getWidth(j),
-                    this.getHeight(i + len),
-                    val,
-                    false,
-                    this.ctx
-                );
+                const curCell = new Cell(this.columnSizePrefix[j], this.rowSizePrefix[i + len], this.getWidth(j), this.getHeight(i + len), val, false, this.ctx);
                 this.cells[i + len][j] = curCell;
             }
         }
@@ -188,15 +165,7 @@ export class Grid {
         for (let i = 0; i < this.dimension.row; i++) {
             for (let j = 0; j < num; j++) {
                 let val = ""; // Initialize cell with an empty string
-                const curCell = new Cell(
-                    this.columnSizePrefix[j + len],
-                    this.rowSizePrefix[i],
-                    this.getWidth(j + len),
-                    this.getHeight(i),
-                    val,
-                    false,
-                    this.ctx
-                );
+                const curCell = new Cell(this.columnSizePrefix[j + len], this.rowSizePrefix[i], this.getWidth(j + len), this.getHeight(i), val, false, this.ctx);
                 this.cells[i][j + len] = curCell;
             }
         }

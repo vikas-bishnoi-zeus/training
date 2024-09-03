@@ -3,53 +3,15 @@ body {
     overflow: hidden;
     z-index: 0;
 }
-
-#header {
-    background-color: aliceblue;
-    height: 90px;
+#ribbon-container {
+    background-color: #f5faf7;
+    height: 10vh;
+    width: 100vw;
     display: flex;
-    padding-left: 15px;
-}
-
-#info,
-#upload {
-    display: flex;
-    /* width: 25%; */
-    justify-content: space-around;
-    align-items: center;
-}
-
-#upload > button {
-    height: 20px;
-}
-
-#info > p {
-    margin: 0px 30px;
-    font-size: 19px;
-    display: flex;
-    align-items: center;
-}
-
-#operation {
-    display: flex;
-    font-size: 19px;
-    /* justify-content: space-around; */
-    /* width: 50%; */
-}
-
-#operation > div {
-    /* display:; */
-    margin: 20px;
-    display: flex;
-    align-items: center;
-}
-
-button {
-    margin-left: 10px;
-}
-
-#findSearch {
-    width: 12px;
+    flex-direction: column;
+    padding: 10px;
+    position: sticky;
+    z-index: 4;
 }
 
 #excel-1 {
@@ -132,17 +94,6 @@ button {
 
 #horizontal-1 {
     z-index: 5;
-}
-
-#ribbon-container {
-    background-color: #f5faf7;
-    height: 10vh;
-    width: 100vw;
-    display: flex;
-    flex-direction: column;
-    padding: 10px;
-    position: sticky;
-    z-index: 4;
 }
 
 .tab-list-container {

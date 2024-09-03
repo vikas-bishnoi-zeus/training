@@ -29,7 +29,7 @@ export class ExcelHeader {
                 const formData = new FormData();
                 formData.append("file", file);
 
-                await fetch("https://localhost:7009/api/csv/uploadCsv", {
+                await fetch("https://localhost:7009/api/csv/UploadCsv", {
                     method: "POST",
                     body: formData,
                 })

@@ -37,15 +37,7 @@ export class TopSheet {
     init() {
         // Create and initialize cells for each column
         for (let i = 0; i < this.dimension.col; i++) {
-            const headerCell = new Cell(
-                this.columnSizePrefix[i],
-                0,
-                this.getWidth(i),
-                30,
-                this.getCoulomName(i + 1),
-                false,
-                this.ctx
-            );
+            const headerCell = new Cell(this.columnSizePrefix[i], 0, this.getWidth(i), 30, this.getCoulomName(i + 1), false, this.ctx);
             this.horizontalcell[i] = headerCell;
         }
         this.horizontalcell[0].isSelected = true; // Select the first cell by default
@@ -65,9 +57,7 @@ export class TopSheet {
         /**
          * @type {number}
          */
-        let lasti = this.dimension.findColumnIndex(
-            this.dimension.scrollX + screen.width
-        );
+        let lasti = this.dimension.findColumnIndex(this.dimension.scrollX + screen.width);
 
         // Iterate through the visible cells and draw them
         for (let i = starti; i <= lasti; i++) {
@@ -99,15 +89,7 @@ export class TopSheet {
 
         // Create and initialize new cells for the additional columns
         for (let i = 0; i < num; i++) {
-            const headerCellToBeAdded = new Cell(
-                this.columnSizePrefix[i + len],
-                0,
-                this.getWidth(i + len),
-                30,
-                this.getCoulomName(i + len + 1),
-                false,
-                this.ctx
-            );
+            const headerCellToBeAdded = new Cell(this.columnSizePrefix[i + len], 0, this.getWidth(i + len), 30, this.getCoulomName(i + len + 1), false, this.ctx);
             this.horizontalcell[i + len] = headerCellToBeAdded;
         }
     }

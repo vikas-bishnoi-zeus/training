@@ -1,7 +1,4 @@
 import { Dimensions } from "./dimension.js";
-import { Graph } from "./graph.js";
-import { ScrollBar } from "./scrollbar.js";
-import { ResizeCol } from "./resizeCol.js";
 import { TopSheet } from "./topSheet.js";
 import { LeftSheet } from "./leftSheet.js";
 import { Grid } from "./grid.js";
@@ -49,6 +46,7 @@ export class Select {
     /**
      * Initializes the selection properties and references to DOM elements.
      * Also sets the initial selection state.
+     * @returns {void}
      */
     init() {
         /**
@@ -84,11 +82,6 @@ export class Select {
         /**
          * @type {boolean}
          */
-        this.isInput = false;
-
-        /**
-         * @type {boolean}
-         */
         this.isSelection = false;
 
         // Reference to the spreadsheet DOM element
@@ -108,101 +101,108 @@ export class Select {
     }
     /**
      * Sets up event listeners for handling mouse interactions on the spreadsheet.
+     * @returns {void}
      */
     addEventListners() {
         // ?spreadsheet
 
         // Mouse down event listener for selecting cells and input
-        this.spreadsheet.addEventListener(
-            "mousedown",
-            this.onMouseDown.bind(this)
-        );
+        this.spreadsheet.addEventListener("mousedown", this.onMouseDown.bind(this));
 
         // Mouse move event listener for updating the selection
-        this.spreadsheet.addEventListener(
-            "mousemove",
-            this.onMouseMove.bind(this)
-        );
+        this.spreadsheet.addEventListener("mousemove", this.onMouseMove.bind(this));
 
         // Mouse up event listener for finalizing the selection
         window.addEventListener("mouseup", this.onMouseUp.bind(this));
     }
     /**
      * Handles mouse down events to start a cell selection.
-     *
      * @param {MouseEvent} evt - The mouse event object.
+     * @returns {void}
      */
     onMouseDown(evt) {
         // Calculate the position relative to the spreadsheet
-
         this.inputX = evt.clientX - this.rect.left + this.dimension.scrollX;
         this.inputY = evt.clientY - this.rect.top + this.dimension.scrollY;
+
+        // Deselect previously selected cells
         this.deselect();
-        if (this.isInput) {
-            this.renderPrv();
-        }
+
+        // Render previous input and Update the value
+        this.renderPrv();
+
+        // Determine the cell indexes based on mouse position
         this.i = this.dimension.findRowIndex(this.inputY);
         this.j = this.dimension.findColumnIndex(this.inputX);
+
         this.currenti = this.i;
         this.currentj = this.j;
 
-        // this.updateGarph()
+        // Start input mode and cell selection
         this.renderInput();
-        this.isInput = true;
         this.isSelection = true;
     }
+    /**
+     * Handles mouse move events to update the cell selection range.
+     * @param {MouseEvent} evt - The mouse event object.
+     * @returns {void}
+     */
     onMouseMove(evt) {
         if (this.isSelection) {
-            let tempcurrenti = this.dimension.findRowIndex(
-                evt.clientY - this.rect.top + this.dimension.scrollY
-            );
-            let tempcurrentj = this.dimension.findColumnIndex(
-                evt.clientX - this.rect.left + this.dimension.scrollX
-            );
-            if (
-                tempcurrenti == this.currenti &&
-                tempcurrentj == this.currentj
-            ) {
+            let tempcurrenti = this.dimension.findRowIndex(evt.clientY - this.rect.top + this.dimension.scrollY);
+            let tempcurrentj = this.dimension.findColumnIndex(evt.clientX - this.rect.left + this.dimension.scrollX);
+            // Check if the current cell has changed
+            if (tempcurrenti == this.currenti && tempcurrentj == this.currentj) {
                 return;
             }
+
+            // Deselect the previous selection
             this.deselect();
+
+            // Update current cell indexes
             this.currenti = tempcurrenti;
             this.currentj = tempcurrentj;
-            // this.updateGarph();
+
+            // Select the new cells
             this.select();
         }
     }
+    /**
+     * Handles mouse up events to finalize the cell selection.
+     * @param {MouseEvent} evt - The mouse event object.
+     * @returns {void}
+     */
     onMouseUp(evt) {
         this.isSelection = false;
     }
+    /**
+     * Selects the cells within the current selection range and updates related information.
+     * @returns {void}
+     */
     select() {
         this.count = 0;
         this.sum = 0;
         this.min = Number.MAX_VALUE;
         this.max = -Number.MAX_VALUE;
-        for (
-            let j = Math.min(this.j, this.currentj);
-            j <= Math.max(this.j, this.currentj);
-            j++
-        ) {
+
+        // Select cells in the TopSheet
+        for (let j = Math.min(this.j, this.currentj); j <= Math.max(this.j, this.currentj); j++) {
             this.topSheet.horizontalcell[j].isSelected = true;
         }
-        for (
-            let i = Math.min(this.i, this.currenti);
-            i <= Math.max(this.i, this.currenti);
-            i++
-        ) {
+
+        // Select cells in the LeftSheet and Grid
+        for (let i = Math.min(this.i, this.currenti); i <= Math.max(this.i, this.currenti); i++) {
             this.leftSheet.verticalcell[i].isSelected = true;
-            for (
-                let j = Math.min(this.j, this.currentj);
-                j <= Math.max(this.j, this.currentj);
-                j++
-            ) {
+            for (let j = Math.min(this.j, this.currentj); j <= Math.max(this.j, this.currentj); j++) {
                 this.grid.cells[i][j].isSelected = true;
+
+                // Continue withouth selection summary if the cell don't have a value
                 if (this.grid.cells[i][j].value === "") {
                     continue;
                 }
                 let number = Number(this.grid.cells[i][j].value);
+
+                // do selection summary if the cell have a numerical value
                 if (!Number.isNaN(number)) {
                     this.sum = this.sum + number;
                     this.count = this.count + 1;
@@ -211,6 +211,8 @@ export class Select {
                 }
             }
         }
+
+        // Update the summary display if more than one cell is selected
         if (this.count > 1) {
             document.getElementById("sum").innerHTML = "Sum: " + this.sum;
             let avr = (this.sum / this.count).toFixed(2);
@@ -222,51 +224,48 @@ export class Select {
         }
         this.sheetRender();
     }
+
+    /**
+     * Clears the summary information displayed for the selected cells.
+     * @returns {void}
+     */
     removeInfoMath() {
         document.getElementById("sum").innerHTML = "";
         document.getElementById("average").innerHTML = "";
         document.getElementById("min").innerHTML = "";
         document.getElementById("max").innerHTML = "";
     }
+
+    /**
+     * Deselects all currently selected cells.
+     * @returns {void}
+     */
     deselect() {
-        this.removeInfoMath();
-        // console.log(this.currenti)
-        if (this.currentj === -1 || this.currenti === -1) {
-            return;
-        }
-        for (
-            let j = Math.min(this.j, this.currentj);
-            j <= Math.max(this.j, this.currentj);
-            j++
-        ) {
+        // Deselect cells in the TopSheet
+        for (let j = Math.min(this.j, this.currentj); j <= Math.max(this.j, this.currentj); j++) {
             this.topSheet.horizontalcell[j].isSelected = false;
         }
-        for (
-            let i = Math.min(this.i, this.currenti);
-            i <= Math.max(this.i, this.currenti);
-            i++
-        ) {
+
+        // Deselect cells in the LeftSheet and Grid
+        for (let i = Math.min(this.i, this.currenti); i <= Math.max(this.i, this.currenti); i++) {
             this.leftSheet.verticalcell[i].isSelected = false;
-            for (
-                let j = Math.min(this.j, this.currentj);
-                j <= Math.max(this.j, this.currentj);
-                j++
-            ) {
+            for (let j = Math.min(this.j, this.currentj); j <= Math.max(this.j, this.currentj); j++) {
                 this.grid.cells[i][j].isSelected = false;
             }
         }
     }
+
+    /**
+     * Renders the previous input value if in editing mode and updates the cell content.
+     * @returns {Promise<void>}
+     */
     async renderPrv() {
-        if (
-            this.i === 0 ||
-            this.grid.cells[this.i][this.j].value === this.cellInput.value
-        ) {
+        // Return if no changes are made
+        if (this.i === 0 || this.grid.cells[this.i][this.j].value === this.cellInput.value) {
             return;
         }
         this.grid.cells[this.i][this.j].value = this.cellInput.value;
         try {
-            // console.log(this.i);
-            // const formData = new FormData();
             const dataModel = {
                 row_num: this.i,
                 email_id: this.grid.cells[this.i][0].value,
@@ -284,21 +283,22 @@ export class Select {
                 gross_salary_FY2022_23: this.grid.cells[this.i][12].value,
                 gross_salary_FY2023_24: this.grid.cells[this.i][13].value,
             };
-            let response = await fetch(
-                "https://localhost:7009/api/csv/updateRecord",
-                {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify(dataModel),
-                }
-            );
+            let response = await fetch("https://localhost:7009/api/csv/UpdateRecord", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(dataModel),
+            });
         } catch (error) {
-            console.error("error now update the cell", error);
+            console.error("error in updating the cell", error);
         }
         this.sheetRender();
     }
+    /**
+     * Renders the input box for cell editing.
+     * @returns {void}
+     */
     renderInput() {
         // if(this.inputX===-1 ||this.inputY===-1){
         //     return ;
@@ -306,24 +306,29 @@ export class Select {
         this.select();
         this.setInputBox(false);
     }
+    /**
+     * Sets the input box position and content based on the selected cell or Clicked cell.
+     *
+     * @param {boolean} iScrolling - Indicates if the sheet is currently scrolling and input box value should it .
+     * @returns {void}
+     */
     setInputBox(iScrolling) {
         if (iScrolling) {
             this.renderPrv();
         }
         this.cellInput.value = this.grid.cells[this.i][this.j].value;
         this.cellInput.style.display = "block";
-        var top =
-            this.grid.cells[this.i][this.j].y -
-            Math.floor(this.dimension.scrollY);
-        var left =
-            this.grid.cells[this.i][this.j].x -
-            Math.floor(this.dimension.scrollX) +
-            this.rect.left;
+        var top = this.grid.cells[this.i][this.j].y - Math.floor(this.dimension.scrollY);
+        var left = this.grid.cells[this.i][this.j].x - Math.floor(this.dimension.scrollX) + this.rect.left;
         this.cellInput.style.top = top + "px";
         this.cellInput.style.left = left + "px";
         this.cellInput.style.height = this.grid.cells[this.i][this.j].h + "px";
         this.cellInput.style.width = this.grid.cells[this.i][this.j].w + "px";
     }
+    /**
+     * Renders the grid, top sheet, and left sheet.
+     * @returns {void}
+     */
     sheetRender() {
         this.grid.render();
         this.topSheet.render();

@@ -40,7 +40,7 @@ export class Select {
 
         this.init();
         this.addEventListners();
-        this.setInputBox();
+        this.setInputBox(false);
         // console.log(this.i,this.grid.cells[0][0]);
     }
     /**
@@ -309,11 +309,11 @@ export class Select {
     /**
      * Sets the input box position and content based on the selected cell or Clicked cell.
      *
-     * @param {boolean} iScrolling - Indicates if the sheet is currently scrolling and input box value should it .
+     * @param {boolean} isScrolling - Indicates if the sheet is currently scrolling and input box value should it .
      * @returns {void}
      */
-    setInputBox(iScrolling) {
-        if (iScrolling) {
+    setInputBox(isScrolling) {
+        if (isScrolling) {
             this.renderPrv();
         }
         this.cellInput.value = this.grid.cells[this.i][this.j].value;

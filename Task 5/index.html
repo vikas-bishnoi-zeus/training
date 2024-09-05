@@ -13,6 +13,8 @@
         />
         <link rel="stylesheet" href="excel.css" />
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/5.0.9/signalr.min.js"></script>
+
     </head>
 
     <body>
@@ -50,6 +52,10 @@
                         <span id="average"></span>
                     </div>
                 </div>
+            </div>
+            <div id="progress-div">
+                <label for="progress">Uploading progress:</label>
+                <progress id="progress" value="32" max="100"> 32% </progress>
             </div>
         </div>
         <div id="main-area">

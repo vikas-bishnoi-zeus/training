@@ -92,15 +92,11 @@ export class ScrollBar {
      */
     handleWheelScroll(evt) {
         evt.preventDefault();
-        let deltaX = 0;
-        let deltaY = 0;
-        if (evt.shiftKey) {
-            deltaX = evt.deltaY / 5;
-        } else {
-            deltaY = evt.deltaY / 5;
-        }
-        this.dimension.scrollX = Math.max(0, Math.min(this.dimension.columnSizePrefix[this.dimension.col - 1] - this.container.clientWidth, this.dimension.scrollX + deltaX));
-        this.dimension.scrollY = Math.max(0, Math.min(this.dimension.rowSizePrefix[this.dimension.row - 1] - this.container.clientHeight, this.dimension.scrollY + deltaY));
+        const factorOfScrollWheel = 5;
+        const scrollAmount = evt.deltaY / factorOfScrollWheel;
+        const deltaX = evt.shiftKey ? scrollAmount : 0;
+        const deltaY = evt.shiftKey ? 0 : scrollAmount;
+        this.updateScrollPosition(deltaX,deltaY)
         if (this.isContentLimitReachedVertical(20)) {
             this.addMoreContentY(200);
         }
@@ -109,6 +105,37 @@ export class ScrollBar {
         }
         //Updateing The scrollBar postion According the wheel change
         this.updateScrollbars();
+    }
+
+    /**
+     * Updates the scroll positions for both horizontal and vertical scrolling
+     * based on the wheel event delta values.
+     *
+     * @param {number} deltaX - The horizontal scroll delta.
+     * @param {number} deltaY - The vertical scroll delta.
+     */
+    updateScrollPosition(deltaX, deltaY) {
+        const { columnSizePrefix, rowSizePrefix,scrollX, scrollY } = this.dimension;
+        const containerWidth = this.container.clientWidth;
+        const containerHeight = this.container.clientHeight;
+
+        this.dimension.scrollX = this.calculateNewScrollPosition(scrollX, deltaX, columnSizePrefix.at(-1) - containerWidth);
+
+        this.dimension.scrollY = this.calculateNewScrollPosition(scrollY, deltaY, rowSizePrefix.at(-1) - containerHeight);
+    }
+
+    /**
+     * Calculates the new scroll position within the allowed range.
+     *
+     * @param {number} currentPosition - The current scroll position.
+     * @param {number} delta - The amount to scroll.
+     * @param {number} maxScroll - The maximum allowable scroll position.
+     * @returns {number} The updated scroll position.
+     */
+    calculateNewScrollPosition(currentPosition, delta, maxScroll) {
+        const updatedPosition = currentPosition + delta;
+        const minimumScroll=0;
+        return Math.max(0, Math.min(maxScroll, updatedPosition));
     }
 
     /**
@@ -204,19 +231,19 @@ export class ScrollBar {
                 },
                 body: JSON.stringify(range),
             });
-            const res = await response.json();
-            console.log("Geting Data", offset);
-            for (let row of res) {
-                let j = -1;
-                for (let cell of row) {
-                    if (j == -1) {
-                        j++;
-                        continue;
-                    }
-                    this.grid.cells[row[0]][j].value = cell;
-                    j++;
-                }
+            if (!response.ok) {
+                throw new Error(`Failed to fetch data: ${response.statusText}`);
             }
+            const data = await response.json();
+            console.log("Geting Data", offset);
+
+            data.forEach((row) => {
+                const [rowIndex, ...cells] = row;
+
+                cells.forEach((cellValue, colIndex) => {
+                    this.grid.cells[rowIndex][colIndex].value = cellValue;
+                });
+            });
             this.grid.render();
         } catch (error) {
             console.error("could not get items", error);
@@ -324,11 +351,14 @@ export class ScrollBar {
         const horizontalRatio = this.container.clientWidth / this.getContentWidth();
 
         // Update scrollbar sizes
-        this.verticalScroll.style.height = `${Math.max(this.container.clientHeight * verticalRatio, 40)}px`;
-        this.horizontalScroll.style.width = `${Math.max(this.container.clientWidth * horizontalRatio, 40)}px`;
+        let minimumScrollSize = 40;
+        this.verticalScroll.style.height = `${Math.max(this.container.clientHeight * verticalRatio, minimumScrollSize)}px`;
+        this.horizontalScroll.style.width = `${Math.max(this.container.clientWidth * horizontalRatio, minimumScrollSize)}px`;
 
         // Update scrollbar positions
-        this.verticalScroll.style.top = `${Math.min((this.dimension.scrollY / this.getContentHeight()) * this.container.clientHeight, screen.height - 350)}px`;
+        let maxScrollPercentage = 0.7;
+        this.verticalScroll.style.top = `${Math.min((this.dimension.scrollY / this.getContentHeight()) * this.container.clientHeight, screen.height * maxScrollPercentage)}px`;
+        // console.log(Math.min((this.dimension.scrollY / this.getContentHeight()) * this.container.clientHeight, screen.height*maxScrollPercentage),screen.height*maxScrollPercentage)
         this.horizontalScroll.style.left = `${Math.min((this.dimension.scrollX / this.getContentWidth()) * this.container.clientWidth, screen.width - 30)}px`;
 
         // Ensure the input box is positioned correctly

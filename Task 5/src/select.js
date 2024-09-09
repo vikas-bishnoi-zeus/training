@@ -98,6 +98,9 @@ export class Select {
          * @type {DOMRect}
          */
         this.rect = this.spreadsheet.getBoundingClientRect();
+        
+        this.rafId=0;
+        this.dashOffset=0;
     }
     /**
      * Sets up event listeners for handling mouse interactions on the spreadsheet.
@@ -114,6 +117,8 @@ export class Select {
 
         // Mouse up event listener for finalizing the selection
         window.addEventListener("mouseup", this.onMouseUp.bind(this));
+
+        window.addEventListener("keydown", this.handleKeyPress.bind(this));
     }
     /**
      * Handles mouse down events to start a cell selection.
@@ -121,6 +126,7 @@ export class Select {
      * @returns {void}
      */
     onMouseDown(evt) {
+        window.cancelAnimationFrame(this.rafId);
         // Calculate the position relative to the spreadsheet
         this.inputX = evt.clientX - this.rect.left + this.dimension.scrollX;
         this.inputY = evt.clientY - this.rect.top + this.dimension.scrollY;
@@ -175,6 +181,116 @@ export class Select {
     onMouseUp(evt) {
         this.isSelection = false;
     }
+
+    /**
+     * Handles the keypress event and triggers the copy action if 'Ctrl + C' is pressed.
+     *
+     * @param {KeyboardEvent} evt - The keyboard event object.
+     */
+    handleKeyPress(evt) {
+        if (evt.ctrlKey && evt.key.toLowerCase() === "c") {
+            console.log("Press C");
+            console.log(evt);
+            this.copyToClipboard();
+            window.cancelAnimationFrame(this.rafId);
+            this.march();
+
+        } else if (evt.ctrlKey && evt.key.toLowerCase() === "v") {
+            console.log("Press v");
+            console.log(evt);
+            this.pasteFromClipboard();
+            window.cancelAnimationFrame(this.rafId);
+            this.sheetRender();
+        }
+        else if(evt.key==="Backspace"){
+            console.log(evt)
+            this.grid.cells[1][1].value=""
+            this.sheetRender()
+        }
+    }
+
+    /**
+     * 
+     */
+    march() {
+        this.dashOffset++;
+        if (this.dashOffset > 20) {
+            this.dashOffset = 0;
+        }
+        // console.log("Hello",this.dashOffset)
+        // this.drawDottedRect();
+        this.grid.drawDottedRect(this.dashOffset);
+
+        this.rafId = window.requestAnimationFrame(() => {
+            this.sheetRender();
+            this.march();
+        });
+    }
+
+    /**
+     * Copies selected cells from the grid to the clipboard in a CSV-like format.
+     * Cells are copied from the range defined by (i, j) to (last_i, last_j).
+     */
+    copyToClipboard() {
+        // Initialize an array to hold the copied values
+        let copiedData = [];
+
+        // Loop through the selected range of cells
+        for (let row = this.dimension.selectYRange[0]; row <= this.dimension.selectYRange[1]; row++) {
+            let rowData = [];
+            // console.log(row);
+            for (let col = this.dimension.selectXRange[0]; col <= this.dimension.selectXRange[1]; col++) {
+                // Get the value of the current cell
+                let cellValue = this.grid.cells[row][col].value;
+                rowData.push(cellValue);
+            }
+            // New   York
+            // Join the row values by tabs (or commas) and push to copiedData
+            copiedData.push(rowData.join("\t"));
+        }
+
+        // Convert the copied data to a single string with line breaks for each row
+        let clipboardContent = copiedData.join("\n");
+
+        // Use the Clipboard API to copy the string to the clipboard
+        navigator.clipboard
+            .writeText(clipboardContent)
+            .then(() => {
+                console.log("Copied to clipboard:", clipboardContent);
+            })
+            .catch((err) => {
+                console.error("Failed to copy text to clipboard:", err);
+            });
+    }
+    /**
+     * Reads data from the clipboard and logs each cell value.
+     * Also logs "New Line" when a new row begins.
+     */
+    pasteFromClipboard() {
+        navigator.clipboard
+            .readText()
+            .then((clipboardContent) => {
+                // Split the clipboard content into rows (by newline characters)
+                let rows = clipboardContent.split("\n");
+
+                rows.forEach((row, rowIndex) => {
+                    if (rowIndex > 0) {
+                        // console.log("New Line");
+                    }
+
+                    // Split each row into cells (by tabs or other delimiter)
+                    let cells = row.split("\t");
+
+                    // cells.forEach((cellValue, colIndex) => {
+                    //     console.log(`Cell[${rowIndex}, ${colIndex}]: ${cellValue}`);
+                    // });
+                });
+            })
+            .catch((err) => {
+                console.error("Failed to read from clipboard:", err);
+            });
+    }
+
     /**
      * Selects the cells within the current selection range and updates related information.
      * @returns {void}
@@ -184,8 +300,9 @@ export class Select {
         this.sum = 0;
         this.min = Number.MAX_VALUE;
         this.max = -Number.MAX_VALUE;
-
+        this.updateSlectedRange();
         // Select cells in the TopSheet
+        // let startj=
         for (let j = Math.min(this.j, this.currentj); j <= Math.max(this.j, this.currentj); j++) {
             this.topSheet.horizontalcell[j].isSelected = true;
         }
@@ -223,6 +340,14 @@ export class Select {
             this.removeInfoMath();
         }
         this.sheetRender();
+    }
+    /**
+     * Update the selected range in dimension object.
+     * @returns {void}
+     */
+    updateSlectedRange() {
+        this.dimension.selectXRange = [Math.min(this.j, this.currentj), Math.max(this.j, this.currentj)];
+        this.dimension.selectYRange = [Math.min(this.i, this.currenti), Math.max(this.i, this.currenti)];
     }
 
     /**
@@ -316,14 +441,15 @@ export class Select {
         if (isScrolling) {
             this.renderPrv();
         }
+        let borderWidth = 2;
         this.cellInput.value = this.grid.cells[this.i][this.j].value;
         this.cellInput.style.display = "block";
-        var top = this.grid.cells[this.i][this.j].y - Math.floor(this.dimension.scrollY);
-        var left = this.grid.cells[this.i][this.j].x - Math.floor(this.dimension.scrollX) + this.rect.left;
+        var top = this.grid.cells[this.i][this.j].y - Math.floor(this.dimension.scrollY) + borderWidth;
+        var left = this.grid.cells[this.i][this.j].x - Math.floor(this.dimension.scrollX) + this.rect.left + borderWidth;
         this.cellInput.style.top = top + "px";
         this.cellInput.style.left = left + "px";
-        this.cellInput.style.height = this.grid.cells[this.i][this.j].h + "px";
-        this.cellInput.style.width = this.grid.cells[this.i][this.j].w + "px";
+        this.cellInput.style.height = this.grid.cells[this.i][this.j].h - 2 * borderWidth + "px";
+        this.cellInput.style.width = this.grid.cells[this.i][this.j].w - 2 * borderWidth + "px";
     }
     /**
      * Renders the grid, top sheet, and left sheet.

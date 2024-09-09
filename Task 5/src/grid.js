@@ -83,6 +83,45 @@ export class Grid {
                 this.cells[i][j].rectDraw(this.dimension.scrollX, this.dimension.scrollY);
             }
         }
+        this.selectBoundary();
+    }
+    selectBoundary() {
+        // console.log("A",ctx)
+        // Set the green border style
+        this.ctx.strokeStyle = "green";
+        this.ctx.lineWidth = 3;
+        // Draw the green rectangle (boundary)
+        // console.log(this.dimension.selectXRange);
+        // console.log(this.dimension.selectXRange)
+        let startXIndex = this.dimension.selectXRange[0];
+        let EndXIndex = this.dimension.selectXRange[1] + 1;
+        let startYIndex = this.dimension.selectYRange[0];
+        let EndYIndex = this.dimension.selectYRange[1] + 1;
+        // console.log(startXIndex,startYIndex)
+        let startXDis = this.dimension.columnSizePrefix[startXIndex];
+        let startYDis = this.dimension.rowSizePrefix[startYIndex];
+        let diffX = this.dimension.columnSizePrefix[EndXIndex] - startXDis;
+        let diffY = this.dimension.rowSizePrefix[EndYIndex] - startYDis;
+        this.ctx.strokeRect(startXDis - this.dimension.scrollX, startYDis - this.dimension.scrollY, diffX, diffY);
+        // this.drawDottedRect()
+    }
+
+    drawDottedRect(dashOffset) {
+        this.ctx.setLineDash([5, 5]);
+        this.ctx.lineDashOffset =-dashOffset;
+        this.ctx.strokeStyle = "white";
+        this.ctx.lineWidth = 2.5;
+        let startXIndex = this.dimension.selectXRange[0];
+        let EndXIndex = this.dimension.selectXRange[1] + 1;
+        let startYIndex = this.dimension.selectYRange[0];
+        let EndYIndex = this.dimension.selectYRange[1] + 1;
+        // console.log(startXIndex,startYIndex)
+        let startXDis = this.dimension.columnSizePrefix[startXIndex];
+        let startYDis = this.dimension.rowSizePrefix[startYIndex];
+        let diffX = this.dimension.columnSizePrefix[EndXIndex] - startXDis;
+        let diffY = this.dimension.rowSizePrefix[EndYIndex] - startYDis;
+        this.ctx.strokeRect(startXDis - this.dimension.scrollX, startYDis - this.dimension.scrollY, diffX, diffY);
+        this.ctx.setLineDash([]);
     }
 
     /**

@@ -40,6 +40,7 @@ export class ExcelHeader {
             if (message>=100) {
                 console.log("Upload complete.");
                 this.stopConnection();
+                this.getFile(0, this.dimension.row);
             } else {
                 // Optionally, handle progress updates here
                 // Example: Update the progress bar or show progress
@@ -88,10 +89,10 @@ export class ExcelHeader {
                         console.log(this.dimension.row);
                         
                         // Stop the SignalR connection after the upload is complete
-                        setTimeout(()=>{
-                            this.getFile(0, this.dimension.row);
-                            // this.stopConnection();
-                        },2000);
+                        // setTimeout(()=>{
+                        //     this.getFile(0, this.dimension.row);
+                        //     // this.stopConnection();
+                        // },2000);
 
                     })
                     .catch((error) => {

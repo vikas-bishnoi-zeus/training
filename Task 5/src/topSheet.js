@@ -65,6 +65,20 @@ export class TopSheet {
             this.horizontalcell[i].w = this.getWidth(i);
             this.horizontalcell[i].rectDraw(this.dimension.scrollX, 0);
         }
+        this.selectBoundar();
+    }
+
+    selectBoundar(){
+        // console.log("A",ctx)
+        // Set the green border style
+        this.ctx.strokeStyle = 'green';
+        this.ctx.lineWidth = 4;
+        let startXIndex=this.dimension.selectXRange[0];
+        let EndXIndex=this.dimension.selectXRange[1]+1;
+
+        let startXDis=this.dimension.columnSizePrefix[startXIndex];
+        let diffX=this.dimension.columnSizePrefix[EndXIndex]-startXDis;
+        this.ctx.strokeRect(startXDis-this.dimension.scrollX,this.dimension.height, diffX, 0);
     }
 
     /**

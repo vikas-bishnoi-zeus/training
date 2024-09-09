@@ -49,6 +49,9 @@ export class Dimensions {
          */
         this.scrollY = scrollY;
 
+        this.selectXRange=[0,0];
+        this.selectYRange=[1,1];
+
         // Add intial number of columns of default width
         this.addSize(this.columnSizePrefix, width, col);
 

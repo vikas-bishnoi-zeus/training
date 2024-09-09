@@ -62,7 +62,21 @@ export class LeftSheet {
         for (let i = starti; i <= lasti; i++) {
             this.verticalcell[i].rectDraw(0, this.dimension.scrollY);
         }
+        this.selectBord();
     }
+
+    selectBord(){
+        // console.log("A",ctx)
+        // Set the green border style
+        this.ctx.strokeStyle = 'green';
+        this.ctx.lineWidth = 4;
+        let startYIndex=this.dimension.selectYRange[0];
+        let EndYIndex=this.dimension.selectYRange[1]+1;
+        let startYDis=this.dimension.rowSizePrefix[startYIndex];
+        let diffY=this.dimension.rowSizePrefix[EndYIndex]-startYDis;
+        this.ctx.strokeRect(this.dimension.width, startYDis-this.dimension.scrollY, 0, diffY);
+    }
+
     /**
      * Adds more rows to the left sheet.
      * @param {number} num - The number of rows to add.

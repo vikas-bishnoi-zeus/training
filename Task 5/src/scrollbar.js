@@ -190,7 +190,8 @@ export class ScrollBar {
      * @returns {boolean} True if more content needs to be loaded, false otherwise.
      */
     isContentLimitReachedHorizontal() {
-        if (this.dimension.scrollX + this.container.clientWidth >= this.dimension.columnSizePrefix[this.dimension.col - 3]) {
+        let remainingRow=10;
+        if (this.dimension.scrollX + this.container.clientWidth >= this.dimension.columnSizePrefix[this.dimension.col - remainingRow]) {
             return true;
         }
         return false;

@@ -33,7 +33,7 @@ export class Cell {
     selectCell(scx = 0, scy = 0) {
         // console.log(scx,scy);
         if (this.isSelected) {
-            this.currentctx.fillStyle = "rgba(19, 126, 67, 0.3)";
+            this.currentctx.fillStyle = "rgba(19, 126, 67, 0.1)";
             this.currentctx.fillRect(this.x - scx, this.y - scy, this.w, this.h);
         }
         // else {

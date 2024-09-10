@@ -36,10 +36,12 @@ export class ExcelHeader {
                 document.getElementById("progress").value=lastProgressValue;
                 // console.log(document.getElementById("progress").value)
             }
+            // console.log(message)
             // Update the progress bar or console
             if (message>=100) {
                 console.log("Upload complete.");
                 this.stopConnection();
+                console.log(this.dimension.row);
                 this.getFile(0, this.dimension.row);
             } else {
                 // Optionally, handle progress updates here

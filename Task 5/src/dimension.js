@@ -7,8 +7,9 @@ export class Dimensions {
      * @param {number} height - Deafault Height of each row.
      * @param {number} scrollX - Horizontal scroll position.
      * @param {number} scrollY - Vertical scroll position.
+     * @param {number} leftSheet_Width - Width of leftSheet(Row number) .
      */
-    constructor(row, col, width, height, scrollX, scrollY) {
+    constructor(row, col, width, height, scrollX, scrollY,leftSheet_Width) {
         /**
          * @type {number}
          */
@@ -52,6 +53,10 @@ export class Dimensions {
         this.selectXRange=[0,0];
         this.selectYRange=[1,1];
 
+        /**
+         * @type {number}
+         */
+        this.leftSheet_Width=leftSheet_Width;
         // Add intial number of columns of default width
         this.addSize(this.columnSizePrefix, width, col);
 

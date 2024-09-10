@@ -74,7 +74,7 @@ export class LeftSheet {
         let EndYIndex=this.dimension.selectYRange[1]+1;
         let startYDis=this.dimension.rowSizePrefix[startYIndex];
         let diffY=this.dimension.rowSizePrefix[EndYIndex]-startYDis;
-        this.ctx.strokeRect(this.dimension.width, startYDis-this.dimension.scrollY, 0, diffY);
+        this.ctx.strokeRect(this.dimension.leftSheet_Width, startYDis-this.dimension.scrollY, 0, diffY);
     }
 
     /**

@@ -60,6 +60,8 @@ export class TopSheet {
         let lasti = this.dimension.findColumnIndex(this.dimension.scrollX + screen.width);
 
         // Iterate through the visible cells and draw them
+        // console.log("last",lasti);
+        // console.log(this.dimension.col)
         for (let i = starti; i <= lasti; i++) {
             this.horizontalcell[i].x = this.columnSizePrefix[i];
             this.horizontalcell[i].w = this.getWidth(i);

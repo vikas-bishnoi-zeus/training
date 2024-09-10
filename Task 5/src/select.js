@@ -197,7 +197,7 @@ export class Select {
 
         } else if (evt.ctrlKey && evt.key.toLowerCase() === "v") {
             console.log("Press v");
-            console.log(evt);
+            // console.log(evt);
             this.pasteFromClipboard();
             window.cancelAnimationFrame(this.rafId);
             this.sheetRender();
@@ -278,13 +278,19 @@ export class Select {
                         // console.log("New Line");
                     }
 
+                    // console.log(row);
                     // Split each row into cells (by tabs or other delimiter)
                     let cells = row.split("\t");
+                    // console.log(cells);
 
-                    // cells.forEach((cellValue, colIndex) => {
-                    //     console.log(`Cell[${rowIndex}, ${colIndex}]: ${cellValue}`);
-                    // });
+                    cells.forEach((cellValue, colIndex) => {
+                        // console.log(this.i+rowIndex,this.j+colIndex)
+                        this.grid.cells[this.i+rowIndex][this.j+colIndex].value=cellValue;
+                        // console.log(`Cell[${rowIndex}, ${colIndex}]: ${cellValue}`);
+                    });
+                    this.updateCell(this.i+rowIndex);
                 });
+                this.sheetRender();
             })
             .catch((err) => {
                 console.error("Failed to read from clipboard:", err);
@@ -379,6 +385,36 @@ export class Select {
             }
         }
     }
+    async updateCell(row_num){
+        try {
+            const dataModel = {
+                row_num:row_num,
+                email_id: this.grid.cells[row_num][0].value,
+                name: this.grid.cells[row_num][1].value,
+                country: this.grid.cells[row_num][2].value,
+                state: this.grid.cells[row_num][3].value,
+                city: this.grid.cells[row_num][4].value,
+                telephone_number: this.grid.cells[row_num][5].value,
+                address_line_1: this.grid.cells[row_num][6].value,
+                address_line_2: this.grid.cells[row_num][7].value,
+                date_of_birth: this.grid.cells[row_num][8].value,
+                gross_salary_FY2019_20: this.grid.cells[row_num][9].value,
+                gross_salary_FY2020_21: this.grid.cells[row_num][10].value,
+                gross_salary_FY2021_22: this.grid.cells[row_num][11].value,
+                gross_salary_FY2022_23: this.grid.cells[row_num][12].value,
+                gross_salary_FY2023_24: this.grid.cells[row_num][13].value,
+            };
+            let response = await fetch("https://localhost:7009/api/csv/UpdateRecord", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(dataModel),
+            });
+        } catch (error) {
+            console.error("error in updating the cell", error);
+        }
+    }
 
     /**
      * Renders the previous input value if in editing mode and updates the cell content.
@@ -456,6 +492,7 @@ export class Select {
      * @returns {void}
      */
     sheetRender() {
+        this.setInputBox(false)
         this.grid.render();
         this.topSheet.render();
         this.leftSheet.render();

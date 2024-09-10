@@ -11,12 +11,13 @@ class Excel {
      * @param {number} col - Number of intial columns in the sheet.
      * @param {number} width - Default Width of each cell in the sheet.
      * @param {number} height - Default Height of each cell in the sheet.
+     * @param {number} leftSheet_Width - Width of leftSheet(Row number) .
      */
-    constructor(row, col, width, height) {
+    constructor(row, col, width, height,leftSheet_Width) {
         /**
          * @type {Sheet}
          */
-        this.sheet1 = new Sheet(row, col, width, height);
+        this.sheet1 = new Sheet(row, col, width, height,leftSheet_Width);
 
         /**
          * @type {ExcelHeader}
@@ -29,4 +30,4 @@ class Excel {
 /**
  * @type {Excel}
  */
-const excelApp = new Excel(200, 50, 100, 30);
+const excelApp = new Excel(200, 25, 100, 30,100);

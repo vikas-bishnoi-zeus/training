@@ -13,12 +13,13 @@ export class Sheet {
      * @param {number} col - Number of intial columns in the sheet.
      * @param {number} width - Default Width of each cell in the sheet.
      * @param {number} height - Default Height of each cell in the sheet.
+     * @param {number} leftSheet_Width - Width of leftSheet(Row number) .
      */
-    constructor(row, col, width, height) {
+    constructor(row, col, width, height,leftSheet_Width) {
         /**
          * @type {Dimensions}
          */
-        this.dimension = new Dimensions(row, col, width, height, 0, 0);
+        this.dimension = new Dimensions(row, col, width, height, 0, 0,leftSheet_Width);
         /**
          * @type {TopSheet}
          */

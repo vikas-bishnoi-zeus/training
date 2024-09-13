@@ -67,10 +67,10 @@ export class TopSheet {
             this.horizontalcell[i].w = this.getWidth(i);
             this.horizontalcell[i].rectDraw(this.dimension.scrollX, 0);
         }
-        this.selectBoundar();
+        this.selectBoundary();
     }
 
-    selectBoundar(){
+    selectBoundary(){
         // console.log("A",ctx)
         // Set the green border style
         this.ctx.strokeStyle = 'green';
@@ -81,6 +81,8 @@ export class TopSheet {
         let startXDis=this.dimension.columnSizePrefix[startXIndex];
         let diffX=this.dimension.columnSizePrefix[EndXIndex]-startXDis;
         this.ctx.strokeRect(startXDis-this.dimension.scrollX,this.dimension.height, diffX, 0);
+        this.ctx.fillStyle = "rgba(19, 126, 67, 0.1)";
+        this.ctx.fillRect(startXDis-this.dimension.scrollX,0,diffX,this.dimension.height);
     }
 
     /**

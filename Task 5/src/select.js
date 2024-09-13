@@ -90,6 +90,12 @@ export class Select {
          */
         this.spreadsheet = document.getElementById("spreadsheet");
 
+        // Reference to the spreadsheet DOM element
+        /**
+         * @type {HTMLElement}
+         */
+        this.columnHeader = document.getElementById("horizontal");
+
         /**
          * @type {HTMLInputElement}
          */
@@ -110,7 +116,7 @@ export class Select {
         // ?spreadsheet
 
         // Mouse down event listener for selecting cells and input
-        this.spreadsheet.addEventListener("mousedown", this.onMouseDown.bind(this));
+        this.spreadsheet.addEventListener("mousedown", this.onMouseDownSpreadSheet.bind(this));
 
         // Mouse move event listener for updating the selection
         this.spreadsheet.addEventListener("mousemove", this.onMouseMove.bind(this));
@@ -125,14 +131,16 @@ export class Select {
      * @param {MouseEvent} evt - The mouse event object.
      * @returns {void}
      */
-    onMouseDown(evt) {
+    onMouseDownSpreadSheet(evt) {
+        this.dimension.colSelects=[-1,-1]
+
         window.cancelAnimationFrame(this.rafId);
         // Calculate the position relative to the spreadsheet
         this.inputX = evt.clientX - this.rect.left + this.dimension.scrollX;
         this.inputY = evt.clientY - this.rect.top + this.dimension.scrollY;
 
         // Deselect previously selected cells
-        this.deselect();
+        // this.deselect();
 
         // Render previous input and Update the value
         this.renderPrv();
@@ -144,10 +152,14 @@ export class Select {
         this.currenti = this.i;
         this.currentj = this.j;
 
-        // Start input mode and cell selection
-        this.renderInput();
         this.isSelection = true;
+        this.select();
+        this.setInputBox(false);
+
+        this.sheetRender();
+
     }
+
     /**
      * Handles mouse move events to update the cell selection range.
      * @param {MouseEvent} evt - The mouse event object.
@@ -163,7 +175,7 @@ export class Select {
             }
 
             // Deselect the previous selection
-            this.deselect();
+            // this.deselect();
 
             // Update current cell indexes
             this.currenti = tempcurrenti;
@@ -200,12 +212,12 @@ export class Select {
             // console.log(evt);
             this.pasteFromClipboard();
             window.cancelAnimationFrame(this.rafId);
-            this.sheetRender();
+            this.sheetRender(false);
         }
         else if(evt.key==="Backspace"){
             console.log(evt)
             this.grid.cells[1][1].value=""
-            this.sheetRender()
+            this.sheetRender(false)
         }
     }
 
@@ -222,7 +234,7 @@ export class Select {
         this.grid.drawDottedRect(this.dashOffset);
 
         this.rafId = window.requestAnimationFrame(() => {
-            this.sheetRender();
+            this.sheetRender(false);
             this.march();
         });
     }
@@ -266,13 +278,14 @@ export class Select {
      * Reads data from the clipboard and logs each cell value.
      * Also logs "New Line" when a new row begins.
      */
-    pasteFromClipboard() {
+    async pasteFromClipboard() {
         navigator.clipboard
             .readText()
             .then((clipboardContent) => {
                 // Split the clipboard content into rows (by newline characters)
                 let rows = clipboardContent.split("\n");
 
+                let toUpdateArray=[];
                 rows.forEach((row, rowIndex) => {
                     if (rowIndex > 0) {
                         // console.log("New Line");
@@ -288,13 +301,53 @@ export class Select {
                         this.grid.cells[this.i+rowIndex][this.j+colIndex].value=cellValue;
                         // console.log(`Cell[${rowIndex}, ${colIndex}]: ${cellValue}`);
                     });
-                    this.updateCell(this.i+rowIndex);
+                    let currentDataModel=this.giveDataModel(this.i+rowIndex);
+                    toUpdateArray.push(currentDataModel);
+                    // this.updateCell(this.i+rowIndex);
                 });
-                this.sheetRender();
+                this.updateBulkCell(toUpdateArray);
+                this.sheetRender(false);
             })
             .catch((err) => {
                 console.error("Failed to read from clipboard:", err);
             });
+    }
+
+    async updateBulkCell(dataModelArray){
+        try {
+            
+            let response = await fetch("https://localhost:7009/api/csv/BulkUpdate", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(dataModelArray),
+            });
+            console.log(response)
+        } catch (error) {
+            console.error("error in updating the cell", error);
+        }
+    }
+
+    giveDataModel(row_num){
+        const dataModel = {
+            row_num:row_num,
+            email_id: this.grid.cells[row_num][0].value,
+            name: this.grid.cells[row_num][1].value,
+            country: this.grid.cells[row_num][2].value,
+            state: this.grid.cells[row_num][3].value,
+            city: this.grid.cells[row_num][4].value,
+            telephone_number: this.grid.cells[row_num][5].value,
+            address_line_1: this.grid.cells[row_num][6].value,
+            address_line_2: this.grid.cells[row_num][7].value,
+            date_of_birth: this.grid.cells[row_num][8].value,
+            gross_salary_FY2019_20: this.grid.cells[row_num][9].value,
+            gross_salary_FY2020_21: this.grid.cells[row_num][10].value,
+            gross_salary_FY2021_22: this.grid.cells[row_num][11].value,
+            gross_salary_FY2022_23: this.grid.cells[row_num][12].value,
+            gross_salary_FY2023_24: this.grid.cells[row_num][13].value,
+        };
+        return dataModel;
     }
 
     /**
@@ -345,7 +398,7 @@ export class Select {
         } else {
             this.removeInfoMath();
         }
-        this.sheetRender();
+        this.sheetRender(false);
     }
     /**
      * Update the selected range in dimension object.
@@ -383,36 +436,6 @@ export class Select {
             for (let j = Math.min(this.j, this.currentj); j <= Math.max(this.j, this.currentj); j++) {
                 this.grid.cells[i][j].isSelected = false;
             }
-        }
-    }
-    async updateCell(row_num){
-        try {
-            const dataModel = {
-                row_num:row_num,
-                email_id: this.grid.cells[row_num][0].value,
-                name: this.grid.cells[row_num][1].value,
-                country: this.grid.cells[row_num][2].value,
-                state: this.grid.cells[row_num][3].value,
-                city: this.grid.cells[row_num][4].value,
-                telephone_number: this.grid.cells[row_num][5].value,
-                address_line_1: this.grid.cells[row_num][6].value,
-                address_line_2: this.grid.cells[row_num][7].value,
-                date_of_birth: this.grid.cells[row_num][8].value,
-                gross_salary_FY2019_20: this.grid.cells[row_num][9].value,
-                gross_salary_FY2020_21: this.grid.cells[row_num][10].value,
-                gross_salary_FY2021_22: this.grid.cells[row_num][11].value,
-                gross_salary_FY2022_23: this.grid.cells[row_num][12].value,
-                gross_salary_FY2023_24: this.grid.cells[row_num][13].value,
-            };
-            let response = await fetch("https://localhost:7009/api/csv/UpdateRecord", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(dataModel),
-            });
-        } catch (error) {
-            console.error("error in updating the cell", error);
         }
     }
 
@@ -454,19 +477,9 @@ export class Select {
         } catch (error) {
             console.error("error in updating the cell", error);
         }
-        this.sheetRender();
+        this.sheetRender(false);
     }
-    /**
-     * Renders the input box for cell editing.
-     * @returns {void}
-     */
-    renderInput() {
-        // if(this.inputX===-1 ||this.inputY===-1){
-        //     return ;
-        // }
-        this.select();
-        this.setInputBox(false);
-    }
+    
     /**
      * Sets the input box position and content based on the selected cell or Clicked cell.
      *
@@ -491,8 +504,8 @@ export class Select {
      * Renders the grid, top sheet, and left sheet.
      * @returns {void}
      */
-    sheetRender() {
-        this.setInputBox(false)
+    sheetRender(isScrolling) {
+        this.setInputBox(isScrolling)
         this.grid.render();
         this.topSheet.render();
         this.leftSheet.render();

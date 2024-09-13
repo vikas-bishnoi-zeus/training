@@ -30,4 +30,4 @@ class Excel {
 /**
  * @type {Excel}
  */
-const excelApp = new Excel(200, 25, 100, 30,100);
+const excelApp = new Excel(200, 50, 100, 30,100);

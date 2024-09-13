@@ -80,14 +80,14 @@ export class Grid {
                 this.cells[i][j].x = this.columnSizePrefix[j];
                 this.cells[i][j].y = this.rowSizePrefix[i];
                 this.cells[i][j].w = this.getWidth(j);
+                this.cells[i][j].h=this.getHeight(i);
                 this.cells[i][j].rectDraw(this.dimension.scrollX, this.dimension.scrollY);
             }
         }
         this.selectBoundary();
+        // this.columnSelectBoundary();
     }
     selectBoundary() {
-        // console.log("A",ctx)
-        // Set the green border style
         this.ctx.strokeStyle = "green";
         this.ctx.lineWidth = 3;
         // Draw the green rectangle (boundary)
@@ -102,7 +102,38 @@ export class Grid {
         let startYDis = this.dimension.rowSizePrefix[startYIndex];
         let diffX = this.dimension.columnSizePrefix[EndXIndex] - startXDis;
         let diffY = this.dimension.rowSizePrefix[EndYIndex] - startYDis;
+        this.ctx.fillStyle = "rgba(19, 126, 67, 0.1)";
         this.ctx.strokeRect(startXDis - this.dimension.scrollX, startYDis - this.dimension.scrollY, diffX, diffY);
+        this.ctx.fillStyle = "rgba(19, 126, 67, 0.1)";
+        this.ctx.fillRect(startXDis - this.dimension.scrollX, startYDis - this.dimension.scrollY, diffX, diffY);
+        // this.drawDottedRect()
+    }
+
+    columnSelectBoundary(){
+        this.ctx.strokeStyle = "green";
+        this.ctx.lineWidth = 3;
+        console.log("colselect")
+        if(this.dimension.isColumnSelected()){
+            let indStart=this.dimension.colSelects[0];
+            let indEnd=this.dimension.colSelects[1];
+            let StartX=this.dimension.columnSizePrefix[Math.min(indStart,indEnd)];
+            let width=this.dimension.columnSizePrefix[Math.max(indStart,indEnd)+1]-StartX;
+            this.ctx.strokeRect(StartX, 0, width, 1000);
+        }
+        
+
+        // let startXIndex = this.dimension.selectXRange[0];
+        // let EndXIndex = this.dimension.selectXRange[1] + 1;
+        // let startYIndex = this.dimension.selectYRange[0];
+        // let EndYIndex = this.dimension.selectYRange[1] + 1;
+        // // console.log(startXIndex,startYIndex)
+        // let startXDis = this.dimension.columnSizePrefix[startXIndex];
+        // let startYDis = this.dimension.rowSizePrefix[startYIndex];
+        // let diffX = this.dimension.columnSizePrefix[EndXIndex] - startXDis;
+        // let diffY = this.dimension.rowSizePrefix[EndYIndex] - startYDis;
+        // this.ctx.strokeRect(startXDis - this.dimension.scrollX, startYDis - this.dimension.scrollY, diffX, diffY);
+        // this.ctx.fillStyle = "rgba(19, 126, 67, 0.1)";
+        // this.ctx.fillRect(startXDis - this.dimension.scrollX, startYDis - this.dimension.scrollY, diffX, diffY);
         // this.drawDottedRect()
     }
 

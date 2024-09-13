@@ -57,6 +57,9 @@ export class Dimensions {
          * @type {number}
          */
         this.leftSheet_Width=leftSheet_Width;
+
+        this.colSelects=[-1,-1];
+        this.rowSelects=[];
         // Add intial number of columns of default width
         this.addSize(this.columnSizePrefix, width, col);
 
@@ -64,6 +67,10 @@ export class Dimensions {
         this.addSize(this.rowSizePrefix, height, row);
     }
 
+    isColumnSelected(){
+        
+        return this.colSelects[0]!=-1;
+    }
     /**
      * Adds more rows to the sheet.
      * @param {number} num - Number of rows to add of default Height.
@@ -152,8 +159,12 @@ export class Dimensions {
      * @param {number} distance - The distance to search for.
      * @returns {number} - The column resize index.
      */
-    findCoumnResizeIndex(distance) {
+    findColumnResizeIndex(distance) {
         return this.binarySearchResizeIndex(this.columnSizePrefix, distance);
+    }
+
+    findRowResizeIndex(distance) {
+        return this.binarySearchResizeIndex(this.rowSizePrefix, distance);
     }
 
     /**
@@ -191,8 +202,12 @@ export class Dimensions {
      * @param {number} extra - The extra width to add.
      * @returns {void}
      */
-    addColumnwidth(ind, extra) {
-        this.sizeAdd(this.columnSizePrefix, ind, extra);
+    addColumnwidth(ind, extra,minimumColWidth) {
+        this.sizeAdd(this.columnSizePrefix, ind, extra,minimumColWidth);
+    }
+
+    addRowHeight(ind, extra,minimumRowHeight) {
+        this.sizeAdd(this.rowSizePrefix, ind, extra,minimumRowHeight);
     }
 
     /**
@@ -202,7 +217,11 @@ export class Dimensions {
      * @param {number} extra - The extra size to add.
      * @returns {void}
      */
-    sizeAdd(arr, ind, extra) {
+    sizeAdd(arr, ind, extra,minimumGap) {
+        if(arr[ind]+extra<arr[ind-1]+minimumGap){
+            // console.log(arr[ind],arr[ind-1])
+            return;
+        }
         for (let i = ind; i < arr.length; i++) {
             arr[i] += extra;
         }

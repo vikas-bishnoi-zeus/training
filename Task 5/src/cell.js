@@ -13,7 +13,6 @@ export class Cell {
     }
     clearRect(scrollX, scrollY) {
         this.currentctx.clearRect(this.x - scrollX, this.y - scrollY, this.w, this.h);
-        // console.log("Clearing")
     }
     rectDraw(scrollX, scrollY) {
         this.currentctx.lineWidth = 0.5;
@@ -33,8 +32,8 @@ export class Cell {
     selectCell(scx = 0, scy = 0) {
         // console.log(scx,scy);
         if (this.isSelected) {
-            this.currentctx.fillStyle = "rgba(19, 126, 67, 0.1)";
-            this.currentctx.fillRect(this.x - scx, this.y - scy, this.w, this.h);
+            // this.currentctx.fillStyle = "rgba(19, 126, 67, 0.1)";
+            // this.currentctx.fillRect(this.x - scx, this.y - scy, this.w, this.h);
         }
         // else {
         // this.rectDraw(scx, scy);

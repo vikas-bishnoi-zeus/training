@@ -60,12 +60,14 @@ export class LeftSheet {
 
         // Iterate through the visible cells and draw them
         for (let i = starti; i <= lasti; i++) {
+            this.verticalcell[i].y=this.rowSizePrefix[i];
+            this.verticalcell[i].h=this.getHeight(i);
             this.verticalcell[i].rectDraw(0, this.dimension.scrollY);
         }
-        this.selectBord();
+        this.selectBoundary();
     }
 
-    selectBord(){
+    selectBoundary(){
         // console.log("A",ctx)
         // Set the green border style
         this.ctx.strokeStyle = 'green';
@@ -75,6 +77,8 @@ export class LeftSheet {
         let startYDis=this.dimension.rowSizePrefix[startYIndex];
         let diffY=this.dimension.rowSizePrefix[EndYIndex]-startYDis;
         this.ctx.strokeRect(this.dimension.leftSheet_Width, startYDis-this.dimension.scrollY, 0, diffY);
+        this.ctx.fillStyle = "rgba(19, 126, 67, 0.1)";
+        this.ctx.fillRect(0, startYDis-this.dimension.scrollY, this.dimension.width, diffY);
     }
 
     /**

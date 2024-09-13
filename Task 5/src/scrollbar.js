@@ -343,10 +343,10 @@ export class ScrollBar {
      */
     updateScrollbars() {
         // Re-render all objects in objArray
-        this.objArray.forEach((obj) => {
-            obj.render();
-        });
-
+        // this.objArray.forEach((obj) => {
+        //     obj.render();
+        // });
+        this.select.sheetRender(true);
         // Calculate ratios for scrollbars
         const verticalRatio = this.container.clientHeight / this.getContentHeight();
         const horizontalRatio = this.container.clientWidth / this.getContentWidth();
@@ -363,6 +363,6 @@ export class ScrollBar {
         this.horizontalScroll.style.left = `${Math.min((this.dimension.scrollX / this.getContentWidth()) * this.container.clientWidth, screen.width - 30)}px`;
 
         // Ensure the input box is positioned correctly
-        this.select.setInputBox(true);
+        // this.select.setInputBox(true);
     }
 }

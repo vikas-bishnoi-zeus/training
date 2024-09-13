@@ -2,7 +2,7 @@ import { Dimensions } from "./dimension.js";
 import { Graph } from "./graph.js";
 import { Select } from "./select.js";
 import { ScrollBar } from "./scrollbar.js";
-import { ResizeCol } from "./resizeCol.js";
+import { Resize } from "./resize.js";
 import { TopSheet } from "./topSheet.js";
 import { LeftSheet } from "./leftSheet.js";
 import { Grid } from "./grid.js";
@@ -44,6 +44,6 @@ export class SheetUtility {
          * Manages the resizing of columns within the sheet.
          * @type {ResizeCol}
          */
-        this.resize = new ResizeCol(dimension, objArray, this.select);
+        this.resize = new Resize(dimension, objArray, this.select);
     }
 }

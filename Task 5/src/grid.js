@@ -48,7 +48,7 @@ export class Grid {
                 this.cells[i][j] = curCell;
             }
         }
-        this.cells[1][0].isSelected = true; // Select the first cell in the second row by default
+        // this.cells[1][1].isSelected = true; // Select the first cell in the second row by default
     }
 
     /**

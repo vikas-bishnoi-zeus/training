@@ -130,13 +130,13 @@ export class ExcelHeader {
             }
             const data = await response.json();
             console.log("Geting Data", offset);
-
+            let screenRowIndex=offset;
             data.forEach((row) => {
                 const [rowIndex, ...cells] = row;
-
                 cells.forEach((cellValue, colIndex) => {
-                    this.grid.cells[rowIndex][colIndex].value = cellValue;
+                    this.grid.cells[screenRowIndex][colIndex].value = cellValue;
                 });
+                screenRowIndex++;
             });
             this.grid.render();
             this.select.setInputBox(false);

@@ -6,6 +6,8 @@ import { Resize } from "./resize.js";
 import { TopSheet } from "./topSheet.js";
 import { LeftSheet } from "./leftSheet.js";
 import { Grid } from "./grid.js";
+import { FindAndReplace } from "./findAndReplace.js";
+
 export class SheetUtility {
     /**
      * Initializes the SheetUtility class with the given dimensions and an array of objects
@@ -42,8 +44,10 @@ export class SheetUtility {
 
         /**
          * Manages the resizing of columns within the sheet.
-         * @type {ResizeCol}
+         * @type {Resize}
          */
         this.resize = new Resize(dimension, objArray, this.select);
+
+        this.findAndReplace=new FindAndReplace(dimension);
     }
 }

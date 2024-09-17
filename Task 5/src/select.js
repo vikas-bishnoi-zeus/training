@@ -67,7 +67,7 @@ export class Select {
         /**
          * @type {number}
          */
-        this.j = 0;
+        this.j = 1;
 
         /**
          * @type {number}
@@ -77,7 +77,7 @@ export class Select {
         /**
          * @type {number}
          */
-        this.currentj = 0;
+        this.currentj = 1;
 
         /**
          * @type {boolean}
@@ -132,8 +132,8 @@ export class Select {
      * @returns {void}
      */
     onMouseDownSpreadSheet(evt) {
-        this.dimension.colSelects=[-1,-1]
-
+        this.dimension.isSelectedRow = false;
+        this.dimension.isSelectedColumn = false;
         window.cancelAnimationFrame(this.rafId);
         // Calculate the position relative to the spreadsheet
         this.inputX = evt.clientX - this.rect.left + this.dimension.scrollX;
@@ -201,26 +201,46 @@ export class Select {
      */
     handleKeyPress(evt) {
         if (evt.ctrlKey && evt.key.toLowerCase() === "c") {
-            console.log("Press C");
-            console.log(evt);
             this.copyToClipboard();
             window.cancelAnimationFrame(this.rafId);
             this.march();
 
         } else if (evt.ctrlKey && evt.key.toLowerCase() === "v") {
-            console.log("Press v");
-            // console.log(evt);
             this.pasteFromClipboard();
             window.cancelAnimationFrame(this.rafId);
             this.sheetRender(false);
         }
-        else if(evt.key==="Backspace"){
-            console.log(evt)
-            this.grid.cells[1][1].value=""
+        else if(evt.key==="Delete"){
+            if(this.dimension.isSelectedRow && this.dimension.selectYRange[0]===this.dimension.selectYRange[1]){
+                this.deleteRow(this.grid.cells[this.dimension.selectYRange[0]][0].value,this.dimension.selectYRange[0]);
+            }
+
             this.sheetRender(false)
         }
     }
+    
+    async deleteRow(email_id,row_num){
+        let response;
+        if(row_num==0){
+            return;
+        }
+        try {
+            response = await fetch("https://localhost:7009/api/csv/DeleteRow", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(email_id),
+            });
+            console.log(response)
+            this.grid.cells.splice(row_num,1);
+            this.dimension.row--;
 
+            this.grid.render();
+        } catch (error) {
+            console.error("could not get items", error);
+        }
+    }
     /**
      * 
      */
@@ -445,7 +465,7 @@ export class Select {
      */
     async renderPrv() {
         // Return if no changes are made
-        if (this.i === 0 || this.grid.cells[this.i][this.j].value === this.cellInput.value) {
+        if (this.i === 0 || this.j===0 || this.grid.cells[this.i][this.j].value === this.cellInput.value) {
             return;
         }
         this.grid.cells[this.i][this.j].value = this.cellInput.value;
@@ -505,9 +525,9 @@ export class Select {
      * @returns {void}
      */
     sheetRender(isScrolling) {
-        this.setInputBox(isScrolling)
         this.grid.render();
         this.topSheet.render();
         this.leftSheet.render();
+        this.setInputBox(isScrolling)
     }
 }

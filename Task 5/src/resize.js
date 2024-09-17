@@ -23,8 +23,7 @@ export class Resize {
          */
         this.objArray = objArray;
 
-
-        this.grid=objArray[2];
+        this.grid = objArray[2];
 
         /**
          * @type {Select}
@@ -39,12 +38,14 @@ export class Resize {
         /**
          * @type {boolean} - Indicates whether the mouse is currently down for Selecting a column.
          */
-        this.isMouseDownOnColSelect = false;
+        this.isSelectingColumn = false;
+
+        this.isSelectingRow = false;
 
         /**
          * @type {boolean} - Indicates whether the mouse is currently down.
          */
-        this.isMouseDownOnRow = false;
+        this.isMouseDownOnRowResize = false;
 
         /**
          * @type {number} - The index of the column being resized.
@@ -55,12 +56,11 @@ export class Resize {
          * @type {number} - The index of the column being resized.
          */
         this.rowIndex = -1;
-        
-        this.minimumColWidth=50;
-        this.minimumRowHeight=30;
+
+        this.minimumColWidth = 50;
+        this.minimumRowHeight = 30;
         this.init();
         this.addEventListner();
-
     }
 
     /**
@@ -76,7 +76,6 @@ export class Resize {
          * @type {DOMRect}
          */
         this.rectTop = this.topCanvasElement.getBoundingClientRect();
-
 
         /**
          * @type {HTMLElement}
@@ -94,10 +93,74 @@ export class Resize {
      */
     addEventListner() {
         this.topCanvasElement.addEventListener("mousedown", this.onMouseDownOnTop.bind(this));
-
         this.leftCanvasElement.addEventListener("mousedown",this.onMouseDownOnLeft.bind(this));
         window.addEventListener("mousemove", this.mouseMove.bind(this));
         window.addEventListener("mouseup", this.mouseUp.bind(this));
+    }
+
+    /**
+     * Handles the mouse down event, indicating the start of a column resize action.
+     * @param {MouseEvent} evt - The mouse down event.
+     * @returns {void}
+     */
+    onMouseDownOnTop(evt) {
+        console.log(this.colIndex===-1)
+        this.colIndex === -1 ? (this.isSelectingColumn = true) : (this.isMouseDownOnColResize = true);
+        if (this.isSelectingColumn) {
+            window.cancelAnimationFrame(this.select.rafId);
+            this.dimension.isSelectedRow = false;
+            this.dimension.isSelectedColumn = true;
+            this.onMouseDownCoulumnHeader(evt);
+        }
+    }
+
+    onMouseDownCoulumnHeader(evt) {
+        
+        // console.log("Hello")
+        let distance = evt.clientX - this.rectTop.left + this.dimension.scrollX;
+        let selectColumnStartIndex = this.dimension.findColumnIndex(distance);
+        // this.select.deselect();
+        this.select.i = 0;
+        this.select.j = selectColumnStartIndex;
+        this.select.currenti = this.dimension.row - 1;
+        this.select.currentj = selectColumnStartIndex;
+        this.select.updateSlectedRange();
+        this.select.sheetRender(true);
+
+        // console.log(this.dimension.findColumnIndex(temp));
+    }
+
+    /**
+     * Handles the mouse down event, indicating the start of a Row resize action.
+     * @param {MouseEvent} evt - The mouse down event.
+     * @returns {void}
+     */
+    onMouseDownOnLeft(evt) {
+        
+        this.rowIndex === -1 ? (this.isSelectingRow = true) : (this.isMouseDownOnRowResize = true);
+        if (this.isSelectingRow) {
+            window.cancelAnimationFrame(this.select.rafId);
+            this.dimension.isSelectedColumn = false;
+            this.dimension.isSelectedRow = true;
+            // console.log("selected Row   ");
+            this.onMouseDownRow(evt);
+        }
+    }
+    /**
+     *
+     * @param {*} evt
+     */
+    onMouseDownRow(evt) {
+        let distance = evt.clientY - this.rectLeft.top + this.dimension.scrollY;
+        let selectRowStartIndex = this.dimension.findRowIndex(distance);
+        // this.select.deselect();
+        this.select.i = selectRowStartIndex;
+        this.select.j = 0;
+        this.select.currenti = selectRowStartIndex;
+        this.select.currentj = this.dimension.col-1;
+        this.select.updateSlectedRange();
+        this.select.sheetRender(false);
+        // console.log(this.dimension.findColumnIndex(temp));
     }
 
     /**
@@ -109,53 +172,42 @@ export class Resize {
         // console.log("Mov",this.isMouseDownOnColResize)
         this.handleTopMouseMove(evt);
         this.handleLeftMouseMove(evt);
-        
     }
-    handleTopMouseMove(evt){
+    handleTopMouseMove(evt) {
         if (this.isMouseDownOnColResize && this.colIndex !== -1) {
-            this.dimension.addColumnwidth(this.colIndex, evt.movementX,this.minimumColWidth);
-
-            // // Re-render the objects after resizing
-            for (let i = 0; i < 3; i++) {
-                this.objArray[i].render();
-            }
-            // Update the input box position
-            this.select.setInputBox(true);
-            this.objArray[0].render();
+            this.dimension.addColumnwidth(this.colIndex, evt.movementX, this.minimumColWidth);
+            this.select.sheetRender(true);
         }
 
-        if (!(this.isMouseDownOnColResize||this.isMouseDownOnColSelect)) {
+        if (!(this.isMouseDownOnColResize || this.isSelectingColumn)) {
             this.getMovingColNumber(evt);
-            this.topCanvasElement.style.cursor = this.colIndex === -1 ? "pointer" : "col-resize";
+            this.topCanvasElement.style.cursor = this.colIndex === -1 ? "grab" : "col-resize";
         }
 
-        if(this.isMouseDownOnColSelect){
-            // console.log(this.isMouseDownOnColResize,this.isMouseDownOnColSelect)
-            let distance=evt.clientX  - this.rectTop.left + this.dimension.scrollX;
-            // this.dimension.selectXRange[1]=Math.max(this.dimension.findColumnIndex(distance),0)
-            this.select.currentj=Math.max(this.dimension.findColumnIndex(distance),0)
+        if (this.isSelectingColumn) {
+            let distance = evt.clientX - this.rectTop.left + this.dimension.scrollX;
+            this.select.currentj = Math.max(this.dimension.findColumnIndex(distance), 0);
             this.select.updateSlectedRange();
-            // console.log(this.dimension.selectXRange);
-            // this.grid.cells[0][0].value="A";
-            this.select.sheetRender(false)         
+            this.select.sheetRender(false);
         }
     }
 
-    handleLeftMouseMove(evt){
-        if (this.isMouseDownOnRow && this.rowIndex !== -1) {
-            this.dimension.addRowHeight(this.rowIndex, evt.movementY,this.minimumRowHeight);
-
-            // Re-render the objects after resizing
-            for (let i = 0; i < 3; i++) {
-                this.objArray[i].render();
-            }
-
-            // Update the input box position
-            this.select.setInputBox(true);
-        } else if (!this.isMouseDownOnRow) {
+    handleLeftMouseMove(evt) {
+        if (this.isMouseDownOnRowResize && this.rowIndex !== -1) {
+            this.dimension.addRowHeight(this.rowIndex, evt.movementY, this.minimumRowHeight);
+            this.select.sheetRender(true);
+        }
+        if (!(this.isMouseDownOnRowResize || this.isSelectingRow)) {
             this.getMovingRowNumber(evt);
-            // console.log("OnRow",this.rowIndex)
-            this.leftCanvasElement.style.cursor = this.rowIndex === -1 ? "default" : "row-resize";
+            // console.log(this.isMouseDownOnRowResize,this.isSelectingRow)
+            this.leftCanvasElement.style.cursor = this.rowIndex === -1 ? "grab" : "row-resize";
+        }
+
+        if (this.isSelectingRow) {
+            let distance = evt.clientY - this.rectLeft.top + this.dimension.scrollY;
+            this.select.currenti = Math.max(this.dimension.findRowIndex(distance), 0);
+            this.select.updateSlectedRange();
+            this.select.sheetRender(false);
         }
     }
 
@@ -169,56 +221,11 @@ export class Resize {
         this.colIndex = this.dimension.findColumnResizeIndex(distance);
     }
 
-
     getMovingRowNumber(evt) {
         let distance = evt.clientY - this.rectLeft.top + this.dimension.scrollY;
         this.rowIndex = this.dimension.findRowResizeIndex(distance);
     }
 
-    /**
-     * Handles the mouse down event, indicating the start of a column resize action.
-     * @param {MouseEvent} evt - The mouse down event.
-     * @returns {void}
-     */
-    onMouseDownOnTop(evt) {
-        // console.log("R")
-        // this.getMovingColNumber(evt);
-        // this.isMouseDownOnColResize = true;
-        this.colIndex===-1? this.isMouseDownOnColSelect = true: this.isMouseDownOnColResize=true;
-        this.topCanvasElement.style.cursor =  this.isMouseDownOnColSelect == true? "pointer" : "col-resize";
-        if(this.isMouseDownOnColSelect){
-            this.onMouseDownCoulumnHeader(evt)
-        }
-
-    }
-
-    onMouseDownCoulumnHeader(evt){
-        // console.log("Hello")
-        let distance=evt.clientX  - this.rectTop.left + this.dimension.scrollX;
-        let selectColumnStartIndex=this.dimension.findColumnIndex(distance);
-        this.select.deselect();
-        this.select.i=0;
-        this.select.j=selectColumnStartIndex;
-        this.select.currenti=this.dimension.row-1;
-        this.select.currentj=selectColumnStartIndex;
-        this.select.updateSlectedRange();
-        // this.dimension.selectXRange[0]=selectColumnStartIndex;
-        // this.dimension.selectXRange[1]=selectColumnStartIndex;
-        // this.dimension.selectYRange[0]=0;
-        // this.dimension.selectYRange[1]=this.dimension.row-1;
-        // this.select.rend
-        this.select.sheetRender(false)
-        // console.log(this.dimension.findColumnIndex(temp));
-    }
-
-    /**
-     * Handles the mouse down event, indicating the start of a Row resize action.
-     * @param {MouseEvent} evt - The mouse down event.
-     * @returns {void}
-     */
-    onMouseDownOnLeft(evt) {
-        this.isMouseDownOnRow = true;
-    }
     /**
      * Handles the mouse up event, indicating the end of a column resize action.
      * @param {MouseEvent} evt - The mouse up event.
@@ -226,14 +233,8 @@ export class Resize {
      */
     mouseUp(evt) {
         this.isMouseDownOnColResize = false;
-        this.isMouseDownOnColSelect=false;
-        this.isMouseDownOnRow = false;
-
-        // // Re-render the objects after resizing
-        // for (let i = 0; i < 3; i++) {
-        //     this.objArray[i].render();
-        // }
-        // this.select.sheetRender(true);
-
+        this.isMouseDownOnRowResize = false;
+        this.isSelectingColumn = false;
+        this.isSelectingRow = false;
     }
 }

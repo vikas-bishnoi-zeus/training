@@ -50,26 +50,22 @@ export class Dimensions {
          */
         this.scrollY = scrollY;
 
-        this.selectXRange=[0,0];
+        this.selectXRange=[1,1];
         this.selectYRange=[1,1];
 
+        this.isSelectedColumn=false;
+        this.isSelectedRow=false;
         /**
          * @type {number}
          */
         this.leftSheet_Width=leftSheet_Width;
 
-        this.colSelects=[-1,-1];
         this.rowSelects=[];
         // Add intial number of columns of default width
         this.addSize(this.columnSizePrefix, width, col);
 
         // Add intial number of rows of default height
         this.addSize(this.rowSizePrefix, height, row);
-    }
-
-    isColumnSelected(){
-        
-        return this.colSelects[0]!=-1;
     }
     /**
      * Adds more rows to the sheet.

@@ -202,7 +202,8 @@ export class ScrollBar {
      */
     addMoreContentY(add) {
         this.dimension.addMoreRows(add);
-        if (this.dimension.row < 110000) {
+        let maximumRow=110000;
+        if (this.dimension.row < maximumRow) {
             console.log(this.dimension.row);
             this.getFile(this.dimension.row, add);
         }
@@ -236,14 +237,14 @@ export class ScrollBar {
                 throw new Error(`Failed to fetch data: ${response.statusText}`);
             }
             const data = await response.json();
-            console.log("Geting Data", offset);
 
+            let screenRowIndex=offset;
             data.forEach((row) => {
                 const [rowIndex, ...cells] = row;
-
                 cells.forEach((cellValue, colIndex) => {
-                    this.grid.cells[rowIndex][colIndex].value = cellValue;
+                    this.grid.cells[screenRowIndex][colIndex].value = cellValue;
                 });
+                screenRowIndex++;
             });
             this.grid.render();
         } catch (error) {
